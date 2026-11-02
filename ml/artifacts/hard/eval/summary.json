@@ -1,0 +1,317 @@
+{
+ "generated_by": "payoutguard_ml 0.1.0",
+ "seed": 2026,
+ "synthetic_data": true,
+ "elapsed_seconds": 13.6,
+ "dataset": {
+  "n_rows": 21672,
+  "n_current_rows": 4184,
+  "n_entities": 6000,
+  "n_distinct_records": 6996,
+  "ledger_sha256": "75ae9e4462009cbaa4238195fba5d6b86af63597cd6c60427137bc764fdf793e",
+  "injected_counts_current_batch": {
+   "alias_duplicate": 162,
+   "email_typo": 81,
+   "exact_duplicate": 61,
+   "amount_outlier": 121
+  },
+  "split_records": {
+   "train": 3547,
+   "calib": 1418,
+   "test": 2031
+  },
+  "split_pairs": {
+   "train": {
+    "candidates": 25918,
+    "positives": 552
+   },
+   "calib": {
+    "candidates": 4676,
+    "positives": 205
+   },
+   "test": {
+    "candidates": 9090,
+    "positives": 278
+   }
+  }
+ },
+ "blocking": {
+  "n_records": 2031,
+  "n_candidates": 9090,
+  "n_all_pairs": 2061465,
+  "reduction_ratio": 0.9955905145127373,
+  "oversized_blocks_skipped": 0,
+  "true_pairs_total": 278,
+  "true_pairs_in_candidates": 278,
+  "pair_completeness": 1.0
+ },
+ "calibration_method": {
+  "method": "sigmoid",
+  "cv_brier": {
+   "isotonic": 0.006577685190331705,
+   "sigmoid": 0.006290476924079104
+  },
+  "n_pos": 205,
+  "n": 4676
+ },
+ "identity_matcher": {
+  "recommended_threshold": 0.3,
+  "threshold_chosen_on": "calibration split (out-of-fold calibrated scores, max F1)",
+  "at_threshold": {
+   "precision": 0.8689,
+   "recall": 0.9532,
+   "f1": 0.9091,
+   "flagged_rows_per_1000": 215.5244,
+   "flagged_rows_new_record_per_1000": 93.3113,
+   "incident_recall": {
+    "alias_duplicate": {
+     "n": 48,
+     "caught": 43,
+     "recall": 0.8958,
+     "recall_ci95": [
+      0.7783,
+      0.9547
+     ]
+    },
+    "email_typo": {
+     "n": 23,
+     "caught": 23,
+     "recall": 1.0,
+     "recall_ci95": [
+      0.8569,
+      1.0
+     ]
+    }
+   }
+  },
+  "average_precision": {
+   "matcher": 0.9716,
+   "baseline_name": 0.5378,
+   "baseline_name_plus_email": 0.6188
+  },
+  "best_f1": {
+   "matcher": 0.9234,
+   "baseline_name": 0.6529,
+   "baseline_name_plus_email": 0.6612
+  },
+  "baselines_at_matcher_queue_size": {
+   "name": {
+    "threshold_for_same_queue": 0.93,
+    "flagged_pairs": 319,
+    "precision": 0.5768,
+    "recall": 0.6619
+   },
+   "combined": {
+    "threshold_for_same_queue": 0.9,
+    "flagged_pairs": 314,
+    "precision": 0.6338,
+    "recall": 0.7158
+   }
+  },
+  "recall_by_alias_kind": {
+   "email_only:email_change": {
+    "n_pairs": 19,
+    "matcher_recall": 1.0,
+    "baseline_name_recall_same_queue": 1.0,
+    "baseline_name_plus_email_recall_same_queue": 0.6316
+   },
+   "email_only:email_typo": {
+    "n_pairs": 23,
+    "matcher_recall": 1.0,
+    "baseline_name_recall_same_queue": 1.0,
+    "baseline_name_plus_email_recall_same_queue": 1.0
+   },
+   "email_only:email_variant": {
+    "n_pairs": 16,
+    "matcher_recall": 1.0,
+    "baseline_name_recall_same_queue": 1.0,
+    "baseline_name_plus_email_recall_same_queue": 1.0
+   },
+   "multiple_aliases": {
+    "n_pairs": 13,
+    "matcher_recall": 0.7692,
+    "baseline_name_recall_same_queue": 0.5385,
+    "baseline_name_plus_email_recall_same_queue": 0.5385
+   },
+   "name+email": {
+    "n_pairs": 171,
+    "matcher_recall": 0.9415,
+    "baseline_name_recall_same_queue": 0.5497,
+    "baseline_name_plus_email_recall_same_queue": 0.6316
+   },
+   "name_only:honorific": {
+    "n_pairs": 6,
+    "matcher_recall": 1.0,
+    "baseline_name_recall_same_queue": 1.0,
+    "baseline_name_plus_email_recall_same_queue": 1.0
+   },
+   "name_only:initial": {
+    "n_pairs": 6,
+    "matcher_recall": 1.0,
+    "baseline_name_recall_same_queue": 0.0,
+    "baseline_name_plus_email_recall_same_queue": 0.5
+   },
+   "name_only:middle_add": {
+    "n_pairs": 4,
+    "matcher_recall": 1.0,
+    "baseline_name_recall_same_queue": 0.75,
+    "baseline_name_plus_email_recall_same_queue": 1.0
+   },
+   "name_only:middle_drop": {
+    "n_pairs": 2,
+    "matcher_recall": 1.0,
+    "baseline_name_recall_same_queue": 1.0,
+    "baseline_name_plus_email_recall_same_queue": 1.0
+   },
+   "name_only:nickname": {
+    "n_pairs": 1,
+    "matcher_recall": 1.0,
+    "baseline_name_recall_same_queue": 0.0,
+    "baseline_name_plus_email_recall_same_queue": 1.0
+   },
+   "name_only:reorder": {
+    "n_pairs": 9,
+    "matcher_recall": 1.0,
+    "baseline_name_recall_same_queue": 0.7778,
+    "baseline_name_plus_email_recall_same_queue": 1.0
+   },
+   "name_only:typo_name": {
+    "n_pairs": 8,
+    "matcher_recall": 1.0,
+    "baseline_name_recall_same_queue": 0.875,
+    "baseline_name_plus_email_recall_same_queue": 1.0
+   }
+  },
+  "ablation_no_context_features": {
+   "average_precision": 0.9247,
+   "note": "same model trained without country/currency/amount features"
+  },
+  "ece": {
+   "raw": 0.0016,
+   "calibrated": 0.0012
+  },
+  "brier": {
+   "raw": 0.0039,
+   "calibrated": 0.0038
+  },
+  "top_features_by_permutation_ap_drop": [
+   {
+    "feature": "currency_equal",
+    "ap_drop": 0.1697
+   },
+   {
+    "feature": "aligned_jw",
+    "ap_drop": 0.0691
+   },
+   {
+    "feature": "amt_logratio",
+    "ap_drop": 0.0442
+   },
+   {
+    "feature": "country_equal",
+    "ap_drop": 0.0263
+   },
+   {
+    "feature": "em_alpha_equal",
+    "ap_drop": 0.0219
+   },
+   {
+    "feature": "em_lev",
+    "ap_drop": 0.02
+   },
+   {
+    "feature": "nm_token_set",
+    "ap_drop": 0.015
+   },
+   {
+    "feature": "nm_jw",
+    "ap_drop": 0.0066
+   },
+   {
+    "feature": "em_domain_equal",
+    "ap_drop": 0.0066
+   },
+   {
+    "feature": "tok_jaccard",
+    "ap_drop": 0.0062
+   },
+   {
+    "feature": "nm_token_sort",
+    "ap_drop": 0.0056
+   },
+   {
+    "feature": "ne_cons_min",
+    "ap_drop": 0.0048
+   }
+  ]
+ },
+ "exact_duplicate_rule": {
+  "rule": "same payee record + same amount appears more than once in the batch",
+  "flagged_rows": 38,
+  "flagged_rows_per_1000": 31.379,
+  "injected_rows": 38,
+  "caught": 38,
+  "recall": 1.0,
+  "precision": 1.0,
+  "note": "Deterministic rule. Synthetic data contains no legitimate same-amount repeats, so precision is optimistic by construction."
+ },
+ "amount_anomaly": {
+  "default_threshold": 10.0,
+  "n_positive_test": 39,
+  "pr_auc": {
+   "per_payee_model": 0.9143,
+   "ratio_to_median_rule": 0.8894,
+   "global_zscore": 0.258
+  },
+  "pr_auc_diff_vs_ratio_rule_bootstrap": {
+   "mean": 0.0229,
+   "ci95": [
+    -0.0258,
+    0.0725
+   ],
+   "n_boot": 300,
+   "note": "per-payee model minus ratio-to-median rule; interval containing 0 means no reliable difference"
+  },
+  "at_default": {
+   "threshold": 10.0,
+   "flagged_rows": 29,
+   "flagged_rows_per_1000": 23.9472,
+   "precision": 1.0,
+   "recall": 0.7436,
+   "f1": 0.8529,
+   "tp": 29,
+   "fp": 0,
+   "fn": 10
+  },
+  "recall_at_flag_rate": {
+   "5_per_1000": {
+    "per_payee_model": 0.1538,
+    "ratio_to_median_rule": 0.1538,
+    "global_zscore": 0.1026
+   },
+   "10_per_1000": {
+    "per_payee_model": 0.3077,
+    "ratio_to_median_rule": 0.3077,
+    "global_zscore": 0.1538
+   },
+   "20_per_1000": {
+    "per_payee_model": 0.6154,
+    "ratio_to_median_rule": 0.6154,
+    "global_zscore": 0.2564
+   },
+   "40_per_1000": {
+    "per_payee_model": 0.8718,
+    "ratio_to_median_rule": 0.8974,
+    "global_zscore": 0.3333
+   }
+  }
+ },
+ "caveats": [
+  "All data is synthetic. Numbers measure recovery of the error patterns in generator.py, not real-world accuracy.",
+  "Generator and features share design assumptions (name/email edit patterns); nickname table is partially shared (see names.py).",
+  "Test pool is 30% of records; negatives are fewer than in a full pool, so precision is optimistic and probabilities are pool-size dependent.",
+  "Incident counts are small; see recall_ci95 (Wilson). Do not over-read differences of a few points.",
+  "Baselines are brute-force over all pairs; the matcher pays for blocking misses (pair_completeness).",
+  "Homonyms (same name, different people) are labelled different; they cap achievable precision."
+ ]
+}

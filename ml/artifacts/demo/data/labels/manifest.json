@@ -1,0 +1,60 @@
+{
+  "generator_version": "0.1.0",
+  "synthetic": true,
+  "difficulty": "standard",
+  "seed": 2027,
+  "n_entities": 400,
+  "rates": {
+    "alias_duplicate": 0.04,
+    "email_typo": 0.02,
+    "exact_duplicate": 0.015,
+    "amount_outlier": 0.03
+  },
+  "batches": [
+    "2026-04",
+    "2026-05",
+    "2026-06",
+    "2026-07",
+    "2026-08",
+    "2026-09",
+    "2026-10"
+  ],
+  "n_rows": 1466,
+  "n_current_rows": 287,
+  "n_entities_actual": 400,
+  "n_distinct_records": 470,
+  "injected_counts_current_batch": {
+    "alias_duplicate": 11,
+    "email_typo": 6,
+    "exact_duplicate": 4,
+    "amount_outlier": 8
+  },
+  "error_types": {
+    "alias_duplicate": "An existing payee is paid again under a different identity string (name variant and/or new email). Two sub-cases: 'both' (canonical row AND alias row are in the batch) and 'drift' (only the alias row is in the batch; canonical was paid in earlier batches).",
+    "email_typo": "Name is correct but the email has exactly one character edit (substitution, deletion, insertion or adjacent transposition) relative to the payee's known email.",
+    "exact_duplicate": "A row is repeated verbatim (same record, same amount, same note) in the batch.",
+    "amount_outlier": "Amount multiplied by a decimal-shift factor (x10, x100, /10, /100) or a random high/low factor. Only injected for payees with >=3 prior payouts (otherwise undetectable by design)."
+  },
+  "alias_kinds": {
+    "reorder": "'Last, First' or 'Last First'",
+    "initial": "first name reduced to an initial",
+    "middle_add": "middle initial added",
+    "middle_drop": "middle initial dropped (canonical had one)",
+    "nickname": "formal first name replaced by a nickname (table in names.py)",
+    "typo_name": "one character edit in first or last name",
+    "honorific": "title or generational suffix added (normalises away)",
+    "legal_suffix": "business legal suffix added/dropped",
+    "email_change": "a new unrelated email address (new domain and/or pattern)",
+    "email_variant": "same mailbox written differently (+tag, dots, trailing digits)"
+  },
+  "notes": [
+    "difficulty=hard: alias records are 70% name+email changes, lose/alter country (50%) and drift in amount (lognormal 0.5); hard-negative rates doubled.",
+    "History is clean except for 'history identity drift' (~20% of persons, ~10% of businesses are legitimately paid under two records); those are true same-entity pairs but not injected errors.",
+    "Hard negatives: relatives (same surname/domain), look-alike names (one-edit), homonyms (same name).",
+    "Amounts are not currency-converted; per-payee spread is 0 (fixed fee, 35%), small or larger."
+  ],
+  "sha256": {
+    "ledger": "36fd4c8f03e81e9fd3e0b616a3f58919951e8ad68081dff8298901039bdc7599",
+    "row_labels": "93365fc1e06cfb11ca4812c27e453092c081c9ef10c5efba6b9f520ad8fe1286"
+  }
+}

@@ -1,0 +1,323 @@
+{
+ "generated_by": "payoutguard_ml 0.1.0",
+ "seed": 2026,
+ "synthetic_data": true,
+ "elapsed_seconds": 11.6,
+ "dataset": {
+  "n_rows": 21730,
+  "n_current_rows": 4183,
+  "n_entities": 6000,
+  "n_distinct_records": 6987,
+  "ledger_sha256": "a4f7826dd677a8743b72355a94683751ba8876a3b0fd93af6443c723a3a0d12f",
+  "injected_counts_current_batch": {
+   "alias_duplicate": 162,
+   "email_typo": 81,
+   "exact_duplicate": 61,
+   "amount_outlier": 121
+  },
+  "split_records": {
+   "train": 3543,
+   "calib": 1410,
+   "test": 2034
+  },
+  "split_pairs": {
+   "train": {
+    "candidates": 26465,
+    "positives": 537
+   },
+   "calib": {
+    "candidates": 4489,
+    "positives": 199
+   },
+   "test": {
+    "candidates": 10183,
+    "positives": 284
+   }
+  }
+ },
+ "blocking": {
+  "n_records": 2034,
+  "n_candidates": 10183,
+  "n_all_pairs": 2067561,
+  "reduction_ratio": 0.9950748732443686,
+  "oversized_blocks_skipped": 0,
+  "true_pairs_total": 284,
+  "true_pairs_in_candidates": 284,
+  "pair_completeness": 1.0
+ },
+ "calibration_method": {
+  "method": "sigmoid",
+  "cv_brier": {
+   "isotonic": 0.0027394999998361573,
+   "sigmoid": 0.0022393573210171
+  },
+  "n_pos": 199,
+  "n": 4489
+ },
+ "identity_matcher": {
+  "recommended_threshold": 0.31,
+  "threshold_chosen_on": "calibration split (out-of-fold calibrated scores, max F1)",
+  "at_threshold": {
+   "precision": 0.9619,
+   "recall": 0.9789,
+   "f1": 0.9703,
+   "flagged_rows_per_1000": 198.8728,
+   "flagged_rows_new_record_per_1000": 81.3205,
+   "incident_recall": {
+    "alias_duplicate": {
+     "n": 49,
+     "caught": 49,
+     "recall": 1.0,
+     "recall_ci95": [
+      0.9273,
+      1.0
+     ]
+    },
+    "email_typo": {
+     "n": 21,
+     "caught": 21,
+     "recall": 1.0,
+     "recall_ci95": [
+      0.8454,
+      1.0
+     ]
+    }
+   }
+  },
+  "average_precision": {
+   "matcher": 0.9942,
+   "baseline_name": 0.6511,
+   "baseline_name_plus_email": 0.7748
+  },
+  "best_f1": {
+   "matcher": 0.9705,
+   "baseline_name": 0.7355,
+   "baseline_name_plus_email": 0.7703
+  },
+  "baselines_at_matcher_queue_size": {
+   "name": {
+    "threshold_for_same_queue": 0.95,
+    "flagged_pairs": 297,
+    "precision": 0.6801,
+    "recall": 0.7113
+   },
+   "combined": {
+    "threshold_for_same_queue": 0.915,
+    "flagged_pairs": 298,
+    "precision": 0.7517,
+    "recall": 0.7887
+   }
+  },
+  "recall_by_alias_kind": {
+   "email_only:email_change": {
+    "n_pairs": 52,
+    "matcher_recall": 0.9808,
+    "baseline_name_recall_same_queue": 1.0,
+    "baseline_name_plus_email_recall_same_queue": 0.6731
+   },
+   "email_only:email_typo": {
+    "n_pairs": 19,
+    "matcher_recall": 1.0,
+    "baseline_name_recall_same_queue": 1.0,
+    "baseline_name_plus_email_recall_same_queue": 0.9474
+   },
+   "email_only:email_variant": {
+    "n_pairs": 61,
+    "matcher_recall": 0.9836,
+    "baseline_name_recall_same_queue": 1.0,
+    "baseline_name_plus_email_recall_same_queue": 0.9836
+   },
+   "multiple_aliases": {
+    "n_pairs": 13,
+    "matcher_recall": 1.0,
+    "baseline_name_recall_same_queue": 0.4615,
+    "baseline_name_plus_email_recall_same_queue": 0.4615
+   },
+   "name+email": {
+    "n_pairs": 53,
+    "matcher_recall": 0.9245,
+    "baseline_name_recall_same_queue": 0.434,
+    "baseline_name_plus_email_recall_same_queue": 0.5849
+   },
+   "name_only:honorific": {
+    "n_pairs": 10,
+    "matcher_recall": 1.0,
+    "baseline_name_recall_same_queue": 0.8,
+    "baseline_name_plus_email_recall_same_queue": 1.0
+   },
+   "name_only:initial": {
+    "n_pairs": 10,
+    "matcher_recall": 1.0,
+    "baseline_name_recall_same_queue": 0.0,
+    "baseline_name_plus_email_recall_same_queue": 0.0
+   },
+   "name_only:legal_suffix": {
+    "n_pairs": 2,
+    "matcher_recall": 1.0,
+    "baseline_name_recall_same_queue": 1.0,
+    "baseline_name_plus_email_recall_same_queue": 1.0
+   },
+   "name_only:middle_add": {
+    "n_pairs": 11,
+    "matcher_recall": 1.0,
+    "baseline_name_recall_same_queue": 0.0909,
+    "baseline_name_plus_email_recall_same_queue": 1.0
+   },
+   "name_only:middle_drop": {
+    "n_pairs": 5,
+    "matcher_recall": 1.0,
+    "baseline_name_recall_same_queue": 0.0,
+    "baseline_name_plus_email_recall_same_queue": 1.0
+   },
+   "name_only:nickname": {
+    "n_pairs": 3,
+    "matcher_recall": 1.0,
+    "baseline_name_recall_same_queue": 0.0,
+    "baseline_name_plus_email_recall_same_queue": 0.3333
+   },
+   "name_only:reorder": {
+    "n_pairs": 17,
+    "matcher_recall": 1.0,
+    "baseline_name_recall_same_queue": 0.8824,
+    "baseline_name_plus_email_recall_same_queue": 1.0
+   },
+   "name_only:typo_name": {
+    "n_pairs": 28,
+    "matcher_recall": 1.0,
+    "baseline_name_recall_same_queue": 0.5357,
+    "baseline_name_plus_email_recall_same_queue": 1.0
+   }
+  },
+  "ablation_no_context_features": {
+   "average_precision": 0.9504,
+   "note": "same model trained without country/currency/amount features"
+  },
+  "ece": {
+   "raw": 0.0004,
+   "calibrated": 0.0009
+  },
+  "brier": {
+   "raw": 0.0013,
+   "calibrated": 0.0014
+  },
+  "top_features_by_permutation_ap_drop": [
+   {
+    "feature": "aligned_jw",
+    "ap_drop": 0.2372
+   },
+   {
+    "feature": "country_equal",
+    "ap_drop": 0.204
+   },
+   {
+    "feature": "amt_logratio",
+    "ap_drop": 0.0331
+   },
+   {
+    "feature": "em_local_ratio",
+    "ap_drop": 0.005
+   },
+   {
+    "feature": "nm_partial",
+    "ap_drop": 0.0033
+   },
+   {
+    "feature": "em_lev",
+    "ap_drop": 0.0023
+   },
+   {
+    "feature": "nm_token_set",
+    "ap_drop": 0.002
+   },
+   {
+    "feature": "tok_jaccard",
+    "ap_drop": 0.0012
+   },
+   {
+    "feature": "em_local_jw",
+    "ap_drop": 0.0009
+   },
+   {
+    "feature": "nm_jw",
+    "ap_drop": 0.0005
+   },
+   {
+    "feature": "ne_cons_min",
+    "ap_drop": 0.0003
+   },
+   {
+    "feature": "tok_shared",
+    "ap_drop": 0.0002
+   }
+  ]
+ },
+ "exact_duplicate_rule": {
+  "rule": "same payee record + same amount appears more than once in the batch",
+  "flagged_rows": 42,
+  "flagged_rows_per_1000": 33.8164,
+  "injected_rows": 42,
+  "caught": 42,
+  "recall": 1.0,
+  "precision": 1.0,
+  "note": "Deterministic rule. Synthetic data contains no legitimate same-amount repeats, so precision is optimistic by construction."
+ },
+ "amount_anomaly": {
+  "default_threshold": 8.0,
+  "n_positive_test": 44,
+  "pr_auc": {
+   "per_payee_model": 0.8803,
+   "ratio_to_median_rule": 0.7808,
+   "global_zscore": 0.4058
+  },
+  "pr_auc_diff_vs_ratio_rule_bootstrap": {
+   "mean": 0.0958,
+   "ci95": [
+    0.032,
+    0.1651
+   ],
+   "n_boot": 300,
+   "note": "per-payee model minus ratio-to-median rule; interval containing 0 means no reliable difference"
+  },
+  "at_default": {
+   "threshold": 8.0,
+   "flagged_rows": 35,
+   "flagged_rows_per_1000": 28.1804,
+   "precision": 0.9429,
+   "recall": 0.75,
+   "f1": 0.8354,
+   "tp": 33,
+   "fp": 2,
+   "fn": 11
+  },
+  "recall_at_flag_rate": {
+   "5_per_1000": {
+    "per_payee_model": 0.1364,
+    "ratio_to_median_rule": 0.1364,
+    "global_zscore": 0.1364
+   },
+   "10_per_1000": {
+    "per_payee_model": 0.2727,
+    "ratio_to_median_rule": 0.2727,
+    "global_zscore": 0.2273
+   },
+   "20_per_1000": {
+    "per_payee_model": 0.5682,
+    "ratio_to_median_rule": 0.5682,
+    "global_zscore": 0.3409
+   },
+   "40_per_1000": {
+    "per_payee_model": 0.8409,
+    "ratio_to_median_rule": 0.7727,
+    "global_zscore": 0.3636
+   }
+  }
+ },
+ "caveats": [
+  "All data is synthetic. Numbers measure recovery of the error patterns in generator.py, not real-world accuracy.",
+  "Generator and features share design assumptions (name/email edit patterns); nickname table is partially shared (see names.py).",
+  "Test pool is 30% of records; negatives are fewer than in a full pool, so precision is optimistic and probabilities are pool-size dependent.",
+  "Incident counts are small; see recall_ci95 (Wilson). Do not over-read differences of a few points.",
+  "Baselines are brute-force over all pairs; the matcher pays for blocking misses (pair_completeness).",
+  "Homonyms (same name, different people) are labelled different; they cap achievable precision."
+ ]
+}

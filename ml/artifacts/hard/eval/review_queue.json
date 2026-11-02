@@ -1,0 +1,630 @@
+{
+ "description": "Review-queue size versus threshold on the TEST pool current batch. flagged_rows counts rows on BOTH sides of a flagged pair. Pair precision/recall are against same-entity ground truth.",
+ "n_current_rows": 1211,
+ "recommended_er_threshold": 0.3,
+ "identity_matcher": [
+  {
+   "threshold": 0.05,
+   "flagged_pairs": 291,
+   "flagged_rows": 316,
+   "flagged_rows_per_1000": 260.9414,
+   "flagged_rows_new_record_per_1000": 104.872,
+   "pair_precision": 0.7595,
+   "pair_recall": 0.991,
+   "row_precision": 0.7468,
+   "incident_recall": {
+    "alias_duplicate": {
+     "n": 48,
+     "caught": 47,
+     "recall": 0.9792,
+     "recall_ci95": [
+      0.891,
+      0.9963
+     ]
+    },
+    "email_typo": {
+     "n": 23,
+     "caught": 23,
+     "recall": 1.0,
+     "recall_ci95": [
+      0.8569,
+      1.0
+     ]
+    }
+   }
+  },
+  {
+   "threshold": 0.1,
+   "flagged_pairs": 274,
+   "flagged_rows": 299,
+   "flagged_rows_per_1000": 246.9034,
+   "flagged_rows_new_record_per_1000": 100.7432,
+   "pair_precision": 0.792,
+   "pair_recall": 0.9731,
+   "row_precision": 0.7726,
+   "incident_recall": {
+    "alias_duplicate": {
+     "n": 48,
+     "caught": 45,
+     "recall": 0.9375,
+     "recall_ci95": [
+      0.8316,
+      0.9785
+     ]
+    },
+    "email_typo": {
+     "n": 23,
+     "caught": 23,
+     "recall": 1.0,
+     "recall_ci95": [
+      0.8569,
+      1.0
+     ]
+    }
+   }
+  },
+  {
+   "threshold": 0.15,
+   "flagged_pairs": 263,
+   "flagged_rows": 286,
+   "flagged_rows_per_1000": 236.1685,
+   "flagged_rows_new_record_per_1000": 96.6144,
+   "pair_precision": 0.8175,
+   "pair_recall": 0.9641,
+   "row_precision": 0.8007,
+   "incident_recall": {
+    "alias_duplicate": {
+     "n": 48,
+     "caught": 44,
+     "recall": 0.9167,
+     "recall_ci95": [
+      0.8045,
+      0.9671
+     ]
+    },
+    "email_typo": {
+     "n": 23,
+     "caught": 23,
+     "recall": 1.0,
+     "recall_ci95": [
+      0.8569,
+      1.0
+     ]
+    }
+   }
+  },
+  {
+   "threshold": 0.2,
+   "flagged_pairs": 252,
+   "flagged_rows": 270,
+   "flagged_rows_per_1000": 222.9562,
+   "flagged_rows_new_record_per_1000": 94.1371,
+   "pair_precision": 0.8532,
+   "pair_recall": 0.9641,
+   "row_precision": 0.8481,
+   "incident_recall": {
+    "alias_duplicate": {
+     "n": 48,
+     "caught": 44,
+     "recall": 0.9167,
+     "recall_ci95": [
+      0.8045,
+      0.9671
+     ]
+    },
+    "email_typo": {
+     "n": 23,
+     "caught": 23,
+     "recall": 1.0,
+     "recall_ci95": [
+      0.8569,
+      1.0
+     ]
+    }
+   }
+  },
+  {
+   "threshold": 0.3,
+   "flagged_pairs": 241,
+   "flagged_rows": 261,
+   "flagged_rows_per_1000": 215.5244,
+   "flagged_rows_new_record_per_1000": 93.3113,
+   "pair_precision": 0.8755,
+   "pair_recall": 0.9462,
+   "row_precision": 0.8659,
+   "incident_recall": {
+    "alias_duplicate": {
+     "n": 48,
+     "caught": 43,
+     "recall": 0.8958,
+     "recall_ci95": [
+      0.7783,
+      0.9547
+     ]
+    },
+    "email_typo": {
+     "n": 23,
+     "caught": 23,
+     "recall": 1.0,
+     "recall_ci95": [
+      0.8569,
+      1.0
+     ]
+    }
+   }
+  },
+  {
+   "threshold": 0.4,
+   "flagged_pairs": 232,
+   "flagged_rows": 248,
+   "flagged_rows_per_1000": 204.7894,
+   "flagged_rows_new_record_per_1000": 90.834,
+   "pair_precision": 0.9009,
+   "pair_recall": 0.9372,
+   "row_precision": 0.8992,
+   "incident_recall": {
+    "alias_duplicate": {
+     "n": 48,
+     "caught": 42,
+     "recall": 0.875,
+     "recall_ci95": [
+      0.753,
+      0.9414
+     ]
+    },
+    "email_typo": {
+     "n": 23,
+     "caught": 23,
+     "recall": 1.0,
+     "recall_ci95": [
+      0.8569,
+      1.0
+     ]
+    }
+   }
+  },
+  {
+   "threshold": 0.5,
+   "flagged_pairs": 228,
+   "flagged_rows": 244,
+   "flagged_rows_per_1000": 201.4864,
+   "flagged_rows_new_record_per_1000": 89.1825,
+   "pair_precision": 0.9035,
+   "pair_recall": 0.9238,
+   "row_precision": 0.9016,
+   "incident_recall": {
+    "alias_duplicate": {
+     "n": 48,
+     "caught": 41,
+     "recall": 0.8542,
+     "recall_ci95": [
+      0.7283,
+      0.9275
+     ]
+    },
+    "email_typo": {
+     "n": 23,
+     "caught": 23,
+     "recall": 1.0,
+     "recall_ci95": [
+      0.8569,
+      1.0
+     ]
+    }
+   }
+  },
+  {
+   "threshold": 0.6,
+   "flagged_pairs": 217,
+   "flagged_rows": 232,
+   "flagged_rows_per_1000": 191.5772,
+   "flagged_rows_new_record_per_1000": 85.8794,
+   "pair_precision": 0.9217,
+   "pair_recall": 0.8969,
+   "row_precision": 0.9224,
+   "incident_recall": {
+    "alias_duplicate": {
+     "n": 48,
+     "caught": 40,
+     "recall": 0.8333,
+     "recall_ci95": [
+      0.7042,
+      0.913
+     ]
+    },
+    "email_typo": {
+     "n": 23,
+     "caught": 23,
+     "recall": 1.0,
+     "recall_ci95": [
+      0.8569,
+      1.0
+     ]
+    }
+   }
+  },
+  {
+   "threshold": 0.7,
+   "flagged_pairs": 209,
+   "flagged_rows": 224,
+   "flagged_rows_per_1000": 184.9711,
+   "flagged_rows_new_record_per_1000": 83.4021,
+   "pair_precision": 0.933,
+   "pair_recall": 0.8744,
+   "row_precision": 0.9375,
+   "incident_recall": {
+    "alias_duplicate": {
+     "n": 48,
+     "caught": 38,
+     "recall": 0.7917,
+     "recall_ci95": [
+      0.6574,
+      0.8827
+     ]
+    },
+    "email_typo": {
+     "n": 23,
+     "caught": 23,
+     "recall": 1.0,
+     "recall_ci95": [
+      0.8569,
+      1.0
+     ]
+    }
+   }
+  },
+  {
+   "threshold": 0.8,
+   "flagged_pairs": 196,
+   "flagged_rows": 209,
+   "flagged_rows_per_1000": 172.5846,
+   "flagged_rows_new_record_per_1000": 78.4476,
+   "pair_precision": 0.9439,
+   "pair_recall": 0.8296,
+   "row_precision": 0.9522,
+   "incident_recall": {
+    "alias_duplicate": {
+     "n": 48,
+     "caught": 37,
+     "recall": 0.7708,
+     "recall_ci95": [
+      0.6346,
+      0.8669
+     ]
+    },
+    "email_typo": {
+     "n": 23,
+     "caught": 23,
+     "recall": 1.0,
+     "recall_ci95": [
+      0.8569,
+      1.0
+     ]
+    }
+   }
+  },
+  {
+   "threshold": 0.9,
+   "flagged_pairs": 171,
+   "flagged_rows": 185,
+   "flagged_rows_per_1000": 152.7663,
+   "flagged_rows_new_record_per_1000": 67.7126,
+   "pair_precision": 0.9766,
+   "pair_recall": 0.7489,
+   "row_precision": 0.9784,
+   "incident_recall": {
+    "alias_duplicate": {
+     "n": 48,
+     "caught": 30,
+     "recall": 0.625,
+     "recall_ci95": [
+      0.4836,
+      0.7478
+     ]
+    },
+    "email_typo": {
+     "n": 23,
+     "caught": 22,
+     "recall": 0.9565,
+     "recall_ci95": [
+      0.7901,
+      0.9923
+     ]
+    }
+   }
+  },
+  {
+   "threshold": 0.95,
+   "flagged_pairs": 141,
+   "flagged_rows": 152,
+   "flagged_rows_per_1000": 125.5161,
+   "flagged_rows_new_record_per_1000": 58.6292,
+   "pair_precision": 0.9858,
+   "pair_recall": 0.6233,
+   "row_precision": 0.9934,
+   "incident_recall": {
+    "alias_duplicate": {
+     "n": 48,
+     "caught": 25,
+     "recall": 0.5208,
+     "recall_ci95": [
+      0.3833,
+      0.6553
+     ]
+    },
+    "email_typo": {
+     "n": 23,
+     "caught": 20,
+     "recall": 0.8696,
+     "recall_ci95": [
+      0.6787,
+      0.9546
+     ]
+    }
+   }
+  },
+  {
+   "threshold": 0.99,
+   "flagged_pairs": 39,
+   "flagged_rows": 41,
+   "flagged_rows_per_1000": 33.8563,
+   "flagged_rows_new_record_per_1000": 16.5153,
+   "pair_precision": 1.0,
+   "pair_recall": 0.1749,
+   "row_precision": 1.0,
+   "incident_recall": {
+    "alias_duplicate": {
+     "n": 48,
+     "caught": 6,
+     "recall": 0.125,
+     "recall_ci95": [
+      0.0586,
+      0.247
+     ]
+    },
+    "email_typo": {
+     "n": 23,
+     "caught": 8,
+     "recall": 0.3478,
+     "recall_ci95": [
+      0.1881,
+      0.5511
+     ]
+    }
+   }
+  }
+ ],
+ "exact_duplicate_rule": {
+  "rule": "same payee record + same amount appears more than once in the batch",
+  "flagged_rows": 38,
+  "flagged_rows_per_1000": 31.379,
+  "injected_rows": 38,
+  "caught": 38,
+  "recall": 1.0,
+  "precision": 1.0,
+  "note": "Deterministic rule. Synthetic data contains no legitimate same-amount repeats, so precision is optimistic by construction."
+ },
+ "amount_anomaly": {
+  "default_threshold": 10.0,
+  "sweep": [
+   {
+    "threshold": 2.0,
+    "flagged_rows": 114,
+    "flagged_rows_per_1000": 94.1371,
+    "precision": 0.3246,
+    "recall": 0.9487,
+    "f1": 0.4837,
+    "tp": 37,
+    "fp": 77,
+    "fn": 2
+   },
+   {
+    "threshold": 2.5,
+    "flagged_rows": 82,
+    "flagged_rows_per_1000": 67.7126,
+    "precision": 0.4512,
+    "recall": 0.9487,
+    "f1": 0.6116,
+    "tp": 37,
+    "fp": 45,
+    "fn": 2
+   },
+   {
+    "threshold": 3.0,
+    "flagged_rows": 63,
+    "flagged_rows_per_1000": 52.0231,
+    "precision": 0.5873,
+    "recall": 0.9487,
+    "f1": 0.7255,
+    "tp": 37,
+    "fp": 26,
+    "fn": 2
+   },
+   {
+    "threshold": 3.5,
+    "flagged_rows": 52,
+    "flagged_rows_per_1000": 42.9397,
+    "precision": 0.6731,
+    "recall": 0.8974,
+    "f1": 0.7692,
+    "tp": 35,
+    "fp": 17,
+    "fn": 4
+   },
+   {
+    "threshold": 4.0,
+    "flagged_rows": 49,
+    "flagged_rows_per_1000": 40.4624,
+    "precision": 0.6939,
+    "recall": 0.8718,
+    "f1": 0.7727,
+    "tp": 34,
+    "fp": 15,
+    "fn": 5
+   },
+   {
+    "threshold": 5.0,
+    "flagged_rows": 43,
+    "flagged_rows_per_1000": 35.5078,
+    "precision": 0.7907,
+    "recall": 0.8718,
+    "f1": 0.8293,
+    "tp": 34,
+    "fp": 9,
+    "fn": 5
+   },
+   {
+    "threshold": 6.0,
+    "flagged_rows": 39,
+    "flagged_rows_per_1000": 32.2048,
+    "precision": 0.8718,
+    "recall": 0.8718,
+    "f1": 0.8718,
+    "tp": 34,
+    "fp": 5,
+    "fn": 5
+   },
+   {
+    "threshold": 8.0,
+    "flagged_rows": 33,
+    "flagged_rows_per_1000": 27.2502,
+    "precision": 0.9394,
+    "recall": 0.7949,
+    "f1": 0.8611,
+    "tp": 31,
+    "fp": 2,
+    "fn": 8
+   },
+   {
+    "threshold": 10.0,
+    "flagged_rows": 29,
+    "flagged_rows_per_1000": 23.9472,
+    "precision": 1.0,
+    "recall": 0.7436,
+    "f1": 0.8529,
+    "tp": 29,
+    "fp": 0,
+    "fn": 10
+   }
+  ]
+ },
+ "combined": [
+  {
+   "er_threshold": 0.05,
+   "anomaly_threshold": 10.0,
+   "flagged_rows": 367,
+   "flagged_rows_per_1000": 303.0553,
+   "rows_from_identity": 316,
+   "rows_from_amount": 29,
+   "rows_from_exact_dup": 38
+  },
+  {
+   "er_threshold": 0.1,
+   "anomaly_threshold": 10.0,
+   "flagged_rows": 350,
+   "flagged_rows_per_1000": 289.0173,
+   "rows_from_identity": 299,
+   "rows_from_amount": 29,
+   "rows_from_exact_dup": 38
+  },
+  {
+   "er_threshold": 0.15,
+   "anomaly_threshold": 10.0,
+   "flagged_rows": 337,
+   "flagged_rows_per_1000": 278.2824,
+   "rows_from_identity": 286,
+   "rows_from_amount": 29,
+   "rows_from_exact_dup": 38
+  },
+  {
+   "er_threshold": 0.2,
+   "anomaly_threshold": 10.0,
+   "flagged_rows": 325,
+   "flagged_rows_per_1000": 268.3732,
+   "rows_from_identity": 270,
+   "rows_from_amount": 29,
+   "rows_from_exact_dup": 38
+  },
+  {
+   "er_threshold": 0.3,
+   "anomaly_threshold": 10.0,
+   "flagged_rows": 316,
+   "flagged_rows_per_1000": 260.9414,
+   "rows_from_identity": 261,
+   "rows_from_amount": 29,
+   "rows_from_exact_dup": 38
+  },
+  {
+   "er_threshold": 0.4,
+   "anomaly_threshold": 10.0,
+   "flagged_rows": 303,
+   "flagged_rows_per_1000": 250.2064,
+   "rows_from_identity": 248,
+   "rows_from_amount": 29,
+   "rows_from_exact_dup": 38
+  },
+  {
+   "er_threshold": 0.5,
+   "anomaly_threshold": 10.0,
+   "flagged_rows": 299,
+   "flagged_rows_per_1000": 246.9034,
+   "rows_from_identity": 244,
+   "rows_from_amount": 29,
+   "rows_from_exact_dup": 38
+  },
+  {
+   "er_threshold": 0.6,
+   "anomaly_threshold": 10.0,
+   "flagged_rows": 287,
+   "flagged_rows_per_1000": 236.9942,
+   "rows_from_identity": 232,
+   "rows_from_amount": 29,
+   "rows_from_exact_dup": 38
+  },
+  {
+   "er_threshold": 0.7,
+   "anomaly_threshold": 10.0,
+   "flagged_rows": 279,
+   "flagged_rows_per_1000": 230.3881,
+   "rows_from_identity": 224,
+   "rows_from_amount": 29,
+   "rows_from_exact_dup": 38
+  },
+  {
+   "er_threshold": 0.8,
+   "anomaly_threshold": 10.0,
+   "flagged_rows": 267,
+   "flagged_rows_per_1000": 220.4789,
+   "rows_from_identity": 209,
+   "rows_from_amount": 29,
+   "rows_from_exact_dup": 38
+  },
+  {
+   "er_threshold": 0.9,
+   "anomaly_threshold": 10.0,
+   "flagged_rows": 245,
+   "flagged_rows_per_1000": 202.3121,
+   "rows_from_identity": 185,
+   "rows_from_amount": 29,
+   "rows_from_exact_dup": 38
+  },
+  {
+   "er_threshold": 0.95,
+   "anomaly_threshold": 10.0,
+   "flagged_rows": 216,
+   "flagged_rows_per_1000": 178.365,
+   "rows_from_identity": 152,
+   "rows_from_amount": 29,
+   "rows_from_exact_dup": 38
+  },
+  {
+   "er_threshold": 0.99,
+   "anomaly_threshold": 10.0,
+   "flagged_rows": 107,
+   "flagged_rows_per_1000": 88.3567,
+   "rows_from_identity": 41,
+   "rows_from_amount": 29,
+   "rows_from_exact_dup": 38
+  }
+ ]
+}

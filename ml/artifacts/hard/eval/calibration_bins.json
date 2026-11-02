@@ -1,0 +1,356 @@
+{
+ "description": "Reliability of pair probabilities on candidate pairs of the TEST pool.",
+ "calibration_method": {
+  "method": "sigmoid",
+  "cv_brier": {
+   "isotonic": 0.006577685190331705,
+   "sigmoid": 0.006290476924079104
+  },
+  "n_pos": 205,
+  "n": 4676
+ },
+ "n_candidate_pairs": 9090,
+ "n_positive": 278,
+ "raw": {
+  "uniform_bins": [
+   {
+    "lo": 0.0,
+    "hi": 0.1,
+    "n": 8761,
+    "mean_predicted": 0.0003,
+    "observed_rate": 0.0009,
+    "n_pos": 8
+   },
+   {
+    "lo": 0.1,
+    "hi": 0.2,
+    "n": 21,
+    "mean_predicted": 0.1456,
+    "observed_rate": 0.1429,
+    "n_pos": 3
+   },
+   {
+    "lo": 0.2,
+    "hi": 0.3,
+    "n": 15,
+    "mean_predicted": 0.2568,
+    "observed_rate": 0.3333,
+    "n_pos": 5
+   },
+   {
+    "lo": 0.3,
+    "hi": 0.4,
+    "n": 6,
+    "mean_predicted": 0.3571,
+    "observed_rate": 0.5,
+    "n_pos": 3
+   },
+   {
+    "lo": 0.4,
+    "hi": 0.5,
+    "n": 4,
+    "mean_predicted": 0.4597,
+    "observed_rate": 0.0,
+    "n_pos": 0
+   },
+   {
+    "lo": 0.5,
+    "hi": 0.6,
+    "n": 19,
+    "mean_predicted": 0.538,
+    "observed_rate": 0.6842,
+    "n_pos": 13
+   },
+   {
+    "lo": 0.6,
+    "hi": 0.7,
+    "n": 11,
+    "mean_predicted": 0.6668,
+    "observed_rate": 0.6364,
+    "n_pos": 7
+   },
+   {
+    "lo": 0.7,
+    "hi": 0.8,
+    "n": 15,
+    "mean_predicted": 0.7665,
+    "observed_rate": 0.8,
+    "n_pos": 12
+   },
+   {
+    "lo": 0.8,
+    "hi": 0.9,
+    "n": 27,
+    "mean_predicted": 0.8531,
+    "observed_rate": 0.8148,
+    "n_pos": 22
+   },
+   {
+    "lo": 0.9,
+    "hi": 1.0,
+    "n": 211,
+    "mean_predicted": 0.9759,
+    "observed_rate": 0.9716,
+    "n_pos": 205
+   }
+  ],
+  "adaptive_bins": [
+   {
+    "lo": 0.0,
+    "hi": 0.0,
+    "n": 909,
+    "mean_predicted": 0.0,
+    "observed_rate": 0.0,
+    "n_pos": 0
+   },
+   {
+    "lo": 0.0,
+    "hi": 0.0,
+    "n": 909,
+    "mean_predicted": 0.0,
+    "observed_rate": 0.0,
+    "n_pos": 0
+   },
+   {
+    "lo": 0.0,
+    "hi": 0.0,
+    "n": 909,
+    "mean_predicted": 0.0,
+    "observed_rate": 0.0,
+    "n_pos": 0
+   },
+   {
+    "lo": 0.0,
+    "hi": 0.0,
+    "n": 908,
+    "mean_predicted": 0.0,
+    "observed_rate": 0.0,
+    "n_pos": 0
+   },
+   {
+    "lo": 0.0,
+    "hi": 0.0,
+    "n": 910,
+    "mean_predicted": 0.0,
+    "observed_rate": 0.0,
+    "n_pos": 0
+   },
+   {
+    "lo": 0.0,
+    "hi": 0.0,
+    "n": 909,
+    "mean_predicted": 0.0,
+    "observed_rate": 0.0,
+    "n_pos": 0
+   },
+   {
+    "lo": 0.0,
+    "hi": 0.0,
+    "n": 905,
+    "mean_predicted": 0.0,
+    "observed_rate": 0.0,
+    "n_pos": 0
+   },
+   {
+    "lo": 0.0,
+    "hi": 0.0,
+    "n": 913,
+    "mean_predicted": 0.0,
+    "observed_rate": 0.0,
+    "n_pos": 0
+   },
+   {
+    "lo": 0.0,
+    "hi": 0.0001,
+    "n": 909,
+    "mean_predicted": 0.0001,
+    "observed_rate": 0.0,
+    "n_pos": 0
+   },
+   {
+    "lo": 0.0001,
+    "hi": 0.9982,
+    "n": 909,
+    "mean_predicted": 0.2988,
+    "observed_rate": 0.3058,
+    "n_pos": 278
+   }
+  ],
+  "ece": 0.0016,
+  "ece_adaptive": 0.0007,
+  "max_calibration_error": 0.4597,
+  "brier": 0.0039,
+  "log_loss": 0.0132
+ },
+ "calibrated": {
+  "uniform_bins": [
+   {
+    "lo": 0.0,
+    "hi": 0.1,
+    "n": 8747,
+    "mean_predicted": 0.0006,
+    "observed_rate": 0.0007,
+    "n_pos": 6
+   },
+   {
+    "lo": 0.1,
+    "hi": 0.2,
+    "n": 23,
+    "mean_predicted": 0.1503,
+    "observed_rate": 0.087,
+    "n_pos": 2
+   },
+   {
+    "lo": 0.2,
+    "hi": 0.3,
+    "n": 15,
+    "mean_predicted": 0.2519,
+    "observed_rate": 0.3333,
+    "n_pos": 5
+   },
+   {
+    "lo": 0.3,
+    "hi": 0.4,
+    "n": 12,
+    "mean_predicted": 0.3514,
+    "observed_rate": 0.25,
+    "n_pos": 3
+   },
+   {
+    "lo": 0.4,
+    "hi": 0.5,
+    "n": 6,
+    "mean_predicted": 0.4374,
+    "observed_rate": 0.5,
+    "n_pos": 3
+   },
+   {
+    "lo": 0.5,
+    "hi": 0.6,
+    "n": 15,
+    "mean_predicted": 0.5658,
+    "observed_rate": 0.4667,
+    "n_pos": 7
+   },
+   {
+    "lo": 0.6,
+    "hi": 0.7,
+    "n": 13,
+    "mean_predicted": 0.6453,
+    "observed_rate": 0.6923,
+    "n_pos": 9
+   },
+   {
+    "lo": 0.7,
+    "hi": 0.8,
+    "n": 18,
+    "mean_predicted": 0.7579,
+    "observed_rate": 0.7778,
+    "n_pos": 14
+   },
+   {
+    "lo": 0.8,
+    "hi": 0.9,
+    "n": 31,
+    "mean_predicted": 0.853,
+    "observed_rate": 0.7742,
+    "n_pos": 24
+   },
+   {
+    "lo": 0.9,
+    "hi": 1.0,
+    "n": 210,
+    "mean_predicted": 0.9715,
+    "observed_rate": 0.9762,
+    "n_pos": 205
+   }
+  ],
+  "adaptive_bins": [
+   {
+    "lo": 0.0001,
+    "hi": 0.0001,
+    "n": 909,
+    "mean_predicted": 0.0001,
+    "observed_rate": 0.0,
+    "n_pos": 0
+   },
+   {
+    "lo": 0.0001,
+    "hi": 0.0001,
+    "n": 909,
+    "mean_predicted": 0.0001,
+    "observed_rate": 0.0,
+    "n_pos": 0
+   },
+   {
+    "lo": 0.0001,
+    "hi": 0.0001,
+    "n": 909,
+    "mean_predicted": 0.0001,
+    "observed_rate": 0.0,
+    "n_pos": 0
+   },
+   {
+    "lo": 0.0001,
+    "hi": 0.0001,
+    "n": 908,
+    "mean_predicted": 0.0001,
+    "observed_rate": 0.0,
+    "n_pos": 0
+   },
+   {
+    "lo": 0.0001,
+    "hi": 0.0001,
+    "n": 910,
+    "mean_predicted": 0.0001,
+    "observed_rate": 0.0,
+    "n_pos": 0
+   },
+   {
+    "lo": 0.0001,
+    "hi": 0.0001,
+    "n": 909,
+    "mean_predicted": 0.0001,
+    "observed_rate": 0.0,
+    "n_pos": 0
+   },
+   {
+    "lo": 0.0001,
+    "hi": 0.0002,
+    "n": 905,
+    "mean_predicted": 0.0001,
+    "observed_rate": 0.0,
+    "n_pos": 0
+   },
+   {
+    "lo": 0.0002,
+    "hi": 0.0002,
+    "n": 913,
+    "mean_predicted": 0.0002,
+    "observed_rate": 0.0,
+    "n_pos": 0
+   },
+   {
+    "lo": 0.0002,
+    "hi": 0.0005,
+    "n": 909,
+    "mean_predicted": 0.0003,
+    "observed_rate": 0.0,
+    "n_pos": 0
+   },
+   {
+    "lo": 0.0005,
+    "hi": 0.9969,
+    "n": 909,
+    "mean_predicted": 0.3068,
+    "observed_rate": 0.3058,
+    "n_pos": 278
+   }
+  ],
+  "ece": 0.0012,
+  "ece_adaptive": 0.0002,
+  "max_calibration_error": 0.1014,
+  "brier": 0.0038,
+  "log_loss": 0.013
+ }
+}

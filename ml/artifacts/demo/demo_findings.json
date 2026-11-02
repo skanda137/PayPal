@@ -1,0 +1,5141 @@
+{
+ "batch_id": "B2026-10",
+ "n_rows": 287,
+ "findings": [
+  {
+   "finding_id": "ID-0001",
+   "type": "identity_match",
+   "probability": 0.9937,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "two_records_same_payee",
+   "affected_row_ids": [
+    "R001397"
+   ],
+   "records": [
+    {
+     "name": "Grace Fischer",
+     "email": "gracefischer10@gmail.com",
+     "country": "BR",
+     "n_hist_rows": 1,
+     "currency": "USD",
+     "median_amount": 70.0,
+     "last_hist_batch": "B2026-05"
+    },
+    {
+     "name": "Gracee Fischer",
+     "email": "gracefischer10@gmail.com",
+     "country": "BR",
+     "n_hist_rows": 3,
+     "currency": "USD",
+     "median_amount": 70.0,
+     "last_hist_batch": "B2026-09"
+    }
+   ],
+   "signals": [
+    "NAME_CLOSE",
+    "EMAIL_IDENTICAL",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Grace Fischer' <gracefischer10@gmail.com> may be the same payee as 'Gracee Fischer' <gracefischer10@gmail.com> (model-estimated probability 99%).",
+    "bullets": [
+     "The names 'Grace Fischer' and 'Gracee Fischer' are very similar but not identical.",
+     "Both records use the same email address.",
+     "Both records are from the same country (BR).",
+     "Their typical payout amounts are similar."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 99,
+     "a": {
+      "name": "Grace Fischer",
+      "email": "gracefischer10@gmail.com",
+      "country": "BR",
+      "n_hist_rows": 1,
+      "currency": "USD",
+      "median_amount": 70.0,
+      "last_hist_batch": "B2026-05"
+     },
+     "b": {
+      "name": "Gracee Fischer",
+      "email": "gracefischer10@gmail.com",
+      "country": "BR",
+      "n_hist_rows": 3,
+      "currency": "USD",
+      "median_amount": 70.0,
+      "last_hist_batch": "B2026-09"
+     },
+     "signals": [
+      "NAME_CLOSE",
+      "EMAIL_IDENTICAL",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR"
+     ]
+    },
+    "text": "Very likely: 'Grace Fischer' <gracefischer10@gmail.com> may be the same payee as 'Gracee Fischer' <gracefischer10@gmail.com> (model-estimated probability 99%). The names 'Grace Fischer' and 'Gracee Fischer' are very similar but not identical. Both records use the same email address. Both records are from the same country (BR). Their typical payout amounts are similar.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0002",
+   "type": "identity_match",
+   "probability": 0.9937,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "two_records_same_payee",
+   "affected_row_ids": [
+    "R001360"
+   ],
+   "records": [
+    {
+     "name": "Rao Creative Inc",
+     "email": "hello@raocreative.com",
+     "country": "IN",
+     "n_hist_rows": 1,
+     "currency": "USD",
+     "median_amount": 216.67000000000002,
+     "last_hist_batch": "B2026-04"
+    },
+    {
+     "name": "Rao Creative",
+     "email": "hello@raocreative.com",
+     "country": "IN",
+     "n_hist_rows": 2,
+     "currency": "USD",
+     "median_amount": 215.615,
+     "last_hist_batch": "B2026-09"
+    }
+   ],
+   "signals": [
+    "NAME_IDENTICAL",
+    "EMAIL_IDENTICAL",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Rao Creative Inc' <hello@raocreative.com> may be the same payee as 'Rao Creative' <hello@raocreative.com> (model-estimated probability 99%).",
+    "bullets": [
+     "The names 'Rao Creative Inc' and 'Rao Creative' are the same after normalisation.",
+     "Both records use the same email address.",
+     "Both records are from the same country (IN).",
+     "Their typical payout amounts are similar."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 99,
+     "a": {
+      "name": "Rao Creative Inc",
+      "email": "hello@raocreative.com",
+      "country": "IN",
+      "n_hist_rows": 1,
+      "currency": "USD",
+      "median_amount": 216.67000000000002,
+      "last_hist_batch": "B2026-04"
+     },
+     "b": {
+      "name": "Rao Creative",
+      "email": "hello@raocreative.com",
+      "country": "IN",
+      "n_hist_rows": 2,
+      "currency": "USD",
+      "median_amount": 215.615,
+      "last_hist_batch": "B2026-09"
+     },
+     "signals": [
+      "NAME_IDENTICAL",
+      "EMAIL_IDENTICAL",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR"
+     ]
+    },
+    "text": "Very likely: 'Rao Creative Inc' <hello@raocreative.com> may be the same payee as 'Rao Creative' <hello@raocreative.com> (model-estimated probability 99%). The names 'Rao Creative Inc' and 'Rao Creative' are the same after normalisation. Both records use the same email address. Both records are from the same country (IN). Their typical payout amounts are similar.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0003",
+   "type": "identity_match",
+   "probability": 0.9937,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "new_record_matches_known_payee",
+   "affected_row_ids": [
+    "R001444"
+   ],
+   "records": [
+    {
+     "name": "Sato, Susan",
+     "email": "s.sato@satohq.com",
+     "country": "CA",
+     "n_hist_rows": 1,
+     "currency": "CAD",
+     "median_amount": 935.0,
+     "last_hist_batch": "B2026-09"
+    },
+    {
+     "name": "Susan Sato",
+     "email": "s.sato@satohq.com",
+     "country": "CA",
+     "n_hist_rows": 0,
+     "currency": "CAD",
+     "median_amount": 935.0,
+     "last_hist_batch": ""
+    }
+   ],
+   "signals": [
+    "NAME_IDENTICAL",
+    "EMAIL_IDENTICAL",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR",
+    "ONE_RECORD_NEW"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Sato, Susan' <s.sato@satohq.com> may be the same payee as 'Susan Sato' <s.sato@satohq.com> (model-estimated probability 99%).",
+    "bullets": [
+     "The names 'Sato, Susan' and 'Susan Sato' are the same after normalisation.",
+     "Both records use the same email address.",
+     "Both records are from the same country (CA).",
+     "Their typical payout amounts are similar.",
+     "'s.sato@satohq.com' has not been paid before; 's.sato@satohq.com' has been paid 1 time(s), last in batch B2026-09."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 99,
+     "a": {
+      "name": "Sato, Susan",
+      "email": "s.sato@satohq.com",
+      "country": "CA",
+      "n_hist_rows": 1,
+      "currency": "CAD",
+      "median_amount": 935.0,
+      "last_hist_batch": "B2026-09"
+     },
+     "b": {
+      "name": "Susan Sato",
+      "email": "s.sato@satohq.com",
+      "country": "CA",
+      "n_hist_rows": 0,
+      "currency": "CAD",
+      "median_amount": 935.0,
+      "last_hist_batch": ""
+     },
+     "signals": [
+      "NAME_IDENTICAL",
+      "EMAIL_IDENTICAL",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR",
+      "ONE_RECORD_NEW"
+     ]
+    },
+    "text": "Very likely: 'Sato, Susan' <s.sato@satohq.com> may be the same payee as 'Susan Sato' <s.sato@satohq.com> (model-estimated probability 99%). The names 'Sato, Susan' and 'Susan Sato' are the same after normalisation. Both records use the same email address. Both records are from the same country (CA). Their typical payout amounts are similar. 's.sato@satohq.com' has not been paid before; 's.sato@satohq.com' has been paid 1 time(s), last in batch B2026-09.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0004",
+   "type": "identity_match",
+   "probability": 0.9936,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "two_records_same_payee",
+   "affected_row_ids": [
+    "R001253"
+   ],
+   "records": [
+    {
+     "name": "Daniel Coxx",
+     "email": "cox.daniel@outlook.com",
+     "country": "CA",
+     "n_hist_rows": 2,
+     "currency": "CAD",
+     "median_amount": 127.635,
+     "last_hist_batch": "B2026-09"
+    },
+    {
+     "name": "Daniel Cox",
+     "email": "cox.daniel@outlook.com",
+     "country": "CA",
+     "n_hist_rows": 3,
+     "currency": "CAD",
+     "median_amount": 127.14500000000001,
+     "last_hist_batch": "B2026-07"
+    }
+   ],
+   "signals": [
+    "NAME_CLOSE",
+    "EMAIL_IDENTICAL",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Daniel Coxx' <cox.daniel@outlook.com> may be the same payee as 'Daniel Cox' <cox.daniel@outlook.com> (model-estimated probability 99%).",
+    "bullets": [
+     "The names 'Daniel Coxx' and 'Daniel Cox' are very similar but not identical.",
+     "Both records use the same email address.",
+     "Both records are from the same country (CA).",
+     "Their typical payout amounts are similar."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 99,
+     "a": {
+      "name": "Daniel Coxx",
+      "email": "cox.daniel@outlook.com",
+      "country": "CA",
+      "n_hist_rows": 2,
+      "currency": "CAD",
+      "median_amount": 127.635,
+      "last_hist_batch": "B2026-09"
+     },
+     "b": {
+      "name": "Daniel Cox",
+      "email": "cox.daniel@outlook.com",
+      "country": "CA",
+      "n_hist_rows": 3,
+      "currency": "CAD",
+      "median_amount": 127.14500000000001,
+      "last_hist_batch": "B2026-07"
+     },
+     "signals": [
+      "NAME_CLOSE",
+      "EMAIL_IDENTICAL",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR"
+     ]
+    },
+    "text": "Very likely: 'Daniel Coxx' <cox.daniel@outlook.com> may be the same payee as 'Daniel Cox' <cox.daniel@outlook.com> (model-estimated probability 99%). The names 'Daniel Coxx' and 'Daniel Cox' are very similar but not identical. Both records use the same email address. Both records are from the same country (CA). Their typical payout amounts are similar.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0005",
+   "type": "identity_match",
+   "probability": 0.9934,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "new_record_matches_known_payee",
+   "affected_row_ids": [
+    "R001185"
+   ],
+   "records": [
+    {
+     "name": "M. Bianchi",
+     "email": "mohan.bianchi@bianchimail.com",
+     "country": "US",
+     "n_hist_rows": 0,
+     "currency": "USD",
+     "median_amount": 150.0,
+     "last_hist_batch": ""
+    },
+    {
+     "name": "Mohan Bianchi",
+     "email": "mohan.bianchi@bianchimail.com",
+     "country": "US",
+     "n_hist_rows": 3,
+     "currency": "USD",
+     "median_amount": 150.0,
+     "last_hist_batch": "B2026-09"
+    }
+   ],
+   "signals": [
+    "NAME_INITIAL",
+    "EMAIL_IDENTICAL",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR",
+    "ONE_RECORD_NEW"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'M. Bianchi' <mohan.bianchi@bianchimail.com> may be the same payee as 'Mohan Bianchi' <mohan.bianchi@bianchimail.com> (model-estimated probability 99%).",
+    "bullets": [
+     "'M. Bianchi' and 'Mohan Bianchi' look like the same name with an initial in place of a full word.",
+     "Both records use the same email address.",
+     "Both records are from the same country (US).",
+     "Their typical payout amounts are similar.",
+     "'mohan.bianchi@bianchimail.com' has not been paid before; 'mohan.bianchi@bianchimail.com' has been paid 3 time(s), last in batch B2026-09."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 99,
+     "a": {
+      "name": "M. Bianchi",
+      "email": "mohan.bianchi@bianchimail.com",
+      "country": "US",
+      "n_hist_rows": 0,
+      "currency": "USD",
+      "median_amount": 150.0,
+      "last_hist_batch": ""
+     },
+     "b": {
+      "name": "Mohan Bianchi",
+      "email": "mohan.bianchi@bianchimail.com",
+      "country": "US",
+      "n_hist_rows": 3,
+      "currency": "USD",
+      "median_amount": 150.0,
+      "last_hist_batch": "B2026-09"
+     },
+     "signals": [
+      "NAME_INITIAL",
+      "EMAIL_IDENTICAL",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR",
+      "ONE_RECORD_NEW"
+     ]
+    },
+    "text": "Very likely: 'M. Bianchi' <mohan.bianchi@bianchimail.com> may be the same payee as 'Mohan Bianchi' <mohan.bianchi@bianchimail.com> (model-estimated probability 99%). 'M. Bianchi' and 'Mohan Bianchi' look like the same name with an initial in place of a full word. Both records use the same email address. Both records are from the same country (US). Their typical payout amounts are similar. 'mohan.bianchi@bianchimail.com' has not been paid before; 'mohan.bianchi@bianchimail.com' has been paid 3 time(s), last in batch B2026-09.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0006",
+   "type": "identity_match",
+   "probability": 0.9933,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "two_records_same_payee",
+   "affected_row_ids": [
+    "R001335"
+   ],
+   "records": [
+    {
+     "name": "E. Robinson",
+     "email": "robinson.etthan@yahoo.com",
+     "country": "IN",
+     "n_hist_rows": 2,
+     "currency": "USD",
+     "median_amount": 120.0,
+     "last_hist_batch": "B2026-09"
+    },
+    {
+     "name": "Etthan Robinson",
+     "email": "robinson.etthan@yahoo.com",
+     "country": "IN",
+     "n_hist_rows": 3,
+     "currency": "USD",
+     "median_amount": 120.0,
+     "last_hist_batch": "B2026-06"
+    }
+   ],
+   "signals": [
+    "NAME_INITIAL",
+    "EMAIL_IDENTICAL",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'E. Robinson' <robinson.etthan@yahoo.com> may be the same payee as 'Etthan Robinson' <robinson.etthan@yahoo.com> (model-estimated probability 99%).",
+    "bullets": [
+     "'E. Robinson' and 'Etthan Robinson' look like the same name with an initial in place of a full word.",
+     "Both records use the same email address.",
+     "Both records are from the same country (IN).",
+     "Their typical payout amounts are similar."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 99,
+     "a": {
+      "name": "E. Robinson",
+      "email": "robinson.etthan@yahoo.com",
+      "country": "IN",
+      "n_hist_rows": 2,
+      "currency": "USD",
+      "median_amount": 120.0,
+      "last_hist_batch": "B2026-09"
+     },
+     "b": {
+      "name": "Etthan Robinson",
+      "email": "robinson.etthan@yahoo.com",
+      "country": "IN",
+      "n_hist_rows": 3,
+      "currency": "USD",
+      "median_amount": 120.0,
+      "last_hist_batch": "B2026-06"
+     },
+     "signals": [
+      "NAME_INITIAL",
+      "EMAIL_IDENTICAL",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR"
+     ]
+    },
+    "text": "Very likely: 'E. Robinson' <robinson.etthan@yahoo.com> may be the same payee as 'Etthan Robinson' <robinson.etthan@yahoo.com> (model-estimated probability 99%). 'E. Robinson' and 'Etthan Robinson' look like the same name with an initial in place of a full word. Both records use the same email address. Both records are from the same country (IN). Their typical payout amounts are similar.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0007",
+   "type": "identity_match",
+   "probability": 0.9933,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "new_record_matches_known_payee",
+   "affected_row_ids": [
+    "R001229",
+    "R001338"
+   ],
+   "records": [
+    {
+     "name": "Camila Bianchi",
+     "email": "cam.ilabianchi@gmail.com",
+     "country": "US",
+     "n_hist_rows": 0,
+     "currency": "USD",
+     "median_amount": 610.0,
+     "last_hist_batch": ""
+    },
+    {
+     "name": "Camila Bianchi",
+     "email": "camilabianchi@gmail.com",
+     "country": "US",
+     "n_hist_rows": 4,
+     "currency": "USD",
+     "median_amount": 610.0,
+     "last_hist_batch": "B2026-09"
+    }
+   ],
+   "signals": [
+    "NAME_IDENTICAL",
+    "EMAIL_SAME_MAILBOX",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR",
+    "ONE_RECORD_NEW"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Camila Bianchi' <cam.ilabianchi@gmail.com> may be the same payee as 'Camila Bianchi' <camilabianchi@gmail.com> (model-estimated probability 99%).",
+    "bullets": [
+     "Both records use the name 'Camila Bianchi'.",
+     "The emails 'cam.ilabianchi@gmail.com' and 'camilabianchi@gmail.com' point to the same mailbox once tags and dots are ignored.",
+     "Both records are from the same country (US).",
+     "Their typical payout amounts are similar.",
+     "'cam.ilabianchi@gmail.com' has not been paid before; 'camilabianchi@gmail.com' has been paid 4 time(s), last in batch B2026-09."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 99,
+     "a": {
+      "name": "Camila Bianchi",
+      "email": "cam.ilabianchi@gmail.com",
+      "country": "US",
+      "n_hist_rows": 0,
+      "currency": "USD",
+      "median_amount": 610.0,
+      "last_hist_batch": ""
+     },
+     "b": {
+      "name": "Camila Bianchi",
+      "email": "camilabianchi@gmail.com",
+      "country": "US",
+      "n_hist_rows": 4,
+      "currency": "USD",
+      "median_amount": 610.0,
+      "last_hist_batch": "B2026-09"
+     },
+     "signals": [
+      "NAME_IDENTICAL",
+      "EMAIL_SAME_MAILBOX",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR",
+      "ONE_RECORD_NEW"
+     ]
+    },
+    "text": "Very likely: 'Camila Bianchi' <cam.ilabianchi@gmail.com> may be the same payee as 'Camila Bianchi' <camilabianchi@gmail.com> (model-estimated probability 99%). Both records use the name 'Camila Bianchi'. The emails 'cam.ilabianchi@gmail.com' and 'camilabianchi@gmail.com' point to the same mailbox once tags and dots are ignored. Both records are from the same country (US). Their typical payout amounts are similar. 'cam.ilabianchi@gmail.com' has not been paid before; 'camilabianchi@gmail.com' has been paid 4 time(s), last in batch B2026-09.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0008",
+   "type": "identity_match",
+   "probability": 0.9933,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "new_record_matches_known_payee",
+   "affected_row_ids": [
+    "R001394"
+   ],
+   "records": [
+    {
+     "name": "Dr. Haruto Suzuki",
+     "email": "harutosuzuki@suzukimail.com",
+     "country": "US",
+     "n_hist_rows": 3,
+     "currency": "USD",
+     "median_amount": 130.0,
+     "last_hist_batch": "B2026-08"
+    },
+    {
+     "name": "Haruto Suzuki",
+     "email": "harutosuzuki@suzukimail.com",
+     "country": "US",
+     "n_hist_rows": 0,
+     "currency": "USD",
+     "median_amount": 130.0,
+     "last_hist_batch": ""
+    }
+   ],
+   "signals": [
+    "NAME_IDENTICAL",
+    "EMAIL_IDENTICAL",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR",
+    "ONE_RECORD_NEW"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Dr. Haruto Suzuki' <harutosuzuki@suzukimail.com> may be the same payee as 'Haruto Suzuki' <harutosuzuki@suzukimail.com> (model-estimated probability 99%).",
+    "bullets": [
+     "The names 'Dr. Haruto Suzuki' and 'Haruto Suzuki' are the same after normalisation.",
+     "Both records use the same email address.",
+     "Both records are from the same country (US).",
+     "Their typical payout amounts are similar.",
+     "'harutosuzuki@suzukimail.com' has not been paid before; 'harutosuzuki@suzukimail.com' has been paid 3 time(s), last in batch B2026-08."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 99,
+     "a": {
+      "name": "Dr. Haruto Suzuki",
+      "email": "harutosuzuki@suzukimail.com",
+      "country": "US",
+      "n_hist_rows": 3,
+      "currency": "USD",
+      "median_amount": 130.0,
+      "last_hist_batch": "B2026-08"
+     },
+     "b": {
+      "name": "Haruto Suzuki",
+      "email": "harutosuzuki@suzukimail.com",
+      "country": "US",
+      "n_hist_rows": 0,
+      "currency": "USD",
+      "median_amount": 130.0,
+      "last_hist_batch": ""
+     },
+     "signals": [
+      "NAME_IDENTICAL",
+      "EMAIL_IDENTICAL",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR",
+      "ONE_RECORD_NEW"
+     ]
+    },
+    "text": "Very likely: 'Dr. Haruto Suzuki' <harutosuzuki@suzukimail.com> may be the same payee as 'Haruto Suzuki' <harutosuzuki@suzukimail.com> (model-estimated probability 99%). The names 'Dr. Haruto Suzuki' and 'Haruto Suzuki' are the same after normalisation. Both records use the same email address. Both records are from the same country (US). Their typical payout amounts are similar. 'harutosuzuki@suzukimail.com' has not been paid before; 'harutosuzuki@suzukimail.com' has been paid 3 time(s), last in batch B2026-08.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0009",
+   "type": "identity_match",
+   "probability": 0.9933,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "two_records_same_payee",
+   "affected_row_ids": [
+    "R001348"
+   ],
+   "records": [
+    {
+     "name": "Manish Martinez",
+     "email": "manish.martinez@martinezworks.com",
+     "country": "US",
+     "n_hist_rows": 3,
+     "currency": "USD",
+     "median_amount": 80.0,
+     "last_hist_batch": "B2026-08"
+    },
+    {
+     "name": "Martinez, Manish",
+     "email": "manish.martinez@martinezworks.com",
+     "country": "US",
+     "n_hist_rows": 2,
+     "currency": "USD",
+     "median_amount": 80.0,
+     "last_hist_batch": "B2026-09"
+    }
+   ],
+   "signals": [
+    "NAME_IDENTICAL",
+    "EMAIL_IDENTICAL",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Manish Martinez' <manish.martinez@martinezworks.com> may be the same payee as 'Martinez, Manish' <manish.martinez@martinezworks.com> (model-estimated probability 99%).",
+    "bullets": [
+     "The names 'Manish Martinez' and 'Martinez, Manish' are the same after normalisation.",
+     "Both records use the same email address.",
+     "Both records are from the same country (US).",
+     "Their typical payout amounts are similar."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 99,
+     "a": {
+      "name": "Manish Martinez",
+      "email": "manish.martinez@martinezworks.com",
+      "country": "US",
+      "n_hist_rows": 3,
+      "currency": "USD",
+      "median_amount": 80.0,
+      "last_hist_batch": "B2026-08"
+     },
+     "b": {
+      "name": "Martinez, Manish",
+      "email": "manish.martinez@martinezworks.com",
+      "country": "US",
+      "n_hist_rows": 2,
+      "currency": "USD",
+      "median_amount": 80.0,
+      "last_hist_batch": "B2026-09"
+     },
+     "signals": [
+      "NAME_IDENTICAL",
+      "EMAIL_IDENTICAL",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR"
+     ]
+    },
+    "text": "Very likely: 'Manish Martinez' <manish.martinez@martinezworks.com> may be the same payee as 'Martinez, Manish' <manish.martinez@martinezworks.com> (model-estimated probability 99%). The names 'Manish Martinez' and 'Martinez, Manish' are the same after normalisation. Both records use the same email address. Both records are from the same country (US). Their typical payout amounts are similar.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0010",
+   "type": "identity_match",
+   "probability": 0.9932,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "new_record_matches_known_payee",
+   "affected_row_ids": [
+    "R001251"
+   ],
+   "records": [
+    {
+     "name": "Olga Kapoor",
+     "email": "olga.kapior@kapoorhq.com",
+     "country": "IN",
+     "n_hist_rows": 0,
+     "currency": "USD",
+     "median_amount": 145.0,
+     "last_hist_batch": ""
+    },
+    {
+     "name": "Olga Kapoor",
+     "email": "olga.kapoor@kapoorhq.com",
+     "country": "IN",
+     "n_hist_rows": 6,
+     "currency": "USD",
+     "median_amount": 145.0,
+     "last_hist_batch": "B2026-09"
+    }
+   ],
+   "signals": [
+    "NAME_IDENTICAL",
+    "EMAIL_ONE_EDIT",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR",
+    "ONE_RECORD_NEW"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Olga Kapoor' <olga.kapior@kapoorhq.com> may be the same payee as 'Olga Kapoor' <olga.kapoor@kapoorhq.com> (model-estimated probability 99%).",
+    "bullets": [
+     "Both records use the name 'Olga Kapoor'.",
+     "The emails 'olga.kapior@kapoorhq.com' and 'olga.kapoor@kapoorhq.com' differ by exactly one character.",
+     "Both records are from the same country (IN).",
+     "Their typical payout amounts are similar.",
+     "'olga.kapior@kapoorhq.com' has not been paid before; 'olga.kapoor@kapoorhq.com' has been paid 6 time(s), last in batch B2026-09."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 99,
+     "a": {
+      "name": "Olga Kapoor",
+      "email": "olga.kapior@kapoorhq.com",
+      "country": "IN",
+      "n_hist_rows": 0,
+      "currency": "USD",
+      "median_amount": 145.0,
+      "last_hist_batch": ""
+     },
+     "b": {
+      "name": "Olga Kapoor",
+      "email": "olga.kapoor@kapoorhq.com",
+      "country": "IN",
+      "n_hist_rows": 6,
+      "currency": "USD",
+      "median_amount": 145.0,
+      "last_hist_batch": "B2026-09"
+     },
+     "signals": [
+      "NAME_IDENTICAL",
+      "EMAIL_ONE_EDIT",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR",
+      "ONE_RECORD_NEW"
+     ]
+    },
+    "text": "Very likely: 'Olga Kapoor' <olga.kapior@kapoorhq.com> may be the same payee as 'Olga Kapoor' <olga.kapoor@kapoorhq.com> (model-estimated probability 99%). Both records use the name 'Olga Kapoor'. The emails 'olga.kapior@kapoorhq.com' and 'olga.kapoor@kapoorhq.com' differ by exactly one character. Both records are from the same country (IN). Their typical payout amounts are similar. 'olga.kapior@kapoorhq.com' has not been paid before; 'olga.kapoor@kapoorhq.com' has been paid 6 time(s), last in batch B2026-09.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0011",
+   "type": "identity_match",
+   "probability": 0.9932,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "new_record_matches_known_payee",
+   "affected_row_ids": [
+    "R001461"
+   ],
+   "records": [
+    {
+     "name": "Stephen P. Nowak",
+     "email": "stephen_nowak@yahoo.com",
+     "country": "JP",
+     "n_hist_rows": 3,
+     "currency": "USD",
+     "median_amount": 110.0,
+     "last_hist_batch": "B2026-09"
+    },
+    {
+     "name": "Stephen P. Nowak",
+     "email": "stephen_nowakk@yahoo.com",
+     "country": "JP",
+     "n_hist_rows": 0,
+     "currency": "USD",
+     "median_amount": 110.0,
+     "last_hist_batch": ""
+    }
+   ],
+   "signals": [
+    "NAME_IDENTICAL",
+    "EMAIL_ONE_EDIT",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR",
+    "ONE_RECORD_NEW"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Stephen P. Nowak' <stephen_nowak@yahoo.com> may be the same payee as 'Stephen P. Nowak' <stephen_nowakk@yahoo.com> (model-estimated probability 99%).",
+    "bullets": [
+     "Both records use the name 'Stephen P. Nowak'.",
+     "The emails 'stephen_nowak@yahoo.com' and 'stephen_nowakk@yahoo.com' differ by exactly one character.",
+     "Both records are from the same country (JP).",
+     "Their typical payout amounts are similar.",
+     "'stephen_nowakk@yahoo.com' has not been paid before; 'stephen_nowak@yahoo.com' has been paid 3 time(s), last in batch B2026-09."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 99,
+     "a": {
+      "name": "Stephen P. Nowak",
+      "email": "stephen_nowak@yahoo.com",
+      "country": "JP",
+      "n_hist_rows": 3,
+      "currency": "USD",
+      "median_amount": 110.0,
+      "last_hist_batch": "B2026-09"
+     },
+     "b": {
+      "name": "Stephen P. Nowak",
+      "email": "stephen_nowakk@yahoo.com",
+      "country": "JP",
+      "n_hist_rows": 0,
+      "currency": "USD",
+      "median_amount": 110.0,
+      "last_hist_batch": ""
+     },
+     "signals": [
+      "NAME_IDENTICAL",
+      "EMAIL_ONE_EDIT",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR",
+      "ONE_RECORD_NEW"
+     ]
+    },
+    "text": "Very likely: 'Stephen P. Nowak' <stephen_nowak@yahoo.com> may be the same payee as 'Stephen P. Nowak' <stephen_nowakk@yahoo.com> (model-estimated probability 99%). Both records use the name 'Stephen P. Nowak'. The emails 'stephen_nowak@yahoo.com' and 'stephen_nowakk@yahoo.com' differ by exactly one character. Both records are from the same country (JP). Their typical payout amounts are similar. 'stephen_nowakk@yahoo.com' has not been paid before; 'stephen_nowak@yahoo.com' has been paid 3 time(s), last in batch B2026-09.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0012",
+   "type": "identity_match",
+   "probability": 0.9932,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "new_record_matches_known_payee",
+   "affected_row_ids": [
+    "R001298"
+   ],
+   "records": [
+    {
+     "name": "Susan X. Smirnov",
+     "email": "susansminov5@gmail.com",
+     "country": "ES",
+     "n_hist_rows": 0,
+     "currency": "EUR",
+     "median_amount": 275.0,
+     "last_hist_batch": ""
+    },
+    {
+     "name": "Susan X. Smirnov",
+     "email": "susansmirnov5@gmail.com",
+     "country": "ES",
+     "n_hist_rows": 2,
+     "currency": "EUR",
+     "median_amount": 275.0,
+     "last_hist_batch": "B2026-09"
+    }
+   ],
+   "signals": [
+    "NAME_IDENTICAL",
+    "EMAIL_ONE_EDIT",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR",
+    "ONE_RECORD_NEW"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Susan X. Smirnov' <susansminov5@gmail.com> may be the same payee as 'Susan X. Smirnov' <susansmirnov5@gmail.com> (model-estimated probability 99%).",
+    "bullets": [
+     "Both records use the name 'Susan X. Smirnov'.",
+     "The emails 'susansminov5@gmail.com' and 'susansmirnov5@gmail.com' differ by exactly one character.",
+     "Both records are from the same country (ES).",
+     "Their typical payout amounts are similar.",
+     "'susansminov5@gmail.com' has not been paid before; 'susansmirnov5@gmail.com' has been paid 2 time(s), last in batch B2026-09."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 99,
+     "a": {
+      "name": "Susan X. Smirnov",
+      "email": "susansminov5@gmail.com",
+      "country": "ES",
+      "n_hist_rows": 0,
+      "currency": "EUR",
+      "median_amount": 275.0,
+      "last_hist_batch": ""
+     },
+     "b": {
+      "name": "Susan X. Smirnov",
+      "email": "susansmirnov5@gmail.com",
+      "country": "ES",
+      "n_hist_rows": 2,
+      "currency": "EUR",
+      "median_amount": 275.0,
+      "last_hist_batch": "B2026-09"
+     },
+     "signals": [
+      "NAME_IDENTICAL",
+      "EMAIL_ONE_EDIT",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR",
+      "ONE_RECORD_NEW"
+     ]
+    },
+    "text": "Very likely: 'Susan X. Smirnov' <susansminov5@gmail.com> may be the same payee as 'Susan X. Smirnov' <susansmirnov5@gmail.com> (model-estimated probability 99%). Both records use the name 'Susan X. Smirnov'. The emails 'susansminov5@gmail.com' and 'susansmirnov5@gmail.com' differ by exactly one character. Both records are from the same country (ES). Their typical payout amounts are similar. 'susansminov5@gmail.com' has not been paid before; 'susansmirnov5@gmail.com' has been paid 2 time(s), last in batch B2026-09.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0013",
+   "type": "identity_match",
+   "probability": 0.993,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "new_record_matches_known_payee",
+   "affected_row_ids": [
+    "R001402"
+   ],
+   "records": [
+    {
+     "name": "Kowalski Digital Inc",
+     "email": "accounts@kowalskidigital.com",
+     "country": "US",
+     "n_hist_rows": 0,
+     "currency": "USD",
+     "median_amount": 335.79,
+     "last_hist_batch": ""
+    },
+    {
+     "name": "Kowalski Digital",
+     "email": "accounts@kowalskidigital.com",
+     "country": "US",
+     "n_hist_rows": 5,
+     "currency": "USD",
+     "median_amount": 349.01,
+     "last_hist_batch": "B2026-09"
+    }
+   ],
+   "signals": [
+    "NAME_IDENTICAL",
+    "EMAIL_IDENTICAL",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR",
+    "ONE_RECORD_NEW"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Kowalski Digital Inc' <accounts@kowalskidigital.com> may be the same payee as 'Kowalski Digital' <accounts@kowalskidigital.com> (model-estimated probability 99%).",
+    "bullets": [
+     "The names 'Kowalski Digital Inc' and 'Kowalski Digital' are the same after normalisation.",
+     "Both records use the same email address.",
+     "Both records are from the same country (US).",
+     "Their typical payout amounts are similar.",
+     "'accounts@kowalskidigital.com' has not been paid before; 'accounts@kowalskidigital.com' has been paid 5 time(s), last in batch B2026-09."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 99,
+     "a": {
+      "name": "Kowalski Digital Inc",
+      "email": "accounts@kowalskidigital.com",
+      "country": "US",
+      "n_hist_rows": 0,
+      "currency": "USD",
+      "median_amount": 335.79,
+      "last_hist_batch": ""
+     },
+     "b": {
+      "name": "Kowalski Digital",
+      "email": "accounts@kowalskidigital.com",
+      "country": "US",
+      "n_hist_rows": 5,
+      "currency": "USD",
+      "median_amount": 349.01,
+      "last_hist_batch": "B2026-09"
+     },
+     "signals": [
+      "NAME_IDENTICAL",
+      "EMAIL_IDENTICAL",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR",
+      "ONE_RECORD_NEW"
+     ]
+    },
+    "text": "Very likely: 'Kowalski Digital Inc' <accounts@kowalskidigital.com> may be the same payee as 'Kowalski Digital' <accounts@kowalskidigital.com> (model-estimated probability 99%). The names 'Kowalski Digital Inc' and 'Kowalski Digital' are the same after normalisation. Both records use the same email address. Both records are from the same country (US). Their typical payout amounts are similar. 'accounts@kowalskidigital.com' has not been paid before; 'accounts@kowalskidigital.com' has been paid 5 time(s), last in batch B2026-09.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0014",
+   "type": "identity_match",
+   "probability": 0.993,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "two_records_same_payee",
+   "affected_row_ids": [
+    "R001299"
+   ],
+   "records": [
+    {
+     "name": "S. Kumar",
+     "email": "s.kumar@hotmail.com",
+     "country": "GB",
+     "n_hist_rows": 4,
+     "currency": "GBP",
+     "median_amount": 35.0,
+     "last_hist_batch": "B2026-09"
+    },
+    {
+     "name": "Stephen Kumar",
+     "email": "s.kumar@hotmail.com",
+     "country": "GB",
+     "n_hist_rows": 1,
+     "currency": "GBP",
+     "median_amount": 35.0,
+     "last_hist_batch": "B2026-05"
+    }
+   ],
+   "signals": [
+    "NAME_INITIAL",
+    "EMAIL_IDENTICAL",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'S. Kumar' <s.kumar@hotmail.com> may be the same payee as 'Stephen Kumar' <s.kumar@hotmail.com> (model-estimated probability 99%).",
+    "bullets": [
+     "'S. Kumar' and 'Stephen Kumar' look like the same name with an initial in place of a full word.",
+     "Both records use the same email address.",
+     "Both records are from the same country (GB).",
+     "Their typical payout amounts are similar."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 99,
+     "a": {
+      "name": "S. Kumar",
+      "email": "s.kumar@hotmail.com",
+      "country": "GB",
+      "n_hist_rows": 4,
+      "currency": "GBP",
+      "median_amount": 35.0,
+      "last_hist_batch": "B2026-09"
+     },
+     "b": {
+      "name": "Stephen Kumar",
+      "email": "s.kumar@hotmail.com",
+      "country": "GB",
+      "n_hist_rows": 1,
+      "currency": "GBP",
+      "median_amount": 35.0,
+      "last_hist_batch": "B2026-05"
+     },
+     "signals": [
+      "NAME_INITIAL",
+      "EMAIL_IDENTICAL",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR"
+     ]
+    },
+    "text": "Very likely: 'S. Kumar' <s.kumar@hotmail.com> may be the same payee as 'Stephen Kumar' <s.kumar@hotmail.com> (model-estimated probability 99%). 'S. Kumar' and 'Stephen Kumar' look like the same name with an initial in place of a full word. Both records use the same email address. Both records are from the same country (GB). Their typical payout amounts are similar.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0015",
+   "type": "identity_match",
+   "probability": 0.9929,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "two_records_same_payee",
+   "affected_row_ids": [
+    "R001245"
+   ],
+   "records": [
+    {
+     "name": "Divya Wang",
+     "email": "dwang@proton.me",
+     "country": "DE",
+     "n_hist_rows": 2,
+     "currency": "EUR",
+     "median_amount": 170.21,
+     "last_hist_batch": "B2026-05"
+    },
+    {
+     "name": "Divya Wan",
+     "email": "dwang@proton.me",
+     "country": "DE",
+     "n_hist_rows": 4,
+     "currency": "EUR",
+     "median_amount": 175.35,
+     "last_hist_batch": "B2026-09"
+    }
+   ],
+   "signals": [
+    "NAME_CLOSE",
+    "EMAIL_IDENTICAL",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Divya Wang' <dwang@proton.me> may be the same payee as 'Divya Wan' <dwang@proton.me> (model-estimated probability 99%).",
+    "bullets": [
+     "The names 'Divya Wang' and 'Divya Wan' are very similar but not identical.",
+     "Both records use the same email address.",
+     "Both records are from the same country (DE).",
+     "Their typical payout amounts are similar."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 99,
+     "a": {
+      "name": "Divya Wang",
+      "email": "dwang@proton.me",
+      "country": "DE",
+      "n_hist_rows": 2,
+      "currency": "EUR",
+      "median_amount": 170.21,
+      "last_hist_batch": "B2026-05"
+     },
+     "b": {
+      "name": "Divya Wan",
+      "email": "dwang@proton.me",
+      "country": "DE",
+      "n_hist_rows": 4,
+      "currency": "EUR",
+      "median_amount": 175.35,
+      "last_hist_batch": "B2026-09"
+     },
+     "signals": [
+      "NAME_CLOSE",
+      "EMAIL_IDENTICAL",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR"
+     ]
+    },
+    "text": "Very likely: 'Divya Wang' <dwang@proton.me> may be the same payee as 'Divya Wan' <dwang@proton.me> (model-estimated probability 99%). The names 'Divya Wang' and 'Divya Wan' are very similar but not identical. Both records use the same email address. Both records are from the same country (DE). Their typical payout amounts are similar.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0016",
+   "type": "identity_match",
+   "probability": 0.9929,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "two_records_same_payee",
+   "affected_row_ids": [
+    "R001275"
+   ],
+   "records": [
+    {
+     "name": "H. Tanaka",
+     "email": "hannahtanaka17@tanakaworks.com",
+     "country": "AU",
+     "n_hist_rows": 3,
+     "currency": "AUD",
+     "median_amount": 15.0,
+     "last_hist_batch": "B2026-09"
+    },
+    {
+     "name": "Hannah Tanaka",
+     "email": "hannahtanaka17@tanakaworks.com",
+     "country": "AU",
+     "n_hist_rows": 1,
+     "currency": "AUD",
+     "median_amount": 15.0,
+     "last_hist_batch": "B2026-04"
+    }
+   ],
+   "signals": [
+    "NAME_INITIAL",
+    "EMAIL_IDENTICAL",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'H. Tanaka' <hannahtanaka17@tanakaworks.com> may be the same payee as 'Hannah Tanaka' <hannahtanaka17@tanakaworks.com> (model-estimated probability 99%).",
+    "bullets": [
+     "'H. Tanaka' and 'Hannah Tanaka' look like the same name with an initial in place of a full word.",
+     "Both records use the same email address.",
+     "Both records are from the same country (AU).",
+     "Their typical payout amounts are similar."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 99,
+     "a": {
+      "name": "H. Tanaka",
+      "email": "hannahtanaka17@tanakaworks.com",
+      "country": "AU",
+      "n_hist_rows": 3,
+      "currency": "AUD",
+      "median_amount": 15.0,
+      "last_hist_batch": "B2026-09"
+     },
+     "b": {
+      "name": "Hannah Tanaka",
+      "email": "hannahtanaka17@tanakaworks.com",
+      "country": "AU",
+      "n_hist_rows": 1,
+      "currency": "AUD",
+      "median_amount": 15.0,
+      "last_hist_batch": "B2026-04"
+     },
+     "signals": [
+      "NAME_INITIAL",
+      "EMAIL_IDENTICAL",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR"
+     ]
+    },
+    "text": "Very likely: 'H. Tanaka' <hannahtanaka17@tanakaworks.com> may be the same payee as 'Hannah Tanaka' <hannahtanaka17@tanakaworks.com> (model-estimated probability 99%). 'H. Tanaka' and 'Hannah Tanaka' look like the same name with an initial in place of a full word. Both records use the same email address. Both records are from the same country (AU). Their typical payout amounts are similar.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0017",
+   "type": "identity_match",
+   "probability": 0.9928,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "new_record_matches_known_payee",
+   "affected_row_ids": [
+    "R001258",
+    "R001386"
+   ],
+   "records": [
+    {
+     "name": "Campbell Piotr",
+     "email": "piotrcampbell96@gmail.com",
+     "country": "US",
+     "n_hist_rows": 0,
+     "currency": "USD",
+     "median_amount": 240.0,
+     "last_hist_batch": ""
+    },
+    {
+     "name": "Piotr Campbell",
+     "email": "piotrcampbell96@gmail.com",
+     "country": "US",
+     "n_hist_rows": 3,
+     "currency": "USD",
+     "median_amount": 240.0,
+     "last_hist_batch": "B2026-08"
+    }
+   ],
+   "signals": [
+    "NAME_REORDERED",
+    "EMAIL_IDENTICAL",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR",
+    "ONE_RECORD_NEW"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Campbell Piotr' <piotrcampbell96@gmail.com> may be the same payee as 'Piotr Campbell' <piotrcampbell96@gmail.com> (model-estimated probability 99%).",
+    "bullets": [
+     "'Campbell Piotr' and 'Piotr Campbell' contain the same words in a different order.",
+     "Both records use the same email address.",
+     "Both records are from the same country (US).",
+     "Their typical payout amounts are similar.",
+     "'piotrcampbell96@gmail.com' has not been paid before; 'piotrcampbell96@gmail.com' has been paid 3 time(s), last in batch B2026-08."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 99,
+     "a": {
+      "name": "Campbell Piotr",
+      "email": "piotrcampbell96@gmail.com",
+      "country": "US",
+      "n_hist_rows": 0,
+      "currency": "USD",
+      "median_amount": 240.0,
+      "last_hist_batch": ""
+     },
+     "b": {
+      "name": "Piotr Campbell",
+      "email": "piotrcampbell96@gmail.com",
+      "country": "US",
+      "n_hist_rows": 3,
+      "currency": "USD",
+      "median_amount": 240.0,
+      "last_hist_batch": "B2026-08"
+     },
+     "signals": [
+      "NAME_REORDERED",
+      "EMAIL_IDENTICAL",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR",
+      "ONE_RECORD_NEW"
+     ]
+    },
+    "text": "Very likely: 'Campbell Piotr' <piotrcampbell96@gmail.com> may be the same payee as 'Piotr Campbell' <piotrcampbell96@gmail.com> (model-estimated probability 99%). 'Campbell Piotr' and 'Piotr Campbell' contain the same words in a different order. Both records use the same email address. Both records are from the same country (US). Their typical payout amounts are similar. 'piotrcampbell96@gmail.com' has not been paid before; 'piotrcampbell96@gmail.com' has been paid 3 time(s), last in batch B2026-08.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0018",
+   "type": "identity_match",
+   "probability": 0.9927,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "two_records_same_payee",
+   "affected_row_ids": [
+    "R001368"
+   ],
+   "records": [
+    {
+     "name": "Daniel O. Shah",
+     "email": "dshah@gmail.com",
+     "country": "FR",
+     "n_hist_rows": 3,
+     "currency": "EUR",
+     "median_amount": 40.0,
+     "last_hist_batch": "B2026-06"
+    },
+    {
+     "name": "Daniel Shah",
+     "email": "dshah@gmail.com",
+     "country": "FR",
+     "n_hist_rows": 2,
+     "currency": "EUR",
+     "median_amount": 40.0,
+     "last_hist_batch": "B2026-08"
+    }
+   ],
+   "signals": [
+    "NAME_SUBSET",
+    "EMAIL_IDENTICAL",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Daniel O. Shah' <dshah@gmail.com> may be the same payee as 'Daniel Shah' <dshah@gmail.com> (model-estimated probability 99%).",
+    "bullets": [
+     "One name contains all the words of the other ('Daniel O. Shah' / 'Daniel Shah').",
+     "Both records use the same email address.",
+     "Both records are from the same country (FR).",
+     "Their typical payout amounts are similar."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 99,
+     "a": {
+      "name": "Daniel O. Shah",
+      "email": "dshah@gmail.com",
+      "country": "FR",
+      "n_hist_rows": 3,
+      "currency": "EUR",
+      "median_amount": 40.0,
+      "last_hist_batch": "B2026-06"
+     },
+     "b": {
+      "name": "Daniel Shah",
+      "email": "dshah@gmail.com",
+      "country": "FR",
+      "n_hist_rows": 2,
+      "currency": "EUR",
+      "median_amount": 40.0,
+      "last_hist_batch": "B2026-08"
+     },
+     "signals": [
+      "NAME_SUBSET",
+      "EMAIL_IDENTICAL",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR"
+     ]
+    },
+    "text": "Very likely: 'Daniel O. Shah' <dshah@gmail.com> may be the same payee as 'Daniel Shah' <dshah@gmail.com> (model-estimated probability 99%). One name contains all the words of the other ('Daniel O. Shah' / 'Daniel Shah'). Both records use the same email address. Both records are from the same country (FR). Their typical payout amounts are similar.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0019",
+   "type": "identity_match",
+   "probability": 0.9927,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "new_record_matches_known_payee",
+   "affected_row_ids": [
+    "R001466"
+   ],
+   "records": [
+    {
+     "name": "Seo Baker",
+     "email": "seibaker@yahoo.com",
+     "country": "IN",
+     "n_hist_rows": 0,
+     "currency": "USD",
+     "median_amount": 290.0,
+     "last_hist_batch": ""
+    },
+    {
+     "name": "Seo Baker",
+     "email": "seobaker@yahoo.com",
+     "country": "IN",
+     "n_hist_rows": 4,
+     "currency": "USD",
+     "median_amount": 290.0,
+     "last_hist_batch": "B2026-09"
+    }
+   ],
+   "signals": [
+    "NAME_IDENTICAL",
+    "EMAIL_ONE_EDIT",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR",
+    "ONE_RECORD_NEW"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Seo Baker' <seibaker@yahoo.com> may be the same payee as 'Seo Baker' <seobaker@yahoo.com> (model-estimated probability 99%).",
+    "bullets": [
+     "Both records use the name 'Seo Baker'.",
+     "The emails 'seibaker@yahoo.com' and 'seobaker@yahoo.com' differ by exactly one character.",
+     "Both records are from the same country (IN).",
+     "Their typical payout amounts are similar.",
+     "'seibaker@yahoo.com' has not been paid before; 'seobaker@yahoo.com' has been paid 4 time(s), last in batch B2026-09."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 99,
+     "a": {
+      "name": "Seo Baker",
+      "email": "seibaker@yahoo.com",
+      "country": "IN",
+      "n_hist_rows": 0,
+      "currency": "USD",
+      "median_amount": 290.0,
+      "last_hist_batch": ""
+     },
+     "b": {
+      "name": "Seo Baker",
+      "email": "seobaker@yahoo.com",
+      "country": "IN",
+      "n_hist_rows": 4,
+      "currency": "USD",
+      "median_amount": 290.0,
+      "last_hist_batch": "B2026-09"
+     },
+     "signals": [
+      "NAME_IDENTICAL",
+      "EMAIL_ONE_EDIT",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR",
+      "ONE_RECORD_NEW"
+     ]
+    },
+    "text": "Very likely: 'Seo Baker' <seibaker@yahoo.com> may be the same payee as 'Seo Baker' <seobaker@yahoo.com> (model-estimated probability 99%). Both records use the name 'Seo Baker'. The emails 'seibaker@yahoo.com' and 'seobaker@yahoo.com' differ by exactly one character. Both records are from the same country (IN). Their typical payout amounts are similar. 'seibaker@yahoo.com' has not been paid before; 'seobaker@yahoo.com' has been paid 4 time(s), last in batch B2026-09.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0020",
+   "type": "identity_match",
+   "probability": 0.9927,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "new_record_matches_known_payee",
+   "affected_row_ids": [
+    "R001231"
+   ],
+   "records": [
+    {
+     "name": "Whiite Labs",
+     "email": "finance@whitelabs.com",
+     "country": "ES",
+     "n_hist_rows": 1,
+     "currency": "EUR",
+     "median_amount": 72.16,
+     "last_hist_batch": "B2026-09"
+    },
+    {
+     "name": "White Labs",
+     "email": "finance@whitelabs.com",
+     "country": "ES",
+     "n_hist_rows": 0,
+     "currency": "EUR",
+     "median_amount": 77.34,
+     "last_hist_batch": ""
+    }
+   ],
+   "signals": [
+    "NAME_CLOSE",
+    "EMAIL_IDENTICAL",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR",
+    "ONE_RECORD_NEW"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Whiite Labs' <finance@whitelabs.com> may be the same payee as 'White Labs' <finance@whitelabs.com> (model-estimated probability 99%).",
+    "bullets": [
+     "The names 'Whiite Labs' and 'White Labs' are very similar but not identical.",
+     "Both records use the same email address.",
+     "Both records are from the same country (ES).",
+     "Their typical payout amounts are similar.",
+     "'finance@whitelabs.com' has not been paid before; 'finance@whitelabs.com' has been paid 1 time(s), last in batch B2026-09."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 99,
+     "a": {
+      "name": "Whiite Labs",
+      "email": "finance@whitelabs.com",
+      "country": "ES",
+      "n_hist_rows": 1,
+      "currency": "EUR",
+      "median_amount": 72.16,
+      "last_hist_batch": "B2026-09"
+     },
+     "b": {
+      "name": "White Labs",
+      "email": "finance@whitelabs.com",
+      "country": "ES",
+      "n_hist_rows": 0,
+      "currency": "EUR",
+      "median_amount": 77.34,
+      "last_hist_batch": ""
+     },
+     "signals": [
+      "NAME_CLOSE",
+      "EMAIL_IDENTICAL",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR",
+      "ONE_RECORD_NEW"
+     ]
+    },
+    "text": "Very likely: 'Whiite Labs' <finance@whitelabs.com> may be the same payee as 'White Labs' <finance@whitelabs.com> (model-estimated probability 99%). The names 'Whiite Labs' and 'White Labs' are very similar but not identical. Both records use the same email address. Both records are from the same country (ES). Their typical payout amounts are similar. 'finance@whitelabs.com' has not been paid before; 'finance@whitelabs.com' has been paid 1 time(s), last in batch B2026-09.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0021",
+   "type": "identity_match",
+   "probability": 0.9925,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "two_records_same_payee",
+   "affected_row_ids": [
+    "R001334"
+   ],
+   "records": [
+    {
+     "name": "Mason Schneider",
+     "email": "masonschneider12@gmail.com",
+     "country": "CA",
+     "n_hist_rows": 2,
+     "currency": "CAD",
+     "median_amount": 155.0,
+     "last_hist_batch": "B2026-09"
+    },
+    {
+     "name": "Mason Schneider",
+     "email": "masonschneider@gmail.com",
+     "country": "CA",
+     "n_hist_rows": 4,
+     "currency": "CAD",
+     "median_amount": 155.0,
+     "last_hist_batch": "B2026-08"
+    }
+   ],
+   "signals": [
+    "NAME_IDENTICAL",
+    "EMAIL_CLOSE",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Mason Schneider' <masonschneider12@gmail.com> may be the same payee as 'Mason Schneider' <masonschneider@gmail.com> (model-estimated probability 99%).",
+    "bullets": [
+     "Both records use the name 'Mason Schneider'.",
+     "The emails 'masonschneider12@gmail.com' and 'masonschneider@gmail.com' are nearly the same.",
+     "Both records are from the same country (CA).",
+     "Their typical payout amounts are similar."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 99,
+     "a": {
+      "name": "Mason Schneider",
+      "email": "masonschneider12@gmail.com",
+      "country": "CA",
+      "n_hist_rows": 2,
+      "currency": "CAD",
+      "median_amount": 155.0,
+      "last_hist_batch": "B2026-09"
+     },
+     "b": {
+      "name": "Mason Schneider",
+      "email": "masonschneider@gmail.com",
+      "country": "CA",
+      "n_hist_rows": 4,
+      "currency": "CAD",
+      "median_amount": 155.0,
+      "last_hist_batch": "B2026-08"
+     },
+     "signals": [
+      "NAME_IDENTICAL",
+      "EMAIL_CLOSE",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR"
+     ]
+    },
+    "text": "Very likely: 'Mason Schneider' <masonschneider12@gmail.com> may be the same payee as 'Mason Schneider' <masonschneider@gmail.com> (model-estimated probability 99%). Both records use the name 'Mason Schneider'. The emails 'masonschneider12@gmail.com' and 'masonschneider@gmail.com' are nearly the same. Both records are from the same country (CA). Their typical payout amounts are similar.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0022",
+   "type": "identity_match",
+   "probability": 0.9921,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "two_records_same_payee",
+   "affected_row_ids": [
+    "R001206"
+   ],
+   "records": [
+    {
+     "name": "Bailey Olga",
+     "email": "olgabailey73@gmail.com",
+     "country": "GB",
+     "n_hist_rows": 1,
+     "currency": "GBP",
+     "median_amount": 39.17,
+     "last_hist_batch": "B2026-09"
+    },
+    {
+     "name": "Olga Bailey",
+     "email": "olgabailey73@gmail.com",
+     "country": "GB",
+     "n_hist_rows": 2,
+     "currency": "GBP",
+     "median_amount": 39.73,
+     "last_hist_batch": "B2026-07"
+    }
+   ],
+   "signals": [
+    "NAME_REORDERED",
+    "EMAIL_IDENTICAL",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Bailey Olga' <olgabailey73@gmail.com> may be the same payee as 'Olga Bailey' <olgabailey73@gmail.com> (model-estimated probability 99%).",
+    "bullets": [
+     "'Bailey Olga' and 'Olga Bailey' contain the same words in a different order.",
+     "Both records use the same email address.",
+     "Both records are from the same country (GB).",
+     "Their typical payout amounts are similar."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 99,
+     "a": {
+      "name": "Bailey Olga",
+      "email": "olgabailey73@gmail.com",
+      "country": "GB",
+      "n_hist_rows": 1,
+      "currency": "GBP",
+      "median_amount": 39.17,
+      "last_hist_batch": "B2026-09"
+     },
+     "b": {
+      "name": "Olga Bailey",
+      "email": "olgabailey73@gmail.com",
+      "country": "GB",
+      "n_hist_rows": 2,
+      "currency": "GBP",
+      "median_amount": 39.73,
+      "last_hist_batch": "B2026-07"
+     },
+     "signals": [
+      "NAME_REORDERED",
+      "EMAIL_IDENTICAL",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR"
+     ]
+    },
+    "text": "Very likely: 'Bailey Olga' <olgabailey73@gmail.com> may be the same payee as 'Olga Bailey' <olgabailey73@gmail.com> (model-estimated probability 99%). 'Bailey Olga' and 'Olga Bailey' contain the same words in a different order. Both records use the same email address. Both records are from the same country (GB). Their typical payout amounts are similar.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0023",
+   "type": "identity_match",
+   "probability": 0.992,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "new_record_matches_known_payee",
+   "affected_row_ids": [
+    "R001230",
+    "R001297"
+   ],
+   "records": [
+    {
+     "name": "Lena M. Esposito",
+     "email": "lenaesposito35@gmail.com",
+     "country": "AU",
+     "n_hist_rows": 4,
+     "currency": "AUD",
+     "median_amount": 396.49,
+     "last_hist_batch": "B2026-09"
+    },
+    {
+     "name": "Lenaa M. Esposito",
+     "email": "lenaesposito35@gmail.com",
+     "country": "AU",
+     "n_hist_rows": 0,
+     "currency": "AUD",
+     "median_amount": 335.85,
+     "last_hist_batch": ""
+    }
+   ],
+   "signals": [
+    "NAME_CLOSE",
+    "EMAIL_IDENTICAL",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR",
+    "ONE_RECORD_NEW"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Lena M. Esposito' <lenaesposito35@gmail.com> may be the same payee as 'Lenaa M. Esposito' <lenaesposito35@gmail.com> (model-estimated probability 99%).",
+    "bullets": [
+     "The names 'Lena M. Esposito' and 'Lenaa M. Esposito' are very similar but not identical.",
+     "Both records use the same email address.",
+     "Both records are from the same country (AU).",
+     "Their typical payout amounts are similar.",
+     "'lenaesposito35@gmail.com' has not been paid before; 'lenaesposito35@gmail.com' has been paid 4 time(s), last in batch B2026-09."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 99,
+     "a": {
+      "name": "Lena M. Esposito",
+      "email": "lenaesposito35@gmail.com",
+      "country": "AU",
+      "n_hist_rows": 4,
+      "currency": "AUD",
+      "median_amount": 396.49,
+      "last_hist_batch": "B2026-09"
+     },
+     "b": {
+      "name": "Lenaa M. Esposito",
+      "email": "lenaesposito35@gmail.com",
+      "country": "AU",
+      "n_hist_rows": 0,
+      "currency": "AUD",
+      "median_amount": 335.85,
+      "last_hist_batch": ""
+     },
+     "signals": [
+      "NAME_CLOSE",
+      "EMAIL_IDENTICAL",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR",
+      "ONE_RECORD_NEW"
+     ]
+    },
+    "text": "Very likely: 'Lena M. Esposito' <lenaesposito35@gmail.com> may be the same payee as 'Lenaa M. Esposito' <lenaesposito35@gmail.com> (model-estimated probability 99%). The names 'Lena M. Esposito' and 'Lenaa M. Esposito' are very similar but not identical. Both records use the same email address. Both records are from the same country (AU). Their typical payout amounts are similar. 'lenaesposito35@gmail.com' has not been paid before; 'lenaesposito35@gmail.com' has been paid 4 time(s), last in batch B2026-09.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0024",
+   "type": "identity_match",
+   "probability": 0.9915,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "two_records_same_payee",
+   "affected_row_ids": [
+    "R001300"
+   ],
+   "records": [
+    {
+     "name": "N. Howard",
+     "email": "neha.howard@howardco.com",
+     "country": "US",
+     "n_hist_rows": 1,
+     "currency": "USD",
+     "median_amount": 248.21,
+     "last_hist_batch": "B2026-09"
+    },
+    {
+     "name": "Neha Y. Howard",
+     "email": "neha.howard@howardco.com",
+     "country": "US",
+     "n_hist_rows": 2,
+     "currency": "USD",
+     "median_amount": 253.23,
+     "last_hist_batch": "B2026-07"
+    }
+   ],
+   "signals": [
+    "NAME_INITIAL",
+    "EMAIL_IDENTICAL",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'N. Howard' <neha.howard@howardco.com> may be the same payee as 'Neha Y. Howard' <neha.howard@howardco.com> (model-estimated probability 99%).",
+    "bullets": [
+     "'N. Howard' and 'Neha Y. Howard' look like the same name with an initial in place of a full word.",
+     "Both records use the same email address.",
+     "Both records are from the same country (US).",
+     "Their typical payout amounts are similar."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 99,
+     "a": {
+      "name": "N. Howard",
+      "email": "neha.howard@howardco.com",
+      "country": "US",
+      "n_hist_rows": 1,
+      "currency": "USD",
+      "median_amount": 248.21,
+      "last_hist_batch": "B2026-09"
+     },
+     "b": {
+      "name": "Neha Y. Howard",
+      "email": "neha.howard@howardco.com",
+      "country": "US",
+      "n_hist_rows": 2,
+      "currency": "USD",
+      "median_amount": 253.23,
+      "last_hist_batch": "B2026-07"
+     },
+     "signals": [
+      "NAME_INITIAL",
+      "EMAIL_IDENTICAL",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR"
+     ]
+    },
+    "text": "Very likely: 'N. Howard' <neha.howard@howardco.com> may be the same payee as 'Neha Y. Howard' <neha.howard@howardco.com> (model-estimated probability 99%). 'N. Howard' and 'Neha Y. Howard' look like the same name with an initial in place of a full word. Both records use the same email address. Both records are from the same country (US). Their typical payout amounts are similar.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0025",
+   "type": "identity_match",
+   "probability": 0.991,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "two_records_same_payee",
+   "affected_row_ids": [
+    "R001379"
+   ],
+   "records": [
+    {
+     "name": "Liu Ravi",
+     "email": "rliu@gmail.com",
+     "country": "US",
+     "n_hist_rows": 3,
+     "currency": "USD",
+     "median_amount": 141.25,
+     "last_hist_batch": "B2026-09"
+    },
+    {
+     "name": "Ravi Liu",
+     "email": "rliu@gmail.com",
+     "country": "US",
+     "n_hist_rows": 1,
+     "currency": "USD",
+     "median_amount": 118.38,
+     "last_hist_batch": "B2026-04"
+    }
+   ],
+   "signals": [
+    "NAME_REORDERED",
+    "EMAIL_IDENTICAL",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Liu Ravi' <rliu@gmail.com> may be the same payee as 'Ravi Liu' <rliu@gmail.com> (model-estimated probability 99%).",
+    "bullets": [
+     "'Liu Ravi' and 'Ravi Liu' contain the same words in a different order.",
+     "Both records use the same email address.",
+     "Both records are from the same country (US).",
+     "Their typical payout amounts are similar."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 99,
+     "a": {
+      "name": "Liu Ravi",
+      "email": "rliu@gmail.com",
+      "country": "US",
+      "n_hist_rows": 3,
+      "currency": "USD",
+      "median_amount": 141.25,
+      "last_hist_batch": "B2026-09"
+     },
+     "b": {
+      "name": "Ravi Liu",
+      "email": "rliu@gmail.com",
+      "country": "US",
+      "n_hist_rows": 1,
+      "currency": "USD",
+      "median_amount": 118.38,
+      "last_hist_batch": "B2026-04"
+     },
+     "signals": [
+      "NAME_REORDERED",
+      "EMAIL_IDENTICAL",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR"
+     ]
+    },
+    "text": "Very likely: 'Liu Ravi' <rliu@gmail.com> may be the same payee as 'Ravi Liu' <rliu@gmail.com> (model-estimated probability 99%). 'Liu Ravi' and 'Ravi Liu' contain the same words in a different order. Both records use the same email address. Both records are from the same country (US). Their typical payout amounts are similar.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0026",
+   "type": "identity_match",
+   "probability": 0.9904,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "new_record_matches_known_payee",
+   "affected_row_ids": [
+    "R001211",
+    "R001327"
+   ],
+   "records": [
+    {
+     "name": "Layla Chopra",
+     "email": "layla.chopra58@yahoo.com",
+     "country": "FR",
+     "n_hist_rows": 0,
+     "currency": "EUR",
+     "median_amount": 434.84,
+     "last_hist_batch": ""
+    },
+    {
+     "name": "Layla Chopra",
+     "email": "layla.chopra@yahoo.com",
+     "country": "FR",
+     "n_hist_rows": 4,
+     "currency": "EUR",
+     "median_amount": 454.76,
+     "last_hist_batch": "B2026-08"
+    }
+   ],
+   "signals": [
+    "NAME_IDENTICAL",
+    "EMAIL_CLOSE",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR",
+    "ONE_RECORD_NEW"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Layla Chopra' <layla.chopra58@yahoo.com> may be the same payee as 'Layla Chopra' <layla.chopra@yahoo.com> (model-estimated probability 99%).",
+    "bullets": [
+     "Both records use the name 'Layla Chopra'.",
+     "The emails 'layla.chopra58@yahoo.com' and 'layla.chopra@yahoo.com' are nearly the same.",
+     "Both records are from the same country (FR).",
+     "Their typical payout amounts are similar.",
+     "'layla.chopra58@yahoo.com' has not been paid before; 'layla.chopra@yahoo.com' has been paid 4 time(s), last in batch B2026-08."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 99,
+     "a": {
+      "name": "Layla Chopra",
+      "email": "layla.chopra58@yahoo.com",
+      "country": "FR",
+      "n_hist_rows": 0,
+      "currency": "EUR",
+      "median_amount": 434.84,
+      "last_hist_batch": ""
+     },
+     "b": {
+      "name": "Layla Chopra",
+      "email": "layla.chopra@yahoo.com",
+      "country": "FR",
+      "n_hist_rows": 4,
+      "currency": "EUR",
+      "median_amount": 454.76,
+      "last_hist_batch": "B2026-08"
+     },
+     "signals": [
+      "NAME_IDENTICAL",
+      "EMAIL_CLOSE",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR",
+      "ONE_RECORD_NEW"
+     ]
+    },
+    "text": "Very likely: 'Layla Chopra' <layla.chopra58@yahoo.com> may be the same payee as 'Layla Chopra' <layla.chopra@yahoo.com> (model-estimated probability 99%). Both records use the name 'Layla Chopra'. The emails 'layla.chopra58@yahoo.com' and 'layla.chopra@yahoo.com' are nearly the same. Both records are from the same country (FR). Their typical payout amounts are similar. 'layla.chopra58@yahoo.com' has not been paid before; 'layla.chopra@yahoo.com' has been paid 4 time(s), last in batch B2026-08.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0027",
+   "type": "identity_match",
+   "probability": 0.9901,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "two_records_same_payee",
+   "affected_row_ids": [
+    "R001198"
+   ],
+   "records": [
+    {
+     "name": "Matteo Flores",
+     "email": "matteoflores57@yahoo.com",
+     "country": "IN",
+     "n_hist_rows": 1,
+     "currency": "USD",
+     "median_amount": 179.12,
+     "last_hist_batch": "B2026-09"
+    },
+    {
+     "name": "Matteo Flores",
+     "email": "matteoflores@yahoo.com",
+     "country": "IN",
+     "n_hist_rows": 3,
+     "currency": "USD",
+     "median_amount": 165.125,
+     "last_hist_batch": "B2026-07"
+    }
+   ],
+   "signals": [
+    "NAME_IDENTICAL",
+    "EMAIL_CLOSE",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Matteo Flores' <matteoflores57@yahoo.com> may be the same payee as 'Matteo Flores' <matteoflores@yahoo.com> (model-estimated probability 99%).",
+    "bullets": [
+     "Both records use the name 'Matteo Flores'.",
+     "The emails 'matteoflores57@yahoo.com' and 'matteoflores@yahoo.com' are nearly the same.",
+     "Both records are from the same country (IN).",
+     "Their typical payout amounts are similar."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 99,
+     "a": {
+      "name": "Matteo Flores",
+      "email": "matteoflores57@yahoo.com",
+      "country": "IN",
+      "n_hist_rows": 1,
+      "currency": "USD",
+      "median_amount": 179.12,
+      "last_hist_batch": "B2026-09"
+     },
+     "b": {
+      "name": "Matteo Flores",
+      "email": "matteoflores@yahoo.com",
+      "country": "IN",
+      "n_hist_rows": 3,
+      "currency": "USD",
+      "median_amount": 165.125,
+      "last_hist_batch": "B2026-07"
+     },
+     "signals": [
+      "NAME_IDENTICAL",
+      "EMAIL_CLOSE",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR"
+     ]
+    },
+    "text": "Very likely: 'Matteo Flores' <matteoflores57@yahoo.com> may be the same payee as 'Matteo Flores' <matteoflores@yahoo.com> (model-estimated probability 99%). Both records use the name 'Matteo Flores'. The emails 'matteoflores57@yahoo.com' and 'matteoflores@yahoo.com' are nearly the same. Both records are from the same country (IN). Their typical payout amounts are similar.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0028",
+   "type": "identity_match",
+   "probability": 0.9893,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "new_record_matches_known_payee",
+   "affected_row_ids": [
+    "R001414"
+   ],
+   "records": [
+    {
+     "name": "Zoya Schneider",
+     "email": "zoya.schneider36@proton.me",
+     "country": "US",
+     "n_hist_rows": 3,
+     "currency": "USD",
+     "median_amount": 271.18,
+     "last_hist_batch": "B2026-09"
+    },
+    {
+     "name": "Zoya Schneider",
+     "email": "zoya.schneider@proton.me",
+     "country": "US",
+     "n_hist_rows": 0,
+     "currency": "USD",
+     "median_amount": 252.81,
+     "last_hist_batch": ""
+    }
+   ],
+   "signals": [
+    "NAME_IDENTICAL",
+    "EMAIL_CLOSE",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR",
+    "ONE_RECORD_NEW"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Zoya Schneider' <zoya.schneider36@proton.me> may be the same payee as 'Zoya Schneider' <zoya.schneider@proton.me> (model-estimated probability 99%).",
+    "bullets": [
+     "Both records use the name 'Zoya Schneider'.",
+     "The emails 'zoya.schneider36@proton.me' and 'zoya.schneider@proton.me' are nearly the same.",
+     "Both records are from the same country (US).",
+     "Their typical payout amounts are similar.",
+     "'zoya.schneider@proton.me' has not been paid before; 'zoya.schneider36@proton.me' has been paid 3 time(s), last in batch B2026-09."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 99,
+     "a": {
+      "name": "Zoya Schneider",
+      "email": "zoya.schneider36@proton.me",
+      "country": "US",
+      "n_hist_rows": 3,
+      "currency": "USD",
+      "median_amount": 271.18,
+      "last_hist_batch": "B2026-09"
+     },
+     "b": {
+      "name": "Zoya Schneider",
+      "email": "zoya.schneider@proton.me",
+      "country": "US",
+      "n_hist_rows": 0,
+      "currency": "USD",
+      "median_amount": 252.81,
+      "last_hist_batch": ""
+     },
+     "signals": [
+      "NAME_IDENTICAL",
+      "EMAIL_CLOSE",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR",
+      "ONE_RECORD_NEW"
+     ]
+    },
+    "text": "Very likely: 'Zoya Schneider' <zoya.schneider36@proton.me> may be the same payee as 'Zoya Schneider' <zoya.schneider@proton.me> (model-estimated probability 99%). Both records use the name 'Zoya Schneider'. The emails 'zoya.schneider36@proton.me' and 'zoya.schneider@proton.me' are nearly the same. Both records are from the same country (US). Their typical payout amounts are similar. 'zoya.schneider@proton.me' has not been paid before; 'zoya.schneider36@proton.me' has been paid 3 time(s), last in batch B2026-09.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0029",
+   "type": "identity_match",
+   "probability": 0.9892,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "new_record_matches_known_payee",
+   "affected_row_ids": [
+    "R001266"
+   ],
+   "records": [
+    {
+     "name": "Li Parker Jr.",
+     "email": "li.parker69@gmail.com",
+     "country": "FR",
+     "n_hist_rows": 0,
+     "currency": "EUR",
+     "median_amount": 121.84,
+     "last_hist_batch": ""
+    },
+    {
+     "name": "Li Parker",
+     "email": "li.parker@gmail.com",
+     "country": "FR",
+     "n_hist_rows": 5,
+     "currency": "EUR",
+     "median_amount": 132.72,
+     "last_hist_batch": "B2026-09"
+    }
+   ],
+   "signals": [
+    "NAME_IDENTICAL",
+    "EMAIL_CLOSE",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR",
+    "ONE_RECORD_NEW"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Li Parker Jr.' <li.parker69@gmail.com> may be the same payee as 'Li Parker' <li.parker@gmail.com> (model-estimated probability 99%).",
+    "bullets": [
+     "The names 'Li Parker Jr.' and 'Li Parker' are the same after normalisation.",
+     "The emails 'li.parker69@gmail.com' and 'li.parker@gmail.com' are nearly the same.",
+     "Both records are from the same country (FR).",
+     "Their typical payout amounts are similar.",
+     "'li.parker69@gmail.com' has not been paid before; 'li.parker@gmail.com' has been paid 5 time(s), last in batch B2026-09."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 99,
+     "a": {
+      "name": "Li Parker Jr.",
+      "email": "li.parker69@gmail.com",
+      "country": "FR",
+      "n_hist_rows": 0,
+      "currency": "EUR",
+      "median_amount": 121.84,
+      "last_hist_batch": ""
+     },
+     "b": {
+      "name": "Li Parker",
+      "email": "li.parker@gmail.com",
+      "country": "FR",
+      "n_hist_rows": 5,
+      "currency": "EUR",
+      "median_amount": 132.72,
+      "last_hist_batch": "B2026-09"
+     },
+     "signals": [
+      "NAME_IDENTICAL",
+      "EMAIL_CLOSE",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR",
+      "ONE_RECORD_NEW"
+     ]
+    },
+    "text": "Very likely: 'Li Parker Jr.' <li.parker69@gmail.com> may be the same payee as 'Li Parker' <li.parker@gmail.com> (model-estimated probability 99%). The names 'Li Parker Jr.' and 'Li Parker' are the same after normalisation. The emails 'li.parker69@gmail.com' and 'li.parker@gmail.com' are nearly the same. Both records are from the same country (FR). Their typical payout amounts are similar. 'li.parker69@gmail.com' has not been paid before; 'li.parker@gmail.com' has been paid 5 time(s), last in batch B2026-09.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0030",
+   "type": "identity_match",
+   "probability": 0.989,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "two_records_same_payee",
+   "affected_row_ids": [
+    "R001419"
+   ],
+   "records": [
+    {
+     "name": "Nikhil Kowalski",
+     "email": "nikhilkowalski58@gmail.com",
+     "country": "US",
+     "n_hist_rows": 1,
+     "currency": "USD",
+     "median_amount": 2120.0,
+     "last_hist_batch": "B2026-09"
+    },
+    {
+     "name": "Nikhil Kowalski",
+     "email": "nikhilkowalski@kowalskihq.com",
+     "country": "US",
+     "n_hist_rows": 2,
+     "currency": "USD",
+     "median_amount": 2120.0,
+     "last_hist_batch": "B2026-05"
+    }
+   ],
+   "signals": [
+    "NAME_IDENTICAL",
+    "EMAIL_CLOSE",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Nikhil Kowalski' <nikhilkowalski58@gmail.com> may be the same payee as 'Nikhil Kowalski' <nikhilkowalski@kowalskihq.com> (model-estimated probability 99%).",
+    "bullets": [
+     "Both records use the name 'Nikhil Kowalski'.",
+     "The emails 'nikhilkowalski58@gmail.com' and 'nikhilkowalski@kowalskihq.com' are nearly the same.",
+     "Both records are from the same country (US).",
+     "Their typical payout amounts are similar."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 99,
+     "a": {
+      "name": "Nikhil Kowalski",
+      "email": "nikhilkowalski58@gmail.com",
+      "country": "US",
+      "n_hist_rows": 1,
+      "currency": "USD",
+      "median_amount": 2120.0,
+      "last_hist_batch": "B2026-09"
+     },
+     "b": {
+      "name": "Nikhil Kowalski",
+      "email": "nikhilkowalski@kowalskihq.com",
+      "country": "US",
+      "n_hist_rows": 2,
+      "currency": "USD",
+      "median_amount": 2120.0,
+      "last_hist_batch": "B2026-05"
+     },
+     "signals": [
+      "NAME_IDENTICAL",
+      "EMAIL_CLOSE",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR"
+     ]
+    },
+    "text": "Very likely: 'Nikhil Kowalski' <nikhilkowalski58@gmail.com> may be the same payee as 'Nikhil Kowalski' <nikhilkowalski@kowalskihq.com> (model-estimated probability 99%). Both records use the name 'Nikhil Kowalski'. The emails 'nikhilkowalski58@gmail.com' and 'nikhilkowalski@kowalskihq.com' are nearly the same. Both records are from the same country (US). Their typical payout amounts are similar.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0031",
+   "type": "identity_match",
+   "probability": 0.9889,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "two_records_same_payee",
+   "affected_row_ids": [
+    "R001240"
+   ],
+   "records": [
+    {
+     "name": "Zoya Tanaka",
+     "email": "zoya.tanaka@icloud.com",
+     "country": "DE",
+     "n_hist_rows": 1,
+     "currency": "EUR",
+     "median_amount": 45.0,
+     "last_hist_batch": "B2026-09"
+    },
+    {
+     "name": "Zoya Tanaka",
+     "email": "zoyatanaka@yahoo.com",
+     "country": "DE",
+     "n_hist_rows": 3,
+     "currency": "EUR",
+     "median_amount": 45.0,
+     "last_hist_batch": "B2026-08"
+    }
+   ],
+   "signals": [
+    "NAME_IDENTICAL",
+    "EMAIL_CLOSE",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Zoya Tanaka' <zoya.tanaka@icloud.com> may be the same payee as 'Zoya Tanaka' <zoyatanaka@yahoo.com> (model-estimated probability 99%).",
+    "bullets": [
+     "Both records use the name 'Zoya Tanaka'.",
+     "The emails 'zoya.tanaka@icloud.com' and 'zoyatanaka@yahoo.com' are nearly the same.",
+     "Both records are from the same country (DE).",
+     "Their typical payout amounts are similar."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 99,
+     "a": {
+      "name": "Zoya Tanaka",
+      "email": "zoya.tanaka@icloud.com",
+      "country": "DE",
+      "n_hist_rows": 1,
+      "currency": "EUR",
+      "median_amount": 45.0,
+      "last_hist_batch": "B2026-09"
+     },
+     "b": {
+      "name": "Zoya Tanaka",
+      "email": "zoyatanaka@yahoo.com",
+      "country": "DE",
+      "n_hist_rows": 3,
+      "currency": "EUR",
+      "median_amount": 45.0,
+      "last_hist_batch": "B2026-08"
+     },
+     "signals": [
+      "NAME_IDENTICAL",
+      "EMAIL_CLOSE",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR"
+     ]
+    },
+    "text": "Very likely: 'Zoya Tanaka' <zoya.tanaka@icloud.com> may be the same payee as 'Zoya Tanaka' <zoyatanaka@yahoo.com> (model-estimated probability 99%). Both records use the name 'Zoya Tanaka'. The emails 'zoya.tanaka@icloud.com' and 'zoyatanaka@yahoo.com' are nearly the same. Both records are from the same country (DE). Their typical payout amounts are similar.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0032",
+   "type": "identity_match",
+   "probability": 0.9889,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "two_records_same_payee",
+   "affected_row_ids": [
+    "R001184"
+   ],
+   "records": [
+    {
+     "name": "Javier Nakamura",
+     "email": "javiernakamura8228@nakamuramail.com",
+     "country": "AU",
+     "n_hist_rows": 2,
+     "currency": "AUD",
+     "median_amount": 30.395000000000003,
+     "last_hist_batch": "B2026-07"
+    },
+    {
+     "name": "Javier Nakamura",
+     "email": "javiernakamura82@nakamuramail.com",
+     "country": "AU",
+     "n_hist_rows": 1,
+     "currency": "AUD",
+     "median_amount": 28.945,
+     "last_hist_batch": "B2026-04"
+    }
+   ],
+   "signals": [
+    "NAME_IDENTICAL",
+    "EMAIL_CLOSE",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Javier Nakamura' <javiernakamura8228@nakamuramail.com> may be the same payee as 'Javier Nakamura' <javiernakamura82@nakamuramail.com> (model-estimated probability 99%).",
+    "bullets": [
+     "Both records use the name 'Javier Nakamura'.",
+     "The emails 'javiernakamura8228@nakamuramail.com' and 'javiernakamura82@nakamuramail.com' are nearly the same.",
+     "Both records are from the same country (AU).",
+     "Their typical payout amounts are similar."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 99,
+     "a": {
+      "name": "Javier Nakamura",
+      "email": "javiernakamura8228@nakamuramail.com",
+      "country": "AU",
+      "n_hist_rows": 2,
+      "currency": "AUD",
+      "median_amount": 30.395000000000003,
+      "last_hist_batch": "B2026-07"
+     },
+     "b": {
+      "name": "Javier Nakamura",
+      "email": "javiernakamura82@nakamuramail.com",
+      "country": "AU",
+      "n_hist_rows": 1,
+      "currency": "AUD",
+      "median_amount": 28.945,
+      "last_hist_batch": "B2026-04"
+     },
+     "signals": [
+      "NAME_IDENTICAL",
+      "EMAIL_CLOSE",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR"
+     ]
+    },
+    "text": "Very likely: 'Javier Nakamura' <javiernakamura8228@nakamuramail.com> may be the same payee as 'Javier Nakamura' <javiernakamura82@nakamuramail.com> (model-estimated probability 99%). Both records use the name 'Javier Nakamura'. The emails 'javiernakamura8228@nakamuramail.com' and 'javiernakamura82@nakamuramail.com' are nearly the same. Both records are from the same country (AU). Their typical payout amounts are similar.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0033",
+   "type": "identity_match",
+   "probability": 0.9888,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "two_records_same_payee",
+   "affected_row_ids": [
+    "R001217"
+   ],
+   "records": [
+    {
+     "name": "Li Liu",
+     "email": "l.liu@hotmail.com",
+     "country": "IN",
+     "n_hist_rows": 2,
+     "currency": "USD",
+     "median_amount": 155.0,
+     "last_hist_batch": "B2026-08"
+    },
+    {
+     "name": "Li Liu",
+     "email": "liliu@outlook.com",
+     "country": "IN",
+     "n_hist_rows": 2,
+     "currency": "USD",
+     "median_amount": 155.0,
+     "last_hist_batch": "B2026-06"
+    }
+   ],
+   "signals": [
+    "NAME_IDENTICAL",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Li Liu' <l.liu@hotmail.com> may be the same payee as 'Li Liu' <liliu@outlook.com> (model-estimated probability 99%).",
+    "bullets": [
+     "Both records use the name 'Li Liu'.",
+     "Both records are from the same country (IN).",
+     "Their typical payout amounts are similar."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 99,
+     "a": {
+      "name": "Li Liu",
+      "email": "l.liu@hotmail.com",
+      "country": "IN",
+      "n_hist_rows": 2,
+      "currency": "USD",
+      "median_amount": 155.0,
+      "last_hist_batch": "B2026-08"
+     },
+     "b": {
+      "name": "Li Liu",
+      "email": "liliu@outlook.com",
+      "country": "IN",
+      "n_hist_rows": 2,
+      "currency": "USD",
+      "median_amount": 155.0,
+      "last_hist_batch": "B2026-06"
+     },
+     "signals": [
+      "NAME_IDENTICAL",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR"
+     ]
+    },
+    "text": "Very likely: 'Li Liu' <l.liu@hotmail.com> may be the same payee as 'Li Liu' <liliu@outlook.com> (model-estimated probability 99%). Both records use the name 'Li Liu'. Both records are from the same country (IN). Their typical payout amounts are similar.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0034",
+   "type": "identity_match",
+   "probability": 0.9857,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "two_records_same_payee",
+   "affected_row_ids": [
+    "R001459"
+   ],
+   "records": [
+    {
+     "name": "Ahmed Creative Inc",
+     "email": "accounts@ahmedcreative.com",
+     "country": "DE",
+     "n_hist_rows": 1,
+     "currency": "EUR",
+     "median_amount": 35.0,
+     "last_hist_batch": "B2026-04"
+    },
+    {
+     "name": "Ahmed Creative Inc",
+     "email": "ap@ahmedcreative.net",
+     "country": "DE",
+     "n_hist_rows": 2,
+     "currency": "EUR",
+     "median_amount": 35.0,
+     "last_hist_batch": "B2026-09"
+    }
+   ],
+   "signals": [
+    "NAME_IDENTICAL",
+    "EMAIL_UNRELATED",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR",
+    "CAUTION_HOMONYM"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Ahmed Creative Inc' <accounts@ahmedcreative.com> may be the same payee as 'Ahmed Creative Inc' <ap@ahmedcreative.net> (model-estimated probability 99%).",
+    "bullets": [
+     "Both records use the name 'Ahmed Creative Inc'.",
+     "The emails 'accounts@ahmedcreative.com' and 'ap@ahmedcreative.net' do not look related.",
+     "Both records are from the same country (DE).",
+     "Their typical payout amounts are similar."
+    ],
+    "caution": "The names are identical but the emails are unrelated, so these could be two different people.",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 99,
+     "a": {
+      "name": "Ahmed Creative Inc",
+      "email": "accounts@ahmedcreative.com",
+      "country": "DE",
+      "n_hist_rows": 1,
+      "currency": "EUR",
+      "median_amount": 35.0,
+      "last_hist_batch": "B2026-04"
+     },
+     "b": {
+      "name": "Ahmed Creative Inc",
+      "email": "ap@ahmedcreative.net",
+      "country": "DE",
+      "n_hist_rows": 2,
+      "currency": "EUR",
+      "median_amount": 35.0,
+      "last_hist_batch": "B2026-09"
+     },
+     "signals": [
+      "NAME_IDENTICAL",
+      "EMAIL_UNRELATED",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR",
+      "CAUTION_HOMONYM"
+     ]
+    },
+    "text": "Very likely: 'Ahmed Creative Inc' <accounts@ahmedcreative.com> may be the same payee as 'Ahmed Creative Inc' <ap@ahmedcreative.net> (model-estimated probability 99%). Both records use the name 'Ahmed Creative Inc'. The emails 'accounts@ahmedcreative.com' and 'ap@ahmedcreative.net' do not look related. Both records are from the same country (DE). Their typical payout amounts are similar. The names are identical but the emails are unrelated, so these could be two different people.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0035",
+   "type": "identity_match",
+   "probability": 0.9847,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "new_record_matches_known_payee",
+   "affected_row_ids": [
+    "R001249"
+   ],
+   "records": [
+    {
+     "name": "Wei W. Harris",
+     "email": "wei_harris@hotmail.com",
+     "country": "GB",
+     "n_hist_rows": 4,
+     "currency": "GBP",
+     "median_amount": 33.415,
+     "last_hist_batch": "B2026-08"
+    },
+    {
+     "name": "Wwi W. Harris",
+     "email": "wei_harris@hotmail.com",
+     "country": "GB",
+     "n_hist_rows": 0,
+     "currency": "GBP",
+     "median_amount": 21.41,
+     "last_hist_batch": ""
+    }
+   ],
+   "signals": [
+    "NAME_INITIAL",
+    "EMAIL_IDENTICAL",
+    "COUNTRY_SAME",
+    "ONE_RECORD_NEW"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Wei W. Harris' <wei_harris@hotmail.com> may be the same payee as 'Wwi W. Harris' <wei_harris@hotmail.com> (model-estimated probability 98%).",
+    "bullets": [
+     "'Wei W. Harris' and 'Wwi W. Harris' look like the same name with an initial in place of a full word.",
+     "Both records use the same email address.",
+     "Both records are from the same country (GB).",
+     "'wei_harris@hotmail.com' has not been paid before; 'wei_harris@hotmail.com' has been paid 4 time(s), last in batch B2026-08."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 98,
+     "a": {
+      "name": "Wei W. Harris",
+      "email": "wei_harris@hotmail.com",
+      "country": "GB",
+      "n_hist_rows": 4,
+      "currency": "GBP",
+      "median_amount": 33.415,
+      "last_hist_batch": "B2026-08"
+     },
+     "b": {
+      "name": "Wwi W. Harris",
+      "email": "wei_harris@hotmail.com",
+      "country": "GB",
+      "n_hist_rows": 0,
+      "currency": "GBP",
+      "median_amount": 21.41,
+      "last_hist_batch": ""
+     },
+     "signals": [
+      "NAME_INITIAL",
+      "EMAIL_IDENTICAL",
+      "COUNTRY_SAME",
+      "ONE_RECORD_NEW"
+     ]
+    },
+    "text": "Very likely: 'Wei W. Harris' <wei_harris@hotmail.com> may be the same payee as 'Wwi W. Harris' <wei_harris@hotmail.com> (model-estimated probability 98%). 'Wei W. Harris' and 'Wwi W. Harris' look like the same name with an initial in place of a full word. Both records use the same email address. Both records are from the same country (GB). 'wei_harris@hotmail.com' has not been paid before; 'wei_harris@hotmail.com' has been paid 4 time(s), last in batch B2026-08.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0036",
+   "type": "identity_match",
+   "probability": 0.9843,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "new_record_matches_known_payee",
+   "affected_row_ids": [
+    "R001202"
+   ],
+   "records": [
+    {
+     "name": "Pooja Hill",
+     "email": "poojahill58@hillworks.com",
+     "country": "IN",
+     "n_hist_rows": 2,
+     "currency": "USD",
+     "median_amount": 82.445,
+     "last_hist_batch": "B2026-08"
+    },
+    {
+     "name": "Pooja Hill",
+     "email": "pooojahill58@hillworks.com",
+     "country": "IN",
+     "n_hist_rows": 0,
+     "currency": "USD",
+     "median_amount": 80.22,
+     "last_hist_batch": ""
+    }
+   ],
+   "signals": [
+    "NAME_IDENTICAL",
+    "EMAIL_ONE_EDIT",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR",
+    "ONE_RECORD_NEW"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Pooja Hill' <poojahill58@hillworks.com> may be the same payee as 'Pooja Hill' <pooojahill58@hillworks.com> (model-estimated probability 98%).",
+    "bullets": [
+     "Both records use the name 'Pooja Hill'.",
+     "The emails 'poojahill58@hillworks.com' and 'pooojahill58@hillworks.com' differ by exactly one character.",
+     "Both records are from the same country (IN).",
+     "Their typical payout amounts are similar.",
+     "'pooojahill58@hillworks.com' has not been paid before; 'poojahill58@hillworks.com' has been paid 2 time(s), last in batch B2026-08."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 98,
+     "a": {
+      "name": "Pooja Hill",
+      "email": "poojahill58@hillworks.com",
+      "country": "IN",
+      "n_hist_rows": 2,
+      "currency": "USD",
+      "median_amount": 82.445,
+      "last_hist_batch": "B2026-08"
+     },
+     "b": {
+      "name": "Pooja Hill",
+      "email": "pooojahill58@hillworks.com",
+      "country": "IN",
+      "n_hist_rows": 0,
+      "currency": "USD",
+      "median_amount": 80.22,
+      "last_hist_batch": ""
+     },
+     "signals": [
+      "NAME_IDENTICAL",
+      "EMAIL_ONE_EDIT",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR",
+      "ONE_RECORD_NEW"
+     ]
+    },
+    "text": "Very likely: 'Pooja Hill' <poojahill58@hillworks.com> may be the same payee as 'Pooja Hill' <pooojahill58@hillworks.com> (model-estimated probability 98%). Both records use the name 'Pooja Hill'. The emails 'poojahill58@hillworks.com' and 'pooojahill58@hillworks.com' differ by exactly one character. Both records are from the same country (IN). Their typical payout amounts are similar. 'pooojahill58@hillworks.com' has not been paid before; 'poojahill58@hillworks.com' has been paid 2 time(s), last in batch B2026-08.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0037",
+   "type": "identity_match",
+   "probability": 0.9839,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "two_records_same_payee",
+   "affected_row_ids": [
+    "R001222"
+   ],
+   "records": [
+    {
+     "name": "Hiro Ramirez",
+     "email": "h.ramirez4@outlook.com",
+     "country": "US",
+     "n_hist_rows": 2,
+     "currency": "USD",
+     "median_amount": 868.29,
+     "last_hist_batch": "B2026-09"
+    },
+    {
+     "name": "Hiro Ramirez",
+     "email": "h.ramirez@outlook.com",
+     "country": "US",
+     "n_hist_rows": 2,
+     "currency": "USD",
+     "median_amount": 896.65,
+     "last_hist_batch": "B2026-06"
+    }
+   ],
+   "signals": [
+    "NAME_IDENTICAL",
+    "EMAIL_ONE_EDIT",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Hiro Ramirez' <h.ramirez4@outlook.com> may be the same payee as 'Hiro Ramirez' <h.ramirez@outlook.com> (model-estimated probability 98%).",
+    "bullets": [
+     "Both records use the name 'Hiro Ramirez'.",
+     "The emails 'h.ramirez4@outlook.com' and 'h.ramirez@outlook.com' differ by exactly one character.",
+     "Both records are from the same country (US).",
+     "Their typical payout amounts are similar."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 98,
+     "a": {
+      "name": "Hiro Ramirez",
+      "email": "h.ramirez4@outlook.com",
+      "country": "US",
+      "n_hist_rows": 2,
+      "currency": "USD",
+      "median_amount": 868.29,
+      "last_hist_batch": "B2026-09"
+     },
+     "b": {
+      "name": "Hiro Ramirez",
+      "email": "h.ramirez@outlook.com",
+      "country": "US",
+      "n_hist_rows": 2,
+      "currency": "USD",
+      "median_amount": 896.65,
+      "last_hist_batch": "B2026-06"
+     },
+     "signals": [
+      "NAME_IDENTICAL",
+      "EMAIL_ONE_EDIT",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR"
+     ]
+    },
+    "text": "Very likely: 'Hiro Ramirez' <h.ramirez4@outlook.com> may be the same payee as 'Hiro Ramirez' <h.ramirez@outlook.com> (model-estimated probability 98%). Both records use the name 'Hiro Ramirez'. The emails 'h.ramirez4@outlook.com' and 'h.ramirez@outlook.com' differ by exactly one character. Both records are from the same country (US). Their typical payout amounts are similar.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0038",
+   "type": "identity_match",
+   "probability": 0.9819,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "two_records_same_payee",
+   "affected_row_ids": [
+    "R001278"
+   ],
+   "records": [
+    {
+     "name": "Kavya Malhotra",
+     "email": "kavya.malhotra55@outlook.com",
+     "country": "CA",
+     "n_hist_rows": 5,
+     "currency": "CAD",
+     "median_amount": 19.09,
+     "last_hist_batch": "B2026-09"
+    },
+    {
+     "name": "Kavya Malhotra",
+     "email": "kavya.malhotra@outlook.com",
+     "country": "CA",
+     "n_hist_rows": 1,
+     "currency": "CAD",
+     "median_amount": 22.93,
+     "last_hist_batch": "B2026-04"
+    }
+   ],
+   "signals": [
+    "NAME_IDENTICAL",
+    "EMAIL_CLOSE",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Kavya Malhotra' <kavya.malhotra55@outlook.com> may be the same payee as 'Kavya Malhotra' <kavya.malhotra@outlook.com> (model-estimated probability 98%).",
+    "bullets": [
+     "Both records use the name 'Kavya Malhotra'.",
+     "The emails 'kavya.malhotra55@outlook.com' and 'kavya.malhotra@outlook.com' are nearly the same.",
+     "Both records are from the same country (CA).",
+     "Their typical payout amounts are similar."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 98,
+     "a": {
+      "name": "Kavya Malhotra",
+      "email": "kavya.malhotra55@outlook.com",
+      "country": "CA",
+      "n_hist_rows": 5,
+      "currency": "CAD",
+      "median_amount": 19.09,
+      "last_hist_batch": "B2026-09"
+     },
+     "b": {
+      "name": "Kavya Malhotra",
+      "email": "kavya.malhotra@outlook.com",
+      "country": "CA",
+      "n_hist_rows": 1,
+      "currency": "CAD",
+      "median_amount": 22.93,
+      "last_hist_batch": "B2026-04"
+     },
+     "signals": [
+      "NAME_IDENTICAL",
+      "EMAIL_CLOSE",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR"
+     ]
+    },
+    "text": "Very likely: 'Kavya Malhotra' <kavya.malhotra55@outlook.com> may be the same payee as 'Kavya Malhotra' <kavya.malhotra@outlook.com> (model-estimated probability 98%). Both records use the name 'Kavya Malhotra'. The emails 'kavya.malhotra55@outlook.com' and 'kavya.malhotra@outlook.com' are nearly the same. Both records are from the same country (CA). Their typical payout amounts are similar.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0039",
+   "type": "identity_match",
+   "probability": 0.9814,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "two_records_same_payee",
+   "affected_row_ids": [
+    "R001286"
+   ],
+   "records": [
+    {
+     "name": "Hussain Media Ltd",
+     "email": "accounts93@hussainmedia.com",
+     "country": "AU",
+     "n_hist_rows": 1,
+     "currency": "AUD",
+     "median_amount": 29.92,
+     "last_hist_batch": "B2026-09"
+    },
+    {
+     "name": "Hussain Media Ltd",
+     "email": "accounts@hussainmedia.com",
+     "country": "AU",
+     "n_hist_rows": 2,
+     "currency": "AUD",
+     "median_amount": 32.44,
+     "last_hist_batch": "B2026-08"
+    }
+   ],
+   "signals": [
+    "NAME_IDENTICAL",
+    "EMAIL_CLOSE",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Hussain Media Ltd' <accounts93@hussainmedia.com> may be the same payee as 'Hussain Media Ltd' <accounts@hussainmedia.com> (model-estimated probability 98%).",
+    "bullets": [
+     "Both records use the name 'Hussain Media Ltd'.",
+     "The emails 'accounts93@hussainmedia.com' and 'accounts@hussainmedia.com' are nearly the same.",
+     "Both records are from the same country (AU).",
+     "Their typical payout amounts are similar."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 98,
+     "a": {
+      "name": "Hussain Media Ltd",
+      "email": "accounts93@hussainmedia.com",
+      "country": "AU",
+      "n_hist_rows": 1,
+      "currency": "AUD",
+      "median_amount": 29.92,
+      "last_hist_batch": "B2026-09"
+     },
+     "b": {
+      "name": "Hussain Media Ltd",
+      "email": "accounts@hussainmedia.com",
+      "country": "AU",
+      "n_hist_rows": 2,
+      "currency": "AUD",
+      "median_amount": 32.44,
+      "last_hist_batch": "B2026-08"
+     },
+     "signals": [
+      "NAME_IDENTICAL",
+      "EMAIL_CLOSE",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR"
+     ]
+    },
+    "text": "Very likely: 'Hussain Media Ltd' <accounts93@hussainmedia.com> may be the same payee as 'Hussain Media Ltd' <accounts@hussainmedia.com> (model-estimated probability 98%). Both records use the name 'Hussain Media Ltd'. The emails 'accounts93@hussainmedia.com' and 'accounts@hussainmedia.com' are nearly the same. Both records are from the same country (AU). Their typical payout amounts are similar.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0040",
+   "type": "identity_match",
+   "probability": 0.9814,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "new_record_matches_known_payee",
+   "affected_row_ids": [
+    "R001309"
+   ],
+   "records": [
+    {
+     "name": "Joao N. Nakamura",
+     "email": "joaonakamura@outlook.com",
+     "country": "US",
+     "n_hist_rows": 0,
+     "currency": "USD",
+     "median_amount": 247.41,
+     "last_hist_batch": ""
+    },
+    {
+     "name": "Joao N. Nakamura",
+     "email": "joaonakamura@yahoo.com",
+     "country": "US",
+     "n_hist_rows": 3,
+     "currency": "USD",
+     "median_amount": 190.6,
+     "last_hist_batch": "B2026-09"
+    }
+   ],
+   "signals": [
+    "NAME_IDENTICAL",
+    "EMAIL_SAME_MAILBOX",
+    "COUNTRY_SAME",
+    "ONE_RECORD_NEW"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Joao N. Nakamura' <joaonakamura@outlook.com> may be the same payee as 'Joao N. Nakamura' <joaonakamura@yahoo.com> (model-estimated probability 98%).",
+    "bullets": [
+     "Both records use the name 'Joao N. Nakamura'.",
+     "The emails 'joaonakamura@outlook.com' and 'joaonakamura@yahoo.com' point to the same mailbox once tags and dots are ignored.",
+     "Both records are from the same country (US).",
+     "'joaonakamura@outlook.com' has not been paid before; 'joaonakamura@yahoo.com' has been paid 3 time(s), last in batch B2026-09."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 98,
+     "a": {
+      "name": "Joao N. Nakamura",
+      "email": "joaonakamura@outlook.com",
+      "country": "US",
+      "n_hist_rows": 0,
+      "currency": "USD",
+      "median_amount": 247.41,
+      "last_hist_batch": ""
+     },
+     "b": {
+      "name": "Joao N. Nakamura",
+      "email": "joaonakamura@yahoo.com",
+      "country": "US",
+      "n_hist_rows": 3,
+      "currency": "USD",
+      "median_amount": 190.6,
+      "last_hist_batch": "B2026-09"
+     },
+     "signals": [
+      "NAME_IDENTICAL",
+      "EMAIL_SAME_MAILBOX",
+      "COUNTRY_SAME",
+      "ONE_RECORD_NEW"
+     ]
+    },
+    "text": "Very likely: 'Joao N. Nakamura' <joaonakamura@outlook.com> may be the same payee as 'Joao N. Nakamura' <joaonakamura@yahoo.com> (model-estimated probability 98%). Both records use the name 'Joao N. Nakamura'. The emails 'joaonakamura@outlook.com' and 'joaonakamura@yahoo.com' point to the same mailbox once tags and dots are ignored. Both records are from the same country (US). 'joaonakamura@outlook.com' has not been paid before; 'joaonakamura@yahoo.com' has been paid 3 time(s), last in batch B2026-09.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0041",
+   "type": "identity_match",
+   "probability": 0.9785,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "two_records_same_payee",
+   "affected_row_ids": [
+    "R001218"
+   ],
+   "records": [
+    {
+     "name": "Ines Ferrari",
+     "email": "iferrari@gmail.com",
+     "country": "US",
+     "n_hist_rows": 2,
+     "currency": "USD",
+     "median_amount": 400.6,
+     "last_hist_batch": "B2026-05"
+    },
+    {
+     "name": "Ines Ferrari",
+     "email": "ines.ferrari@hotmail.com",
+     "country": "US",
+     "n_hist_rows": 4,
+     "currency": "USD",
+     "median_amount": 442.525,
+     "last_hist_batch": "B2026-09"
+    }
+   ],
+   "signals": [
+    "NAME_IDENTICAL",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Ines Ferrari' <iferrari@gmail.com> may be the same payee as 'Ines Ferrari' <ines.ferrari@hotmail.com> (model-estimated probability 98%).",
+    "bullets": [
+     "Both records use the name 'Ines Ferrari'.",
+     "Both records are from the same country (US).",
+     "Their typical payout amounts are similar."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 98,
+     "a": {
+      "name": "Ines Ferrari",
+      "email": "iferrari@gmail.com",
+      "country": "US",
+      "n_hist_rows": 2,
+      "currency": "USD",
+      "median_amount": 400.6,
+      "last_hist_batch": "B2026-05"
+     },
+     "b": {
+      "name": "Ines Ferrari",
+      "email": "ines.ferrari@hotmail.com",
+      "country": "US",
+      "n_hist_rows": 4,
+      "currency": "USD",
+      "median_amount": 442.525,
+      "last_hist_batch": "B2026-09"
+     },
+     "signals": [
+      "NAME_IDENTICAL",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR"
+     ]
+    },
+    "text": "Very likely: 'Ines Ferrari' <iferrari@gmail.com> may be the same payee as 'Ines Ferrari' <ines.ferrari@hotmail.com> (model-estimated probability 98%). Both records use the name 'Ines Ferrari'. Both records are from the same country (US). Their typical payout amounts are similar.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0042",
+   "type": "identity_match",
+   "probability": 0.9782,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "two_records_same_payee",
+   "affected_row_ids": [
+    "R001439"
+   ],
+   "records": [
+    {
+     "name": "Samuel Santos",
+     "email": "samuel.santos@hotmail.com",
+     "country": "US",
+     "n_hist_rows": 3,
+     "currency": "USD",
+     "median_amount": 1122.02,
+     "last_hist_batch": "B2026-08"
+    },
+    {
+     "name": "Samuel Santos",
+     "email": "samuel_santos@santosco.com",
+     "country": "US",
+     "n_hist_rows": 2,
+     "currency": "USD",
+     "median_amount": 1139.1,
+     "last_hist_batch": "B2026-05"
+    }
+   ],
+   "signals": [
+    "NAME_IDENTICAL",
+    "EMAIL_CLOSE",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Samuel Santos' <samuel.santos@hotmail.com> may be the same payee as 'Samuel Santos' <samuel_santos@santosco.com> (model-estimated probability 98%).",
+    "bullets": [
+     "Both records use the name 'Samuel Santos'.",
+     "The emails 'samuel.santos@hotmail.com' and 'samuel_santos@santosco.com' are nearly the same.",
+     "Both records are from the same country (US).",
+     "Their typical payout amounts are similar."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 98,
+     "a": {
+      "name": "Samuel Santos",
+      "email": "samuel.santos@hotmail.com",
+      "country": "US",
+      "n_hist_rows": 3,
+      "currency": "USD",
+      "median_amount": 1122.02,
+      "last_hist_batch": "B2026-08"
+     },
+     "b": {
+      "name": "Samuel Santos",
+      "email": "samuel_santos@santosco.com",
+      "country": "US",
+      "n_hist_rows": 2,
+      "currency": "USD",
+      "median_amount": 1139.1,
+      "last_hist_batch": "B2026-05"
+     },
+     "signals": [
+      "NAME_IDENTICAL",
+      "EMAIL_CLOSE",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR"
+     ]
+    },
+    "text": "Very likely: 'Samuel Santos' <samuel.santos@hotmail.com> may be the same payee as 'Samuel Santos' <samuel_santos@santosco.com> (model-estimated probability 98%). Both records use the name 'Samuel Santos'. The emails 'samuel.santos@hotmail.com' and 'samuel_santos@santosco.com' are nearly the same. Both records are from the same country (US). Their typical payout amounts are similar.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0043",
+   "type": "identity_match",
+   "probability": 0.9775,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "new_record_matches_known_payee",
+   "affected_row_ids": [
+    "R001284",
+    "R001296"
+   ],
+   "records": [
+    {
+     "name": "Javier Sharma Jr.",
+     "email": "javiersharma@outlook.com",
+     "country": "IN",
+     "n_hist_rows": 0,
+     "currency": "USD",
+     "median_amount": 436.43,
+     "last_hist_batch": ""
+    },
+    {
+     "name": "Javier Sharma",
+     "email": "javiersharma@sharmaco.com",
+     "country": "IN",
+     "n_hist_rows": 5,
+     "currency": "USD",
+     "median_amount": 457.92499999999995,
+     "last_hist_batch": "B2026-08"
+    }
+   ],
+   "signals": [
+    "NAME_IDENTICAL",
+    "EMAIL_SAME_MAILBOX",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR",
+    "ONE_RECORD_NEW"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Javier Sharma Jr.' <javiersharma@outlook.com> may be the same payee as 'Javier Sharma' <javiersharma@sharmaco.com> (model-estimated probability 98%).",
+    "bullets": [
+     "The names 'Javier Sharma Jr.' and 'Javier Sharma' are the same after normalisation.",
+     "The emails 'javiersharma@outlook.com' and 'javiersharma@sharmaco.com' point to the same mailbox once tags and dots are ignored.",
+     "Both records are from the same country (IN).",
+     "Their typical payout amounts are similar.",
+     "'javiersharma@outlook.com' has not been paid before; 'javiersharma@sharmaco.com' has been paid 5 time(s), last in batch B2026-08."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 98,
+     "a": {
+      "name": "Javier Sharma Jr.",
+      "email": "javiersharma@outlook.com",
+      "country": "IN",
+      "n_hist_rows": 0,
+      "currency": "USD",
+      "median_amount": 436.43,
+      "last_hist_batch": ""
+     },
+     "b": {
+      "name": "Javier Sharma",
+      "email": "javiersharma@sharmaco.com",
+      "country": "IN",
+      "n_hist_rows": 5,
+      "currency": "USD",
+      "median_amount": 457.92499999999995,
+      "last_hist_batch": "B2026-08"
+     },
+     "signals": [
+      "NAME_IDENTICAL",
+      "EMAIL_SAME_MAILBOX",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR",
+      "ONE_RECORD_NEW"
+     ]
+    },
+    "text": "Very likely: 'Javier Sharma Jr.' <javiersharma@outlook.com> may be the same payee as 'Javier Sharma' <javiersharma@sharmaco.com> (model-estimated probability 98%). The names 'Javier Sharma Jr.' and 'Javier Sharma' are the same after normalisation. The emails 'javiersharma@outlook.com' and 'javiersharma@sharmaco.com' point to the same mailbox once tags and dots are ignored. Both records are from the same country (IN). Their typical payout amounts are similar. 'javiersharma@outlook.com' has not been paid before; 'javiersharma@sharmaco.com' has been paid 5 time(s), last in batch B2026-08.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0044",
+   "type": "identity_match",
+   "probability": 0.9768,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "two_records_same_payee",
+   "affected_row_ids": [
+    "R001366"
+   ],
+   "records": [
+    {
+     "name": "Ji H. Patel",
+     "email": "jipatel53@patelhq.com",
+     "country": "DE",
+     "n_hist_rows": 1,
+     "currency": "EUR",
+     "median_amount": 40.08,
+     "last_hist_batch": "B2026-09"
+    },
+    {
+     "name": "Ji Patel",
+     "email": "jipatel@patelhq.com",
+     "country": "DE",
+     "n_hist_rows": 4,
+     "currency": "EUR",
+     "median_amount": 42.41,
+     "last_hist_batch": "B2026-07"
+    }
+   ],
+   "signals": [
+    "NAME_SUBSET",
+    "EMAIL_CLOSE",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Ji H. Patel' <jipatel53@patelhq.com> may be the same payee as 'Ji Patel' <jipatel@patelhq.com> (model-estimated probability 98%).",
+    "bullets": [
+     "One name contains all the words of the other ('Ji H. Patel' / 'Ji Patel').",
+     "The emails 'jipatel53@patelhq.com' and 'jipatel@patelhq.com' are nearly the same.",
+     "Both records are from the same country (DE).",
+     "Their typical payout amounts are similar."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 98,
+     "a": {
+      "name": "Ji H. Patel",
+      "email": "jipatel53@patelhq.com",
+      "country": "DE",
+      "n_hist_rows": 1,
+      "currency": "EUR",
+      "median_amount": 40.08,
+      "last_hist_batch": "B2026-09"
+     },
+     "b": {
+      "name": "Ji Patel",
+      "email": "jipatel@patelhq.com",
+      "country": "DE",
+      "n_hist_rows": 4,
+      "currency": "EUR",
+      "median_amount": 42.41,
+      "last_hist_batch": "B2026-07"
+     },
+     "signals": [
+      "NAME_SUBSET",
+      "EMAIL_CLOSE",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR"
+     ]
+    },
+    "text": "Very likely: 'Ji H. Patel' <jipatel53@patelhq.com> may be the same payee as 'Ji Patel' <jipatel@patelhq.com> (model-estimated probability 98%). One name contains all the words of the other ('Ji H. Patel' / 'Ji Patel'). The emails 'jipatel53@patelhq.com' and 'jipatel@patelhq.com' are nearly the same. Both records are from the same country (DE). Their typical payout amounts are similar.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0045",
+   "type": "identity_match",
+   "probability": 0.9727,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "two_records_same_payee",
+   "affected_row_ids": [
+    "R001215"
+   ],
+   "records": [
+    {
+     "name": "Jess Oliveira",
+     "email": "jessicaoliveira1392@oliveiramail.com",
+     "country": "CA",
+     "n_hist_rows": 2,
+     "currency": "CAD",
+     "median_amount": 475.0,
+     "last_hist_batch": "B2026-09"
+    },
+    {
+     "name": "Jessica H. Oliveira",
+     "email": "jessicaoliveira13@oliveiramail.com",
+     "country": "CA",
+     "n_hist_rows": 1,
+     "currency": "CAD",
+     "median_amount": 475.0,
+     "last_hist_batch": "B2026-06"
+    }
+   ],
+   "signals": [
+    "NAME_CLOSE",
+    "EMAIL_CLOSE",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Jess Oliveira' <jessicaoliveira1392@oliveiramail.com> may be the same payee as 'Jessica H. Oliveira' <jessicaoliveira13@oliveiramail.com> (model-estimated probability 97%).",
+    "bullets": [
+     "The names 'Jess Oliveira' and 'Jessica H. Oliveira' are very similar but not identical.",
+     "The emails 'jessicaoliveira1392@oliveiramail.com' and 'jessicaoliveira13@oliveiramail.com' are nearly the same.",
+     "Both records are from the same country (CA).",
+     "Their typical payout amounts are similar."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 97,
+     "a": {
+      "name": "Jess Oliveira",
+      "email": "jessicaoliveira1392@oliveiramail.com",
+      "country": "CA",
+      "n_hist_rows": 2,
+      "currency": "CAD",
+      "median_amount": 475.0,
+      "last_hist_batch": "B2026-09"
+     },
+     "b": {
+      "name": "Jessica H. Oliveira",
+      "email": "jessicaoliveira13@oliveiramail.com",
+      "country": "CA",
+      "n_hist_rows": 1,
+      "currency": "CAD",
+      "median_amount": 475.0,
+      "last_hist_batch": "B2026-06"
+     },
+     "signals": [
+      "NAME_CLOSE",
+      "EMAIL_CLOSE",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR"
+     ]
+    },
+    "text": "Very likely: 'Jess Oliveira' <jessicaoliveira1392@oliveiramail.com> may be the same payee as 'Jessica H. Oliveira' <jessicaoliveira13@oliveiramail.com> (model-estimated probability 97%). The names 'Jess Oliveira' and 'Jessica H. Oliveira' are very similar but not identical. The emails 'jessicaoliveira1392@oliveiramail.com' and 'jessicaoliveira13@oliveiramail.com' are nearly the same. Both records are from the same country (CA). Their typical payout amounts are similar.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0046",
+   "type": "identity_match",
+   "probability": 0.9642,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "two_records_same_payee",
+   "affected_row_ids": [
+    "R001320"
+   ],
+   "records": [
+    {
+     "name": "Joao Sato",
+     "email": "j.sato@gmail.com",
+     "country": "IN",
+     "n_hist_rows": 1,
+     "currency": "USD",
+     "median_amount": 38.480000000000004,
+     "last_hist_batch": "B2026-04"
+    },
+    {
+     "name": "Joao Sato",
+     "email": "joao.sato@yahoo.com",
+     "country": "IN",
+     "n_hist_rows": 3,
+     "currency": "USD",
+     "median_amount": 45.54,
+     "last_hist_batch": "B2026-09"
+    }
+   ],
+   "signals": [
+    "NAME_IDENTICAL",
+    "EMAIL_UNRELATED",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR",
+    "CAUTION_HOMONYM"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Joao Sato' <j.sato@gmail.com> may be the same payee as 'Joao Sato' <joao.sato@yahoo.com> (model-estimated probability 96%).",
+    "bullets": [
+     "Both records use the name 'Joao Sato'.",
+     "The emails 'j.sato@gmail.com' and 'joao.sato@yahoo.com' do not look related.",
+     "Both records are from the same country (IN).",
+     "Their typical payout amounts are similar."
+    ],
+    "caution": "The names are identical but the emails are unrelated, so these could be two different people.",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 96,
+     "a": {
+      "name": "Joao Sato",
+      "email": "j.sato@gmail.com",
+      "country": "IN",
+      "n_hist_rows": 1,
+      "currency": "USD",
+      "median_amount": 38.480000000000004,
+      "last_hist_batch": "B2026-04"
+     },
+     "b": {
+      "name": "Joao Sato",
+      "email": "joao.sato@yahoo.com",
+      "country": "IN",
+      "n_hist_rows": 3,
+      "currency": "USD",
+      "median_amount": 45.54,
+      "last_hist_batch": "B2026-09"
+     },
+     "signals": [
+      "NAME_IDENTICAL",
+      "EMAIL_UNRELATED",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR",
+      "CAUTION_HOMONYM"
+     ]
+    },
+    "text": "Very likely: 'Joao Sato' <j.sato@gmail.com> may be the same payee as 'Joao Sato' <joao.sato@yahoo.com> (model-estimated probability 96%). Both records use the name 'Joao Sato'. The emails 'j.sato@gmail.com' and 'joao.sato@yahoo.com' do not look related. Both records are from the same country (IN). Their typical payout amounts are similar. The names are identical but the emails are unrelated, so these could be two different people.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0047",
+   "type": "identity_match",
+   "probability": 0.9628,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "new_record_matches_known_payee",
+   "affected_row_ids": [
+    "R001233"
+   ],
+   "records": [
+    {
+     "name": "Hannah Lee",
+     "email": "hananhlee@leeworks.com",
+     "country": "JP",
+     "n_hist_rows": 0,
+     "currency": "USD",
+     "median_amount": 114.67,
+     "last_hist_batch": ""
+    },
+    {
+     "name": "Hannah Lee",
+     "email": "hannahlee@leeworks.com",
+     "country": "JP",
+     "n_hist_rows": 1,
+     "currency": "USD",
+     "median_amount": 162.75,
+     "last_hist_batch": "B2026-09"
+    }
+   ],
+   "signals": [
+    "NAME_IDENTICAL",
+    "EMAIL_CLOSE",
+    "COUNTRY_SAME",
+    "ONE_RECORD_NEW"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Hannah Lee' <hananhlee@leeworks.com> may be the same payee as 'Hannah Lee' <hannahlee@leeworks.com> (model-estimated probability 96%).",
+    "bullets": [
+     "Both records use the name 'Hannah Lee'.",
+     "The emails 'hananhlee@leeworks.com' and 'hannahlee@leeworks.com' are nearly the same.",
+     "Both records are from the same country (JP).",
+     "'hananhlee@leeworks.com' has not been paid before; 'hannahlee@leeworks.com' has been paid 1 time(s), last in batch B2026-09."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 96,
+     "a": {
+      "name": "Hannah Lee",
+      "email": "hananhlee@leeworks.com",
+      "country": "JP",
+      "n_hist_rows": 0,
+      "currency": "USD",
+      "median_amount": 114.67,
+      "last_hist_batch": ""
+     },
+     "b": {
+      "name": "Hannah Lee",
+      "email": "hannahlee@leeworks.com",
+      "country": "JP",
+      "n_hist_rows": 1,
+      "currency": "USD",
+      "median_amount": 162.75,
+      "last_hist_batch": "B2026-09"
+     },
+     "signals": [
+      "NAME_IDENTICAL",
+      "EMAIL_CLOSE",
+      "COUNTRY_SAME",
+      "ONE_RECORD_NEW"
+     ]
+    },
+    "text": "Very likely: 'Hannah Lee' <hananhlee@leeworks.com> may be the same payee as 'Hannah Lee' <hannahlee@leeworks.com> (model-estimated probability 96%). Both records use the name 'Hannah Lee'. The emails 'hananhlee@leeworks.com' and 'hannahlee@leeworks.com' are nearly the same. Both records are from the same country (JP). 'hananhlee@leeworks.com' has not been paid before; 'hannahlee@leeworks.com' has been paid 1 time(s), last in batch B2026-09.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0048",
+   "type": "identity_match",
+   "probability": 0.9588,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "new_record_matches_known_payee",
+   "affected_row_ids": [
+    "R001280"
+   ],
+   "records": [
+    {
+     "name": "Deepa Q. Ramirez",
+     "email": "deeparamirez5314@hotmail.com",
+     "country": "BR",
+     "n_hist_rows": 1,
+     "currency": "USD",
+     "median_amount": 145.84,
+     "last_hist_batch": "B2026-05"
+    },
+    {
+     "name": "Deepa Q. Ramirez",
+     "email": "deeparamirez53@hotmail.com",
+     "country": "BR",
+     "n_hist_rows": 0,
+     "currency": "USD",
+     "median_amount": 94.39,
+     "last_hist_batch": ""
+    }
+   ],
+   "signals": [
+    "NAME_IDENTICAL",
+    "EMAIL_CLOSE",
+    "COUNTRY_SAME",
+    "ONE_RECORD_NEW"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Deepa Q. Ramirez' <deeparamirez5314@hotmail.com> may be the same payee as 'Deepa Q. Ramirez' <deeparamirez53@hotmail.com> (model-estimated probability 96%).",
+    "bullets": [
+     "Both records use the name 'Deepa Q. Ramirez'.",
+     "The emails 'deeparamirez5314@hotmail.com' and 'deeparamirez53@hotmail.com' are nearly the same.",
+     "Both records are from the same country (BR).",
+     "'deeparamirez53@hotmail.com' has not been paid before; 'deeparamirez5314@hotmail.com' has been paid 1 time(s), last in batch B2026-05."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 96,
+     "a": {
+      "name": "Deepa Q. Ramirez",
+      "email": "deeparamirez5314@hotmail.com",
+      "country": "BR",
+      "n_hist_rows": 1,
+      "currency": "USD",
+      "median_amount": 145.84,
+      "last_hist_batch": "B2026-05"
+     },
+     "b": {
+      "name": "Deepa Q. Ramirez",
+      "email": "deeparamirez53@hotmail.com",
+      "country": "BR",
+      "n_hist_rows": 0,
+      "currency": "USD",
+      "median_amount": 94.39,
+      "last_hist_batch": ""
+     },
+     "signals": [
+      "NAME_IDENTICAL",
+      "EMAIL_CLOSE",
+      "COUNTRY_SAME",
+      "ONE_RECORD_NEW"
+     ]
+    },
+    "text": "Very likely: 'Deepa Q. Ramirez' <deeparamirez5314@hotmail.com> may be the same payee as 'Deepa Q. Ramirez' <deeparamirez53@hotmail.com> (model-estimated probability 96%). Both records use the name 'Deepa Q. Ramirez'. The emails 'deeparamirez5314@hotmail.com' and 'deeparamirez53@hotmail.com' are nearly the same. Both records are from the same country (BR). 'deeparamirez53@hotmail.com' has not been paid before; 'deeparamirez5314@hotmail.com' has been paid 1 time(s), last in batch B2026-05.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0049",
+   "type": "identity_match",
+   "probability": 0.9587,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "two_records_same_payee",
+   "affected_row_ids": [
+    "R001306",
+    "R001434"
+   ],
+   "records": [
+    {
+     "name": "Yuki G. Larsen",
+     "email": "yuki_larsen@larsenco.com",
+     "country": "AU",
+     "n_hist_rows": 2,
+     "currency": "AUD",
+     "median_amount": 162.165,
+     "last_hist_batch": "B2026-07"
+    },
+    {
+     "name": "Yuki J. Larsen",
+     "email": "yuki_larsen@outlook.com",
+     "country": "AU",
+     "n_hist_rows": 3,
+     "currency": "AUD",
+     "median_amount": 161.6,
+     "last_hist_batch": "B2026-09"
+    }
+   ],
+   "signals": [
+    "NAME_CLOSE",
+    "EMAIL_SAME_MAILBOX",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Yuki G. Larsen' <yuki_larsen@larsenco.com> may be the same payee as 'Yuki J. Larsen' <yuki_larsen@outlook.com> (model-estimated probability 96%).",
+    "bullets": [
+     "The names 'Yuki G. Larsen' and 'Yuki J. Larsen' are very similar but not identical.",
+     "The emails 'yuki_larsen@larsenco.com' and 'yuki_larsen@outlook.com' point to the same mailbox once tags and dots are ignored.",
+     "Both records are from the same country (AU).",
+     "Their typical payout amounts are similar."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 96,
+     "a": {
+      "name": "Yuki G. Larsen",
+      "email": "yuki_larsen@larsenco.com",
+      "country": "AU",
+      "n_hist_rows": 2,
+      "currency": "AUD",
+      "median_amount": 162.165,
+      "last_hist_batch": "B2026-07"
+     },
+     "b": {
+      "name": "Yuki J. Larsen",
+      "email": "yuki_larsen@outlook.com",
+      "country": "AU",
+      "n_hist_rows": 3,
+      "currency": "AUD",
+      "median_amount": 161.6,
+      "last_hist_batch": "B2026-09"
+     },
+     "signals": [
+      "NAME_CLOSE",
+      "EMAIL_SAME_MAILBOX",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR"
+     ]
+    },
+    "text": "Very likely: 'Yuki G. Larsen' <yuki_larsen@larsenco.com> may be the same payee as 'Yuki J. Larsen' <yuki_larsen@outlook.com> (model-estimated probability 96%). The names 'Yuki G. Larsen' and 'Yuki J. Larsen' are very similar but not identical. The emails 'yuki_larsen@larsenco.com' and 'yuki_larsen@outlook.com' point to the same mailbox once tags and dots are ignored. Both records are from the same country (AU). Their typical payout amounts are similar.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0050",
+   "type": "identity_match",
+   "probability": 0.947,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "new_record_matches_known_payee",
+   "affected_row_ids": [
+    "R001380"
+   ],
+   "records": [
+    {
+     "name": "Anna K. Chopra",
+     "email": "achopra@choprahq.com",
+     "country": "IN",
+     "n_hist_rows": 6,
+     "currency": "USD",
+     "median_amount": 129.23000000000002,
+     "last_hist_batch": "B2026-09"
+    },
+    {
+     "name": "Chopra, Anna",
+     "email": "anna.chopra@yahoo.com",
+     "country": "IN",
+     "n_hist_rows": 0,
+     "currency": "USD",
+     "median_amount": 128.28,
+     "last_hist_batch": ""
+    }
+   ],
+   "signals": [
+    "NAME_SUBSET",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR",
+    "ONE_RECORD_NEW"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Anna K. Chopra' <achopra@choprahq.com> may be the same payee as 'Chopra, Anna' <anna.chopra@yahoo.com> (model-estimated probability 95%).",
+    "bullets": [
+     "One name contains all the words of the other ('Anna K. Chopra' / 'Chopra, Anna').",
+     "Both records are from the same country (IN).",
+     "Their typical payout amounts are similar.",
+     "'anna.chopra@yahoo.com' has not been paid before; 'achopra@choprahq.com' has been paid 6 time(s), last in batch B2026-09."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 95,
+     "a": {
+      "name": "Anna K. Chopra",
+      "email": "achopra@choprahq.com",
+      "country": "IN",
+      "n_hist_rows": 6,
+      "currency": "USD",
+      "median_amount": 129.23000000000002,
+      "last_hist_batch": "B2026-09"
+     },
+     "b": {
+      "name": "Chopra, Anna",
+      "email": "anna.chopra@yahoo.com",
+      "country": "IN",
+      "n_hist_rows": 0,
+      "currency": "USD",
+      "median_amount": 128.28,
+      "last_hist_batch": ""
+     },
+     "signals": [
+      "NAME_SUBSET",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR",
+      "ONE_RECORD_NEW"
+     ]
+    },
+    "text": "Very likely: 'Anna K. Chopra' <achopra@choprahq.com> may be the same payee as 'Chopra, Anna' <anna.chopra@yahoo.com> (model-estimated probability 95%). One name contains all the words of the other ('Anna K. Chopra' / 'Chopra, Anna'). Both records are from the same country (IN). Their typical payout amounts are similar. 'anna.chopra@yahoo.com' has not been paid before; 'achopra@choprahq.com' has been paid 6 time(s), last in batch B2026-09.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0051",
+   "type": "identity_match",
+   "probability": 0.9414,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "new_record_matches_known_payee",
+   "affected_row_ids": [
+    "R001249"
+   ],
+   "records": [
+    {
+     "name": "Wei W. Harris",
+     "email": "wei_harris31@hotmail.com",
+     "country": "GB",
+     "n_hist_rows": 1,
+     "currency": "GBP",
+     "median_amount": 28.37,
+     "last_hist_batch": "B2026-09"
+    },
+    {
+     "name": "Wwi W. Harris",
+     "email": "wei_harris@hotmail.com",
+     "country": "GB",
+     "n_hist_rows": 0,
+     "currency": "GBP",
+     "median_amount": 21.41,
+     "last_hist_batch": ""
+    }
+   ],
+   "signals": [
+    "NAME_INITIAL",
+    "EMAIL_CLOSE",
+    "COUNTRY_SAME",
+    "ONE_RECORD_NEW"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Wei W. Harris' <wei_harris31@hotmail.com> may be the same payee as 'Wwi W. Harris' <wei_harris@hotmail.com> (model-estimated probability 94%).",
+    "bullets": [
+     "'Wei W. Harris' and 'Wwi W. Harris' look like the same name with an initial in place of a full word.",
+     "The emails 'wei_harris31@hotmail.com' and 'wei_harris@hotmail.com' are nearly the same.",
+     "Both records are from the same country (GB).",
+     "'wei_harris@hotmail.com' has not been paid before; 'wei_harris31@hotmail.com' has been paid 1 time(s), last in batch B2026-09."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 94,
+     "a": {
+      "name": "Wei W. Harris",
+      "email": "wei_harris31@hotmail.com",
+      "country": "GB",
+      "n_hist_rows": 1,
+      "currency": "GBP",
+      "median_amount": 28.37,
+      "last_hist_batch": "B2026-09"
+     },
+     "b": {
+      "name": "Wwi W. Harris",
+      "email": "wei_harris@hotmail.com",
+      "country": "GB",
+      "n_hist_rows": 0,
+      "currency": "GBP",
+      "median_amount": 21.41,
+      "last_hist_batch": ""
+     },
+     "signals": [
+      "NAME_INITIAL",
+      "EMAIL_CLOSE",
+      "COUNTRY_SAME",
+      "ONE_RECORD_NEW"
+     ]
+    },
+    "text": "Very likely: 'Wei W. Harris' <wei_harris31@hotmail.com> may be the same payee as 'Wwi W. Harris' <wei_harris@hotmail.com> (model-estimated probability 94%). 'Wei W. Harris' and 'Wwi W. Harris' look like the same name with an initial in place of a full word. The emails 'wei_harris31@hotmail.com' and 'wei_harris@hotmail.com' are nearly the same. Both records are from the same country (GB). 'wei_harris@hotmail.com' has not been paid before; 'wei_harris31@hotmail.com' has been paid 1 time(s), last in batch B2026-09.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0052",
+   "type": "identity_match",
+   "probability": 0.9353,
+   "severity": "high",
+   "above_threshold": true,
+   "category": "new_record_matches_known_payee",
+   "affected_row_ids": [
+    "R001314",
+    "R001407"
+   ],
+   "records": [
+    {
+     "name": "Schneider Consulting Ltd",
+     "email": "billing@schneiderconsulting.com",
+     "country": "BR",
+     "n_hist_rows": 6,
+     "currency": "USD",
+     "median_amount": 170.74,
+     "last_hist_batch": "B2026-09"
+    },
+    {
+     "name": "Schneider Consulting",
+     "email": "billing57@schneiderconsulting.com",
+     "country": "BR",
+     "n_hist_rows": 0,
+     "currency": "USD",
+     "median_amount": 114.0,
+     "last_hist_batch": ""
+    }
+   ],
+   "signals": [
+    "NAME_IDENTICAL",
+    "EMAIL_CLOSE",
+    "COUNTRY_SAME",
+    "ONE_RECORD_NEW"
+   ],
+   "explanation": {
+    "headline": "Very likely: 'Schneider Consulting Ltd' <billing@schneiderconsulting.com> may be the same payee as 'Schneider Consulting' <billing57@schneiderconsulting.com> (model-estimated probability 94%).",
+    "bullets": [
+     "The names 'Schneider Consulting Ltd' and 'Schneider Consulting' are the same after normalisation.",
+     "The emails 'billing@schneiderconsulting.com' and 'billing57@schneiderconsulting.com' are nearly the same.",
+     "Both records are from the same country (BR).",
+     "'billing57@schneiderconsulting.com' has not been paid before; 'billing@schneiderconsulting.com' has been paid 6 time(s), last in batch B2026-09."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "probability_percent": 94,
+     "a": {
+      "name": "Schneider Consulting Ltd",
+      "email": "billing@schneiderconsulting.com",
+      "country": "BR",
+      "n_hist_rows": 6,
+      "currency": "USD",
+      "median_amount": 170.74,
+      "last_hist_batch": "B2026-09"
+     },
+     "b": {
+      "name": "Schneider Consulting",
+      "email": "billing57@schneiderconsulting.com",
+      "country": "BR",
+      "n_hist_rows": 0,
+      "currency": "USD",
+      "median_amount": 114.0,
+      "last_hist_batch": ""
+     },
+     "signals": [
+      "NAME_IDENTICAL",
+      "EMAIL_CLOSE",
+      "COUNTRY_SAME",
+      "ONE_RECORD_NEW"
+     ]
+    },
+    "text": "Very likely: 'Schneider Consulting Ltd' <billing@schneiderconsulting.com> may be the same payee as 'Schneider Consulting' <billing57@schneiderconsulting.com> (model-estimated probability 94%). The names 'Schneider Consulting Ltd' and 'Schneider Consulting' are the same after normalisation. The emails 'billing@schneiderconsulting.com' and 'billing57@schneiderconsulting.com' are nearly the same. Both records are from the same country (BR). 'billing57@schneiderconsulting.com' has not been paid before; 'billing@schneiderconsulting.com' has been paid 6 time(s), last in batch B2026-09.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0053",
+   "type": "identity_match",
+   "probability": 0.8641,
+   "severity": "medium",
+   "above_threshold": true,
+   "category": "new_record_matches_known_payee",
+   "affected_row_ids": [
+    "R001236"
+   ],
+   "records": [
+    {
+     "name": "Benjamin Lewis",
+     "email": "benjamin_lewis@gmail.com",
+     "country": "US",
+     "n_hist_rows": 0,
+     "currency": "USD",
+     "median_amount": 1075.65,
+     "last_hist_batch": ""
+    },
+    {
+     "name": "Benjamin P. Lewis",
+     "email": "b.lewis@proton.me",
+     "country": "US",
+     "n_hist_rows": 1,
+     "currency": "USD",
+     "median_amount": 920.76,
+     "last_hist_batch": "B2026-09"
+    }
+   ],
+   "signals": [
+    "NAME_SUBSET",
+    "EMAIL_UNRELATED",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR",
+    "ONE_RECORD_NEW"
+   ],
+   "explanation": {
+    "headline": "Likely: 'Benjamin Lewis' <benjamin_lewis@gmail.com> may be the same payee as 'Benjamin P. Lewis' <b.lewis@proton.me> (model-estimated probability 86%).",
+    "bullets": [
+     "One name contains all the words of the other ('Benjamin Lewis' / 'Benjamin P. Lewis').",
+     "The emails 'benjamin_lewis@gmail.com' and 'b.lewis@proton.me' do not look related.",
+     "Both records are from the same country (US).",
+     "Their typical payout amounts are similar.",
+     "'benjamin_lewis@gmail.com' has not been paid before; 'b.lewis@proton.me' has been paid 1 time(s), last in batch B2026-09."
+    ],
+    "caution": "",
+    "severity": "medium",
+    "facts": {
+     "probability_percent": 86,
+     "a": {
+      "name": "Benjamin Lewis",
+      "email": "benjamin_lewis@gmail.com",
+      "country": "US",
+      "n_hist_rows": 0,
+      "currency": "USD",
+      "median_amount": 1075.65,
+      "last_hist_batch": ""
+     },
+     "b": {
+      "name": "Benjamin P. Lewis",
+      "email": "b.lewis@proton.me",
+      "country": "US",
+      "n_hist_rows": 1,
+      "currency": "USD",
+      "median_amount": 920.76,
+      "last_hist_batch": "B2026-09"
+     },
+     "signals": [
+      "NAME_SUBSET",
+      "EMAIL_UNRELATED",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR",
+      "ONE_RECORD_NEW"
+     ]
+    },
+    "text": "Likely: 'Benjamin Lewis' <benjamin_lewis@gmail.com> may be the same payee as 'Benjamin P. Lewis' <b.lewis@proton.me> (model-estimated probability 86%). One name contains all the words of the other ('Benjamin Lewis' / 'Benjamin P. Lewis'). The emails 'benjamin_lewis@gmail.com' and 'b.lewis@proton.me' do not look related. Both records are from the same country (US). Their typical payout amounts are similar. 'benjamin_lewis@gmail.com' has not been paid before; 'b.lewis@proton.me' has been paid 1 time(s), last in batch B2026-09.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0054",
+   "type": "identity_match",
+   "probability": 0.7681,
+   "severity": "medium",
+   "above_threshold": true,
+   "category": "two_records_same_payee",
+   "affected_row_ids": [
+    "R001335"
+   ],
+   "records": [
+    {
+     "name": "Ethan Robinson",
+     "email": "ethanrobinson43@yahoo.com",
+     "country": "IN",
+     "n_hist_rows": 1,
+     "currency": "USD",
+     "median_amount": 80.0,
+     "last_hist_batch": "B2026-08"
+    },
+    {
+     "name": "Etthan Robinson",
+     "email": "robinson.etthan@yahoo.com",
+     "country": "IN",
+     "n_hist_rows": 3,
+     "currency": "USD",
+     "median_amount": 120.0,
+     "last_hist_batch": "B2026-06"
+    }
+   ],
+   "signals": [
+    "NAME_CLOSE",
+    "EMAIL_UNRELATED",
+    "COUNTRY_SAME"
+   ],
+   "explanation": {
+    "headline": "Likely: 'Ethan Robinson' <ethanrobinson43@yahoo.com> may be the same payee as 'Etthan Robinson' <robinson.etthan@yahoo.com> (model-estimated probability 77%).",
+    "bullets": [
+     "The names 'Ethan Robinson' and 'Etthan Robinson' are very similar but not identical.",
+     "The emails 'ethanrobinson43@yahoo.com' and 'robinson.etthan@yahoo.com' do not look related.",
+     "Both records are from the same country (IN)."
+    ],
+    "caution": "",
+    "severity": "medium",
+    "facts": {
+     "probability_percent": 77,
+     "a": {
+      "name": "Ethan Robinson",
+      "email": "ethanrobinson43@yahoo.com",
+      "country": "IN",
+      "n_hist_rows": 1,
+      "currency": "USD",
+      "median_amount": 80.0,
+      "last_hist_batch": "B2026-08"
+     },
+     "b": {
+      "name": "Etthan Robinson",
+      "email": "robinson.etthan@yahoo.com",
+      "country": "IN",
+      "n_hist_rows": 3,
+      "currency": "USD",
+      "median_amount": 120.0,
+      "last_hist_batch": "B2026-06"
+     },
+     "signals": [
+      "NAME_CLOSE",
+      "EMAIL_UNRELATED",
+      "COUNTRY_SAME"
+     ]
+    },
+    "text": "Likely: 'Ethan Robinson' <ethanrobinson43@yahoo.com> may be the same payee as 'Etthan Robinson' <robinson.etthan@yahoo.com> (model-estimated probability 77%). The names 'Ethan Robinson' and 'Etthan Robinson' are very similar but not identical. The emails 'ethanrobinson43@yahoo.com' and 'robinson.etthan@yahoo.com' do not look related. Both records are from the same country (IN).",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0055",
+   "type": "identity_match",
+   "probability": 0.7423,
+   "severity": "medium",
+   "above_threshold": true,
+   "category": "two_records_same_payee",
+   "affected_row_ids": [
+    "R001361"
+   ],
+   "records": [
+    {
+     "name": "Oliveiar Studio Ltd",
+     "email": "hello90@oliveirastudio.com",
+     "country": "GB",
+     "n_hist_rows": 1,
+     "currency": "GBP",
+     "median_amount": 65.0,
+     "last_hist_batch": "B2026-08"
+    },
+    {
+     "name": "Oliveira Studio Ltd",
+     "email": "hello@oliveirastudio.com",
+     "country": "GB",
+     "n_hist_rows": 3,
+     "currency": "GBP",
+     "median_amount": 74.47,
+     "last_hist_batch": "B2026-09"
+    }
+   ],
+   "signals": [
+    "NAME_CLOSE",
+    "EMAIL_CLOSE",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR"
+   ],
+   "explanation": {
+    "headline": "Likely: 'Oliveiar Studio Ltd' <hello90@oliveirastudio.com> may be the same payee as 'Oliveira Studio Ltd' <hello@oliveirastudio.com> (model-estimated probability 74%).",
+    "bullets": [
+     "The names 'Oliveiar Studio Ltd' and 'Oliveira Studio Ltd' are very similar but not identical.",
+     "The emails 'hello90@oliveirastudio.com' and 'hello@oliveirastudio.com' are nearly the same.",
+     "Both records are from the same country (GB).",
+     "Their typical payout amounts are similar."
+    ],
+    "caution": "",
+    "severity": "medium",
+    "facts": {
+     "probability_percent": 74,
+     "a": {
+      "name": "Oliveiar Studio Ltd",
+      "email": "hello90@oliveirastudio.com",
+      "country": "GB",
+      "n_hist_rows": 1,
+      "currency": "GBP",
+      "median_amount": 65.0,
+      "last_hist_batch": "B2026-08"
+     },
+     "b": {
+      "name": "Oliveira Studio Ltd",
+      "email": "hello@oliveirastudio.com",
+      "country": "GB",
+      "n_hist_rows": 3,
+      "currency": "GBP",
+      "median_amount": 74.47,
+      "last_hist_batch": "B2026-09"
+     },
+     "signals": [
+      "NAME_CLOSE",
+      "EMAIL_CLOSE",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR"
+     ]
+    },
+    "text": "Likely: 'Oliveiar Studio Ltd' <hello90@oliveirastudio.com> may be the same payee as 'Oliveira Studio Ltd' <hello@oliveirastudio.com> (model-estimated probability 74%). The names 'Oliveiar Studio Ltd' and 'Oliveira Studio Ltd' are very similar but not identical. The emails 'hello90@oliveirastudio.com' and 'hello@oliveirastudio.com' are nearly the same. Both records are from the same country (GB). Their typical payout amounts are similar.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0056",
+   "type": "identity_match",
+   "probability": 0.739,
+   "severity": "medium",
+   "above_threshold": true,
+   "category": "two_records_same_payee",
+   "affected_row_ids": [
+    "R001433"
+   ],
+   "records": [
+    {
+     "name": "Jennifer Chatterjee",
+     "email": "chatterjee.jennifer13@chatterjeehq.com",
+     "country": "US",
+     "n_hist_rows": 3,
+     "currency": "USD",
+     "median_amount": 52.77,
+     "last_hist_batch": "B2026-09"
+    },
+    {
+     "name": "Jennifer Chatterjee",
+     "email": "chatterjee.jennifer@chatterjeehq.com",
+     "country": "US",
+     "n_hist_rows": 1,
+     "currency": "USD",
+     "median_amount": 77.1,
+     "last_hist_batch": "B2026-05"
+    }
+   ],
+   "signals": [
+    "NAME_IDENTICAL",
+    "EMAIL_CLOSE",
+    "COUNTRY_SAME"
+   ],
+   "explanation": {
+    "headline": "Likely: 'Jennifer Chatterjee' <chatterjee.jennifer13@chatterjeehq.com> may be the same payee as 'Jennifer Chatterjee' <chatterjee.jennifer@chatterjeehq.com> (model-estimated probability 74%).",
+    "bullets": [
+     "Both records use the name 'Jennifer Chatterjee'.",
+     "The emails 'chatterjee.jennifer13@chatterjeehq.com' and 'chatterjee.jennifer@chatterjeehq.com' are nearly the same.",
+     "Both records are from the same country (US)."
+    ],
+    "caution": "",
+    "severity": "medium",
+    "facts": {
+     "probability_percent": 74,
+     "a": {
+      "name": "Jennifer Chatterjee",
+      "email": "chatterjee.jennifer13@chatterjeehq.com",
+      "country": "US",
+      "n_hist_rows": 3,
+      "currency": "USD",
+      "median_amount": 52.77,
+      "last_hist_batch": "B2026-09"
+     },
+     "b": {
+      "name": "Jennifer Chatterjee",
+      "email": "chatterjee.jennifer@chatterjeehq.com",
+      "country": "US",
+      "n_hist_rows": 1,
+      "currency": "USD",
+      "median_amount": 77.1,
+      "last_hist_batch": "B2026-05"
+     },
+     "signals": [
+      "NAME_IDENTICAL",
+      "EMAIL_CLOSE",
+      "COUNTRY_SAME"
+     ]
+    },
+    "text": "Likely: 'Jennifer Chatterjee' <chatterjee.jennifer13@chatterjeehq.com> may be the same payee as 'Jennifer Chatterjee' <chatterjee.jennifer@chatterjeehq.com> (model-estimated probability 74%). Both records use the name 'Jennifer Chatterjee'. The emails 'chatterjee.jennifer13@chatterjeehq.com' and 'chatterjee.jennifer@chatterjeehq.com' are nearly the same. Both records are from the same country (US).",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0057",
+   "type": "identity_match",
+   "probability": 0.6392,
+   "severity": "low",
+   "above_threshold": true,
+   "category": "new_record_matches_known_payee",
+   "affected_row_ids": [
+    "R001209"
+   ],
+   "records": [
+    {
+     "name": "Matthew Das Jr.",
+     "email": "matthew.das+payouts@gmail.com",
+     "country": "FR",
+     "n_hist_rows": 0,
+     "currency": "EUR",
+     "median_amount": 41.6,
+     "last_hist_batch": ""
+    },
+    {
+     "name": "Matthew U. Das",
+     "email": "matthew.das@gmail.com",
+     "country": "FR",
+     "n_hist_rows": 4,
+     "currency": "EUR",
+     "median_amount": 100.685,
+     "last_hist_batch": "B2026-09"
+    }
+   ],
+   "signals": [
+    "NAME_SUBSET",
+    "EMAIL_SAME_MAILBOX",
+    "COUNTRY_SAME",
+    "AMOUNT_DIFFERENT",
+    "ONE_RECORD_NEW"
+   ],
+   "explanation": {
+    "headline": "Possible: 'Matthew Das Jr.' <matthew.das+payouts@gmail.com> may be the same payee as 'Matthew U. Das' <matthew.das@gmail.com> (model-estimated probability 64%).",
+    "bullets": [
+     "One name contains all the words of the other ('Matthew Das Jr.' / 'Matthew U. Das').",
+     "The emails 'matthew.das+payouts@gmail.com' and 'matthew.das@gmail.com' point to the same mailbox once tags and dots are ignored.",
+     "Both records are from the same country (FR).",
+     "Their typical payout amounts are quite different.",
+     "'matthew.das+payouts@gmail.com' has not been paid before; 'matthew.das@gmail.com' has been paid 4 time(s), last in batch B2026-09."
+    ],
+    "caution": "",
+    "severity": "low",
+    "facts": {
+     "probability_percent": 64,
+     "a": {
+      "name": "Matthew Das Jr.",
+      "email": "matthew.das+payouts@gmail.com",
+      "country": "FR",
+      "n_hist_rows": 0,
+      "currency": "EUR",
+      "median_amount": 41.6,
+      "last_hist_batch": ""
+     },
+     "b": {
+      "name": "Matthew U. Das",
+      "email": "matthew.das@gmail.com",
+      "country": "FR",
+      "n_hist_rows": 4,
+      "currency": "EUR",
+      "median_amount": 100.685,
+      "last_hist_batch": "B2026-09"
+     },
+     "signals": [
+      "NAME_SUBSET",
+      "EMAIL_SAME_MAILBOX",
+      "COUNTRY_SAME",
+      "AMOUNT_DIFFERENT",
+      "ONE_RECORD_NEW"
+     ]
+    },
+    "text": "Possible: 'Matthew Das Jr.' <matthew.das+payouts@gmail.com> may be the same payee as 'Matthew U. Das' <matthew.das@gmail.com> (model-estimated probability 64%). One name contains all the words of the other ('Matthew Das Jr.' / 'Matthew U. Das'). The emails 'matthew.das+payouts@gmail.com' and 'matthew.das@gmail.com' point to the same mailbox once tags and dots are ignored. Both records are from the same country (FR). Their typical payout amounts are quite different. 'matthew.das+payouts@gmail.com' has not been paid before; 'matthew.das@gmail.com' has been paid 4 time(s), last in batch B2026-09.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0058",
+   "type": "identity_match",
+   "probability": 0.523,
+   "severity": "low",
+   "above_threshold": true,
+   "category": "two_records_same_payee",
+   "affected_row_ids": [
+    "R001333",
+    "R001424"
+   ],
+   "records": [
+    {
+     "name": "Luca Khan",
+     "email": "l.khan@gmail.com",
+     "country": "GB",
+     "n_hist_rows": 4,
+     "currency": "GBP",
+     "median_amount": 45.0,
+     "last_hist_batch": "B2026-08"
+    },
+    {
+     "name": "Luuca Khan",
+     "email": "lkhan@outlook.com",
+     "country": "GB",
+     "n_hist_rows": 2,
+     "currency": "GBP",
+     "median_amount": 262.71,
+     "last_hist_batch": "B2026-08"
+    }
+   ],
+   "signals": [
+    "NAME_CLOSE",
+    "EMAIL_SAME_MAILBOX",
+    "COUNTRY_SAME",
+    "AMOUNT_DIFFERENT"
+   ],
+   "explanation": {
+    "headline": "Possible: 'Luca Khan' <l.khan@gmail.com> may be the same payee as 'Luuca Khan' <lkhan@outlook.com> (model-estimated probability 52%).",
+    "bullets": [
+     "The names 'Luca Khan' and 'Luuca Khan' are very similar but not identical.",
+     "The emails 'l.khan@gmail.com' and 'lkhan@outlook.com' point to the same mailbox once tags and dots are ignored.",
+     "Both records are from the same country (GB).",
+     "Their typical payout amounts are quite different."
+    ],
+    "caution": "",
+    "severity": "low",
+    "facts": {
+     "probability_percent": 52,
+     "a": {
+      "name": "Luca Khan",
+      "email": "l.khan@gmail.com",
+      "country": "GB",
+      "n_hist_rows": 4,
+      "currency": "GBP",
+      "median_amount": 45.0,
+      "last_hist_batch": "B2026-08"
+     },
+     "b": {
+      "name": "Luuca Khan",
+      "email": "lkhan@outlook.com",
+      "country": "GB",
+      "n_hist_rows": 2,
+      "currency": "GBP",
+      "median_amount": 262.71,
+      "last_hist_batch": "B2026-08"
+     },
+     "signals": [
+      "NAME_CLOSE",
+      "EMAIL_SAME_MAILBOX",
+      "COUNTRY_SAME",
+      "AMOUNT_DIFFERENT"
+     ]
+    },
+    "text": "Possible: 'Luca Khan' <l.khan@gmail.com> may be the same payee as 'Luuca Khan' <lkhan@outlook.com> (model-estimated probability 52%). The names 'Luca Khan' and 'Luuca Khan' are very similar but not identical. The emails 'l.khan@gmail.com' and 'lkhan@outlook.com' point to the same mailbox once tags and dots are ignored. Both records are from the same country (GB). Their typical payout amounts are quite different.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "finding_id": "ID-0059",
+   "type": "identity_match",
+   "probability": 0.3298,
+   "severity": "low",
+   "above_threshold": true,
+   "category": "two_records_same_payee",
+   "affected_row_ids": [
+    "R001349"
+   ],
+   "records": [
+    {
+     "name": "Elena Hill",
+     "email": "elenahill73@hillmail.com",
+     "country": "DE",
+     "n_hist_rows": 5,
+     "currency": "EUR",
+     "median_amount": 52.455,
+     "last_hist_batch": "B2026-09"
+    },
+    {
+     "name": "Ellena Hill",
+     "email": "ellena.hill@gmail.com",
+     "country": "DE",
+     "n_hist_rows": 2,
+     "currency": "EUR",
+     "median_amount": 51.445,
+     "last_hist_batch": "B2026-07"
+    }
+   ],
+   "signals": [
+    "NAME_CLOSE",
+    "COUNTRY_SAME",
+    "AMOUNT_SIMILAR"
+   ],
+   "explanation": {
+    "headline": "Weak signal: 'Elena Hill' <elenahill73@hillmail.com> may be the same payee as 'Ellena Hill' <ellena.hill@gmail.com> (model-estimated probability 33%).",
+    "bullets": [
+     "The names 'Elena Hill' and 'Ellena Hill' are very similar but not identical.",
+     "Both records are from the same country (DE).",
+     "Their typical payout amounts are similar."
+    ],
+    "caution": "",
+    "severity": "low",
+    "facts": {
+     "probability_percent": 33,
+     "a": {
+      "name": "Elena Hill",
+      "email": "elenahill73@hillmail.com",
+      "country": "DE",
+      "n_hist_rows": 5,
+      "currency": "EUR",
+      "median_amount": 52.455,
+      "last_hist_batch": "B2026-09"
+     },
+     "b": {
+      "name": "Ellena Hill",
+      "email": "ellena.hill@gmail.com",
+      "country": "DE",
+      "n_hist_rows": 2,
+      "currency": "EUR",
+      "median_amount": 51.445,
+      "last_hist_batch": "B2026-07"
+     },
+     "signals": [
+      "NAME_CLOSE",
+      "COUNTRY_SAME",
+      "AMOUNT_SIMILAR"
+     ]
+    },
+    "text": "Weak signal: 'Elena Hill' <elenahill73@hillmail.com> may be the same payee as 'Ellena Hill' <ellena.hill@gmail.com> (model-estimated probability 33%). The names 'Elena Hill' and 'Ellena Hill' are very similar but not identical. Both records are from the same country (DE). Their typical payout amounts are similar.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "type": "exact_duplicate",
+   "severity": "high",
+   "probability": null,
+   "affected_row_ids": [
+    "R001223",
+    "R001303"
+   ],
+   "explanation": {
+    "headline": "'Javier Costa' <javier.costa@gmail.com> appears 2 times in this batch for the same amount of 156.76 USD.",
+    "bullets": [
+     "Identical payee and amount repeated within one batch."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "count": 2,
+     "amount": 156.76
+    },
+    "text": "'Javier Costa' <javier.costa@gmail.com> appears 2 times in this batch for the same amount of 156.76 USD. Identical payee and amount repeated within one batch.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "type": "exact_duplicate",
+   "severity": "high",
+   "probability": null,
+   "affected_row_ids": [
+    "R001437",
+    "R001464"
+   ],
+   "explanation": {
+    "headline": "'Patrick Bell' <patrickbell67@yahoo.com> appears 2 times in this batch for the same amount of 56.21 GBP.",
+    "bullets": [
+     "Identical payee and amount repeated within one batch."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "count": 2,
+     "amount": 56.21
+    },
+    "text": "'Patrick Bell' <patrickbell67@yahoo.com> appears 2 times in this batch for the same amount of 56.21 GBP. Identical payee and amount repeated within one batch.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "type": "exact_duplicate",
+   "severity": "high",
+   "probability": null,
+   "affected_row_ids": [
+    "R001446",
+    "R001458"
+   ],
+   "explanation": {
+    "headline": "'Piotr Tanaka' <piotr.tanaka@outlook.com> appears 2 times in this batch for the same amount of 219.96 GBP.",
+    "bullets": [
+     "Identical payee and amount repeated within one batch."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "count": 2,
+     "amount": 219.96
+    },
+    "text": "'Piotr Tanaka' <piotr.tanaka@outlook.com> appears 2 times in this batch for the same amount of 219.96 GBP. Identical payee and amount repeated within one batch.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "type": "exact_duplicate",
+   "severity": "high",
+   "probability": null,
+   "affected_row_ids": [
+    "R001306",
+    "R001434"
+   ],
+   "explanation": {
+    "headline": "'Yuki J. Larsen' <yuki_larsen@outlook.com> appears 2 times in this batch for the same amount of 161.60 AUD.",
+    "bullets": [
+     "Identical payee and amount repeated within one batch."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "count": 2,
+     "amount": 161.6
+    },
+    "text": "'Yuki J. Larsen' <yuki_larsen@outlook.com> appears 2 times in this batch for the same amount of 161.60 AUD. Identical payee and amount repeated within one batch.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "type": "amount_anomaly",
+   "severity": "high",
+   "probability": null,
+   "affected_row_ids": [
+    "R001254"
+   ],
+   "evidence": {
+    "z": -21.587,
+    "score": 21.587,
+    "amount": 3.58,
+    "payee_median": 40.0,
+    "ratio": 0.089,
+    "n_history": 4,
+    "basis": "payee_history",
+    "typical_low": 31.99,
+    "typical_high": 50.02,
+    "decimal_shift": 0.1,
+    "sigma": 0.1118,
+    "history_source": "own_history"
+   },
+   "explanation": {
+    "headline": "Unusual amount for 'Joao Desai': 3.58 USD.",
+    "bullets": [
+     "3.58 USD is 0.09x this payee's median of 40.00 USD across 4 earlier payouts.",
+     "Their usual range is about 31.99 USD to 50.02 USD.",
+     "The ratio is close to 0.1x, which can happen when a decimal point is misplaced."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "evidence": {
+      "z": -21.587,
+      "score": 21.587,
+      "amount": 3.58,
+      "payee_median": 40.0,
+      "ratio": 0.089,
+      "n_history": 4,
+      "basis": "payee_history",
+      "typical_low": 31.99,
+      "typical_high": 50.02,
+      "decimal_shift": 0.1,
+      "sigma": 0.1118
+     },
+     "payee": "Joao Desai",
+     "currency": "USD"
+    },
+    "text": "Unusual amount for 'Joao Desai': 3.58 USD. 3.58 USD is 0.09x this payee's median of 40.00 USD across 4 earlier payouts. Their usual range is about 31.99 USD to 50.02 USD. The ratio is close to 0.1x, which can happen when a decimal point is misplaced.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "type": "amount_anomaly",
+   "severity": "high",
+   "probability": null,
+   "affected_row_ids": [
+    "R001269"
+   ],
+   "evidence": {
+    "z": -18.281,
+    "score": 18.281,
+    "amount": 15.72,
+    "payee_median": 127.5,
+    "ratio": 0.123,
+    "n_history": 4,
+    "basis": "payee_history",
+    "typical_low": 101.41,
+    "typical_high": 160.32,
+    "decimal_shift": null,
+    "sigma": 0.1145,
+    "history_source": "own_history"
+   },
+   "explanation": {
+    "headline": "Unusual amount for 'David Young': 15.72 USD.",
+    "bullets": [
+     "15.72 USD is 0.12x this payee's median of 127.50 USD across 4 earlier payouts.",
+     "Their usual range is about 101.41 USD to 160.32 USD."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "evidence": {
+      "z": -18.281,
+      "score": 18.281,
+      "amount": 15.72,
+      "payee_median": 127.5,
+      "ratio": 0.123,
+      "n_history": 4,
+      "basis": "payee_history",
+      "typical_low": 101.41,
+      "typical_high": 160.32,
+      "decimal_shift": null,
+      "sigma": 0.1145
+     },
+     "payee": "David Young",
+     "currency": "USD"
+    },
+    "text": "Unusual amount for 'David Young': 15.72 USD. 15.72 USD is 0.12x this payee's median of 127.50 USD across 4 earlier payouts. Their usual range is about 101.41 USD to 160.32 USD.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "type": "amount_anomaly",
+   "severity": "high",
+   "probability": null,
+   "affected_row_ids": [
+    "R001359"
+   ],
+   "evidence": {
+    "z": 41.786,
+    "score": 41.786,
+    "amount": 19706.0,
+    "payee_median": 216.0,
+    "ratio": 91.23,
+    "n_history": 6,
+    "basis": "payee_history",
+    "typical_low": 174.04,
+    "typical_high": 268.09,
+    "decimal_shift": 100.0,
+    "sigma": 0.108,
+    "history_source": "own_history"
+   },
+   "explanation": {
+    "headline": "Unusual amount for 'Kren M. Roberts': 19,706.00 GBP.",
+    "bullets": [
+     "19,706.00 GBP is 91.23x this payee's median of 216.00 GBP across 6 earlier payouts.",
+     "Their usual range is about 174.04 GBP to 268.09 GBP.",
+     "The ratio is close to 100x, which can happen when a decimal point is misplaced."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "evidence": {
+      "z": 41.786,
+      "score": 41.786,
+      "amount": 19706.0,
+      "payee_median": 216.0,
+      "ratio": 91.23,
+      "n_history": 6,
+      "basis": "payee_history",
+      "typical_low": 174.04,
+      "typical_high": 268.09,
+      "decimal_shift": 100.0,
+      "sigma": 0.108
+     },
+     "payee": "Kren M. Roberts",
+     "currency": "GBP"
+    },
+    "text": "Unusual amount for 'Kren M. Roberts': 19,706.00 GBP. 19,706.00 GBP is 91.23x this payee's median of 216.00 GBP across 6 earlier payouts. Their usual range is about 174.04 GBP to 268.09 GBP. The ratio is close to 100x, which can happen when a decimal point is misplaced.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "type": "amount_anomaly",
+   "severity": "high",
+   "probability": null,
+   "affected_row_ids": [
+    "R001423"
+   ],
+   "evidence": {
+    "z": -30.035,
+    "score": 30.035,
+    "amount": 12.28,
+    "payee_median": 697.65,
+    "ratio": 0.018,
+    "n_history": 5,
+    "basis": "payee_history",
+    "typical_low": 533.1,
+    "typical_high": 912.98,
+    "decimal_shift": null,
+    "sigma": 0.1345,
+    "history_source": "own_history"
+   },
+   "explanation": {
+    "headline": "Unusual amount for 'Wei Phillips': 12.28 GBP.",
+    "bullets": [
+     "12.28 GBP is 0.02x this payee's median of 697.65 GBP across 5 earlier payouts.",
+     "Their usual range is about 533.10 GBP to 912.98 GBP."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "evidence": {
+      "z": -30.035,
+      "score": 30.035,
+      "amount": 12.28,
+      "payee_median": 697.65,
+      "ratio": 0.018,
+      "n_history": 5,
+      "basis": "payee_history",
+      "typical_low": 533.1,
+      "typical_high": 912.98,
+      "decimal_shift": null,
+      "sigma": 0.1345
+     },
+     "payee": "Wei Phillips",
+     "currency": "GBP"
+    },
+    "text": "Unusual amount for 'Wei Phillips': 12.28 GBP. 12.28 GBP is 0.02x this payee's median of 697.65 GBP across 5 earlier payouts. Their usual range is about 533.10 GBP to 912.98 GBP.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "type": "amount_anomaly",
+   "severity": "high",
+   "probability": null,
+   "affected_row_ids": [
+    "R001424"
+   ],
+   "evidence": {
+    "z": 21.796,
+    "score": 21.796,
+    "amount": 514.66,
+    "payee_median": 45.0,
+    "ratio": 11.437,
+    "n_history": 4,
+    "basis": "payee_history",
+    "typical_low": 35.98,
+    "typical_high": 56.28,
+    "decimal_shift": 10.0,
+    "sigma": 0.1118,
+    "history_source": "linked_payee_history"
+   },
+   "explanation": {
+    "headline": "Unusual amount for 'Luuca Khan': 514.66 GBP.",
+    "bullets": [
+     "514.66 GBP is 11.44x this payee's median of 45.00 GBP across 4 earlier payouts.",
+     "Their usual range is about 35.98 GBP to 56.28 GBP.",
+     "The ratio is close to 10x, which can happen when a decimal point is misplaced.",
+     "The comparison uses the history of the payee this record is likely linked to."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "evidence": {
+      "z": 21.796,
+      "score": 21.796,
+      "amount": 514.66,
+      "payee_median": 45.0,
+      "ratio": 11.437,
+      "n_history": 4,
+      "basis": "payee_history",
+      "typical_low": 35.98,
+      "typical_high": 56.28,
+      "decimal_shift": 10.0,
+      "sigma": 0.1118
+     },
+     "payee": "Luuca Khan",
+     "currency": "GBP"
+    },
+    "text": "Unusual amount for 'Luuca Khan': 514.66 GBP. 514.66 GBP is 11.44x this payee's median of 45.00 GBP across 4 earlier payouts. Their usual range is about 35.98 GBP to 56.28 GBP. The ratio is close to 10x, which can happen when a decimal point is misplaced. The comparison uses the history of the payee this record is likely linked to.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "type": "amount_anomaly",
+   "severity": "high",
+   "probability": null,
+   "affected_row_ids": [
+    "R001426"
+   ],
+   "evidence": {
+    "z": -41.19,
+    "score": 41.19,
+    "amount": 16.85,
+    "payee_median": 1685.0,
+    "ratio": 0.01,
+    "n_history": 4,
+    "basis": "payee_history",
+    "typical_low": 1347.38,
+    "typical_high": 2107.23,
+    "decimal_shift": 0.01,
+    "sigma": 0.1118,
+    "history_source": "own_history"
+   },
+   "explanation": {
+    "headline": "Unusual amount for 'Lars I. Mukherjee': 16.85 USD.",
+    "bullets": [
+     "16.85 USD is 0.01x this payee's median of 1,685.00 USD across 4 earlier payouts.",
+     "Their usual range is about 1,347.38 USD to 2,107.23 USD.",
+     "The ratio is close to 0.01x, which can happen when a decimal point is misplaced."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "evidence": {
+      "z": -41.19,
+      "score": 41.19,
+      "amount": 16.85,
+      "payee_median": 1685.0,
+      "ratio": 0.01,
+      "n_history": 4,
+      "basis": "payee_history",
+      "typical_low": 1347.38,
+      "typical_high": 2107.23,
+      "decimal_shift": 0.01,
+      "sigma": 0.1118
+     },
+     "payee": "Lars I. Mukherjee",
+     "currency": "USD"
+    },
+    "text": "Unusual amount for 'Lars I. Mukherjee': 16.85 USD. 16.85 USD is 0.01x this payee's median of 1,685.00 USD across 4 earlier payouts. Their usual range is about 1,347.38 USD to 2,107.23 USD. The ratio is close to 0.01x, which can happen when a decimal point is misplaced.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  },
+  {
+   "type": "amount_anomaly",
+   "severity": "high",
+   "probability": null,
+   "affected_row_ids": [
+    "R001439"
+   ],
+   "evidence": {
+    "z": 14.213,
+    "score": 14.213,
+    "amount": 5791.23,
+    "payee_median": 1122.02,
+    "ratio": 5.161,
+    "n_history": 3,
+    "basis": "payee_history",
+    "typical_low": 890.64,
+    "typical_high": 1413.5,
+    "decimal_shift": null,
+    "sigma": 0.1155,
+    "history_source": "linked_payee_history"
+   },
+   "explanation": {
+    "headline": "Unusual amount for 'Samuel Santos': 5,791.23 USD.",
+    "bullets": [
+     "5,791.23 USD is 5.16x this payee's median of 1,122.02 USD across 3 earlier payouts.",
+     "Their usual range is about 890.64 USD to 1,413.50 USD.",
+     "The comparison uses the history of the payee this record is likely linked to."
+    ],
+    "caution": "",
+    "severity": "high",
+    "facts": {
+     "evidence": {
+      "z": 14.213,
+      "score": 14.213,
+      "amount": 5791.23,
+      "payee_median": 1122.02,
+      "ratio": 5.161,
+      "n_history": 3,
+      "basis": "payee_history",
+      "typical_low": 890.64,
+      "typical_high": 1413.5,
+      "decimal_shift": null,
+      "sigma": 0.1155
+     },
+     "payee": "Samuel Santos",
+     "currency": "USD"
+    },
+    "text": "Unusual amount for 'Samuel Santos': 5,791.23 USD. 5,791.23 USD is 5.16x this payee's median of 1,122.02 USD across 3 earlier payouts. Their usual range is about 890.64 USD to 1,413.50 USD. The comparison uses the history of the payee this record is likely linked to.",
+    "text_source": "template"
+   },
+   "recommended_action": "hold_for_review"
+  }
+ ],
+ "summary": {
+  "n_findings": 70,
+  "flagged_rows": 76,
+  "flagged_rows_per_1000": 264.8,
+  "by_type": {
+   "amount_anomaly": 7,
+   "exact_duplicate": 4,
+   "identity_match": 59
+  },
+  "er_threshold": 0.31,
+  "z_threshold": 8.0,
+  "blocking": {
+   "n_records": 470,
+   "n_candidates": 526,
+   "n_all_pairs": 110215,
+   "reduction_ratio": 0.995227509867078,
+   "oversized_blocks_skipped": 0
+  }
+ },
+ "disclaimer": "Advisory output. Payment execution stays deterministic and requires explicit operator approval. Probabilities are calibrated on synthetic data."
+}

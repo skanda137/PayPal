@@ -1,0 +1,338 @@
+{
+ "description": "Leave-one-alias-kind-out recall on TEST pairs. 'seen' = trained with all kinds. 'heldout' = that kind removed from train+calibration. 'heldout_no_dedicated_features' also drops the features written for that kind.",
+ "seed": 2026,
+ "groups": {
+  "nickname": {
+   "train_pairs_removed": 30,
+   "calib_pairs_removed": 12,
+   "dedicated_features": [
+    "nick_used"
+   ],
+   "seen": {
+    "threshold": 0.3,
+    "n_pairs": 1,
+    "caught": 1,
+    "recall": 1.0,
+    "recall_ci95": [
+     0.2065,
+     1.0
+    ],
+    "recall_other_kinds": 0.9531,
+    "precision_overall": 0.8689
+   },
+   "heldout": {
+    "threshold": 0.4,
+    "n_pairs": 1,
+    "caught": 1,
+    "recall": 1.0,
+    "recall_ci95": [
+     0.2065,
+     1.0
+    ],
+    "recall_other_kinds": 0.9531,
+    "precision_overall": 0.8833
+   },
+   "heldout_no_dedicated_features": {
+    "threshold": 0.4,
+    "n_pairs": 1,
+    "caught": 1,
+    "recall": 1.0,
+    "recall_ci95": [
+     0.2065,
+     1.0
+    ],
+    "recall_other_kinds": 0.9531,
+    "precision_overall": 0.8833
+   }
+  },
+  "initial": {
+   "train_pairs_removed": 138,
+   "calib_pairs_removed": 34,
+   "dedicated_features": [
+    "initial_compat"
+   ],
+   "seen": {
+    "threshold": 0.3,
+    "n_pairs": 6,
+    "caught": 6,
+    "recall": 1.0,
+    "recall_ci95": [
+     0.6097,
+     1.0
+    ],
+    "recall_other_kinds": 0.9522,
+    "precision_overall": 0.8689
+   },
+   "heldout": {
+    "threshold": 0.26,
+    "n_pairs": 6,
+    "caught": 6,
+    "recall": 1.0,
+    "recall_ci95": [
+     0.6097,
+     1.0
+    ],
+    "recall_other_kinds": 0.9596,
+    "precision_overall": 0.8585
+   },
+   "heldout_no_dedicated_features": {
+    "threshold": 0.49,
+    "n_pairs": 6,
+    "caught": 6,
+    "recall": 1.0,
+    "recall_ci95": [
+     0.6097,
+     1.0
+    ],
+    "recall_other_kinds": 0.9301,
+    "precision_overall": 0.881
+   }
+  },
+  "reorder": {
+   "train_pairs_removed": 195,
+   "calib_pairs_removed": 25,
+   "dedicated_features": [
+    "aligned_jw",
+    "tok_jaccard"
+   ],
+   "seen": {
+    "threshold": 0.3,
+    "n_pairs": 10,
+    "caught": 10,
+    "recall": 1.0,
+    "recall_ci95": [
+     0.7225,
+     1.0
+    ],
+    "recall_other_kinds": 0.9515,
+    "precision_overall": 0.8689
+   },
+   "heldout": {
+    "threshold": 0.52,
+    "n_pairs": 10,
+    "caught": 10,
+    "recall": 1.0,
+    "recall_ci95": [
+     0.7225,
+     1.0
+    ],
+    "recall_other_kinds": 0.9216,
+    "precision_overall": 0.8924
+   },
+   "heldout_no_dedicated_features": {
+    "threshold": 0.49,
+    "n_pairs": 10,
+    "caught": 10,
+    "recall": 1.0,
+    "recall_ci95": [
+     0.7225,
+     1.0
+    ],
+    "recall_other_kinds": 0.9142,
+    "precision_overall": 0.8854
+   }
+  },
+  "name_typo": {
+   "train_pairs_removed": 284,
+   "calib_pairs_removed": 64,
+   "dedicated_features": [],
+   "seen": {
+    "threshold": 0.3,
+    "n_pairs": 9,
+    "caught": 9,
+    "recall": 1.0,
+    "recall_ci95": [
+     0.7008,
+     1.0
+    ],
+    "recall_other_kinds": 0.9517,
+    "precision_overall": 0.8689
+   },
+   "heldout": {
+    "threshold": 0.29,
+    "n_pairs": 9,
+    "caught": 9,
+    "recall": 1.0,
+    "recall_ci95": [
+     0.7008,
+     1.0
+    ],
+    "recall_other_kinds": 0.948,
+    "precision_overall": 0.8742
+   }
+  },
+  "middle_initial": {
+   "train_pairs_removed": 163,
+   "calib_pairs_removed": 21,
+   "dedicated_features": [],
+   "seen": {
+    "threshold": 0.3,
+    "n_pairs": 6,
+    "caught": 6,
+    "recall": 1.0,
+    "recall_ci95": [
+     0.6097,
+     1.0
+    ],
+    "recall_other_kinds": 0.9522,
+    "precision_overall": 0.8689
+   },
+   "heldout": {
+    "threshold": 0.51,
+    "n_pairs": 6,
+    "caught": 6,
+    "recall": 1.0,
+    "recall_ci95": [
+     0.6097,
+     1.0
+    ],
+    "recall_other_kinds": 0.9191,
+    "precision_overall": 0.911
+   }
+  },
+  "email_variant": {
+   "train_pairs_removed": 659,
+   "calib_pairs_removed": 38,
+   "dedicated_features": [
+    "em_canon_equal"
+   ],
+   "seen": {
+    "threshold": 0.3,
+    "n_pairs": 16,
+    "caught": 16,
+    "recall": 1.0,
+    "recall_ci95": [
+     0.8064,
+     1.0
+    ],
+    "recall_other_kinds": 0.9504,
+    "precision_overall": 0.8689
+   },
+   "heldout": {
+    "threshold": 0.48,
+    "n_pairs": 16,
+    "caught": 16,
+    "recall": 1.0,
+    "recall_ci95": [
+     0.8064,
+     1.0
+    ],
+    "recall_other_kinds": 0.9275,
+    "precision_overall": 0.8993
+   },
+   "heldout_no_dedicated_features": {
+    "threshold": 0.48,
+    "n_pairs": 16,
+    "caught": 16,
+    "recall": 1.0,
+    "recall_ci95": [
+     0.8064,
+     1.0
+    ],
+    "recall_other_kinds": 0.9275,
+    "precision_overall": 0.8993
+   }
+  },
+  "email_typo": {
+   "train_pairs_removed": 515,
+   "calib_pairs_removed": 46,
+   "dedicated_features": [
+    "em_lev_le1"
+   ],
+   "seen": {
+    "threshold": 0.3,
+    "n_pairs": 30,
+    "caught": 28,
+    "recall": 0.9333,
+    "recall_ci95": [
+     0.7868,
+     0.9815
+    ],
+    "recall_other_kinds": 0.9556,
+    "precision_overall": 0.8689
+   },
+   "heldout": {
+    "threshold": 0.51,
+    "n_pairs": 30,
+    "caught": 5,
+    "recall": 0.1667,
+    "recall_ci95": [
+     0.0734,
+     0.3356
+    ],
+    "recall_other_kinds": 0.9516,
+    "precision_overall": 0.8796
+   },
+   "heldout_no_dedicated_features": {
+    "threshold": 0.51,
+    "n_pairs": 30,
+    "caught": 5,
+    "recall": 0.1667,
+    "recall_ci95": [
+     0.0734,
+     0.3356
+    ],
+    "recall_other_kinds": 0.9516,
+    "precision_overall": 0.8796
+   }
+  },
+  "email_change": {
+   "train_pairs_removed": 528,
+   "calib_pairs_removed": 53,
+   "dedicated_features": [],
+   "seen": {
+    "threshold": 0.3,
+    "n_pairs": 21,
+    "caught": 21,
+    "recall": 1.0,
+    "recall_ci95": [
+     0.8454,
+     1.0
+    ],
+    "recall_other_kinds": 0.9494,
+    "precision_overall": 0.8689
+   },
+   "heldout": {
+    "threshold": 0.32,
+    "n_pairs": 21,
+    "caught": 20,
+    "recall": 0.9524,
+    "recall_ci95": [
+     0.7733,
+     0.9915
+    ],
+    "recall_other_kinds": 0.9494,
+    "precision_overall": 0.8684
+   }
+  },
+  "name_and_email_both": {
+   "train_pairs_removed": 4346,
+   "calib_pairs_removed": 842,
+   "dedicated_features": [],
+   "seen": {
+    "threshold": 0.3,
+    "n_pairs": 182,
+    "caught": 169,
+    "recall": 0.9286,
+    "recall_ci95": [
+     0.8816,
+     0.9578
+    ],
+    "recall_other_kinds": 1.0,
+    "precision_overall": 0.8689
+   },
+   "heldout": {
+    "threshold": 0.27,
+    "n_pairs": 182,
+    "caught": 39,
+    "recall": 0.2143,
+    "recall_ci95": [
+     0.1609,
+     0.2795
+    ],
+    "recall_other_kinds": 0.9583,
+    "precision_overall": 0.9161
+   }
+  }
+ }
+}
