@@ -9,7 +9,7 @@
     "nick_used"
    ],
    "seen": {
-    "threshold": 0.31,
+    "threshold": 0.45,
     "n_pairs": 3,
     "caught": 3,
     "recall": 1.0,
@@ -17,11 +17,11 @@
      0.4385,
      1.0
     ],
-    "recall_other_kinds": 0.9786,
-    "precision_overall": 0.9619
+    "recall_other_kinds": 0.9537,
+    "precision_overall": 0.9679
    },
    "heldout": {
-    "threshold": 0.49,
+    "threshold": 0.33,
     "n_pairs": 3,
     "caught": 3,
     "recall": 1.0,
@@ -29,11 +29,11 @@
      0.4385,
      1.0
     ],
-    "recall_other_kinds": 0.9466,
-    "precision_overall": 0.9676
+    "recall_other_kinds": 0.9822,
+    "precision_overall": 0.9654
    },
    "heldout_no_dedicated_features": {
-    "threshold": 0.49,
+    "threshold": 0.33,
     "n_pairs": 3,
     "caught": 3,
     "recall": 1.0,
@@ -41,8 +41,8 @@
      0.4385,
      1.0
     ],
-    "recall_other_kinds": 0.9466,
-    "precision_overall": 0.9676
+    "recall_other_kinds": 0.9822,
+    "precision_overall": 0.9654
    }
   },
   "initial": {
@@ -52,7 +52,7 @@
     "initial_compat"
    ],
    "seen": {
-    "threshold": 0.31,
+    "threshold": 0.45,
     "n_pairs": 12,
     "caught": 12,
     "recall": 1.0,
@@ -60,11 +60,11 @@
      0.7575,
      1.0
     ],
-    "recall_other_kinds": 0.9779,
-    "precision_overall": 0.9619
+    "recall_other_kinds": 0.9522,
+    "precision_overall": 0.9679
    },
    "heldout": {
-    "threshold": 0.54,
+    "threshold": 0.29,
     "n_pairs": 12,
     "caught": 12,
     "recall": 1.0,
@@ -72,11 +72,11 @@
      0.7575,
      1.0
     ],
-    "recall_other_kinds": 0.9412,
-    "precision_overall": 0.971
+    "recall_other_kinds": 0.9706,
+    "precision_overall": 0.955
    },
    "heldout_no_dedicated_features": {
-    "threshold": 0.33,
+    "threshold": 0.34,
     "n_pairs": 12,
     "caught": 12,
     "recall": 1.0,
@@ -84,8 +84,8 @@
      0.7575,
      1.0
     ],
-    "recall_other_kinds": 0.9559,
-    "precision_overall": 0.9611
+    "recall_other_kinds": 0.9632,
+    "precision_overall": 0.9716
    }
   },
   "reorder": {
@@ -96,19 +96,19 @@
     "tok_jaccard"
    ],
    "seen": {
-    "threshold": 0.31,
+    "threshold": 0.45,
     "n_pairs": 20,
-    "caught": 20,
-    "recall": 1.0,
+    "caught": 19,
+    "recall": 0.95,
     "recall_ci95": [
-     0.8389,
-     1.0
+     0.7639,
+     0.9911
     ],
-    "recall_other_kinds": 0.9773,
-    "precision_overall": 0.9619
+    "recall_other_kinds": 0.9545,
+    "precision_overall": 0.9679
    },
    "heldout": {
-    "threshold": 0.27,
+    "threshold": 0.36,
     "n_pairs": 20,
     "caught": 19,
     "recall": 0.95,
@@ -116,11 +116,11 @@
      0.7639,
      0.9911
     ],
-    "recall_other_kinds": 0.9773,
-    "precision_overall": 0.9719
+    "recall_other_kinds": 0.9621,
+    "precision_overall": 0.9681
    },
    "heldout_no_dedicated_features": {
-    "threshold": 0.29,
+    "threshold": 0.34,
     "n_pairs": 20,
     "caught": 19,
     "recall": 0.95,
@@ -128,8 +128,8 @@
      0.7639,
      0.9911
     ],
-    "recall_other_kinds": 0.9735,
-    "precision_overall": 0.955
+    "recall_other_kinds": 0.9659,
+    "precision_overall": 0.9614
    }
   },
   "name_typo": {
@@ -137,7 +137,7 @@
    "calib_pairs_removed": 82,
    "dedicated_features": [],
    "seen": {
-    "threshold": 0.31,
+    "threshold": 0.45,
     "n_pairs": 28,
     "caught": 28,
     "recall": 1.0,
@@ -145,11 +145,11 @@
      0.8794,
      1.0
     ],
-    "recall_other_kinds": 0.9766,
-    "precision_overall": 0.9619
+    "recall_other_kinds": 0.9492,
+    "precision_overall": 0.9679
    },
    "heldout": {
-    "threshold": 0.18,
+    "threshold": 0.38,
     "n_pairs": 28,
     "caught": 28,
     "recall": 1.0,
@@ -157,8 +157,8 @@
      0.8794,
      1.0
     ],
-    "recall_other_kinds": 0.9883,
-    "precision_overall": 0.943
+    "recall_other_kinds": 0.9609,
+    "precision_overall": 0.9716
    }
   },
   "middle_initial": {
@@ -166,7 +166,7 @@
    "calib_pairs_removed": 106,
    "dedicated_features": [],
    "seen": {
-    "threshold": 0.31,
+    "threshold": 0.45,
     "n_pairs": 17,
     "caught": 17,
     "recall": 1.0,
@@ -174,11 +174,11 @@
      0.8157,
      1.0
     ],
-    "recall_other_kinds": 0.9775,
-    "precision_overall": 0.9619
+    "recall_other_kinds": 0.9513,
+    "precision_overall": 0.9679
    },
    "heldout": {
-    "threshold": 0.55,
+    "threshold": 0.3,
     "n_pairs": 17,
     "caught": 17,
     "recall": 1.0,
@@ -186,8 +186,8 @@
      0.8157,
      1.0
     ],
-    "recall_other_kinds": 0.9363,
-    "precision_overall": 0.9745
+    "recall_other_kinds": 0.9813,
+    "precision_overall": 0.9588
    }
   },
   "email_variant": {
@@ -197,7 +197,7 @@
     "em_canon_equal"
    ],
    "seen": {
-    "threshold": 0.31,
+    "threshold": 0.45,
     "n_pairs": 65,
     "caught": 64,
     "recall": 0.9846,
@@ -205,11 +205,11 @@
      0.9179,
      0.9973
     ],
-    "recall_other_kinds": 0.9772,
-    "precision_overall": 0.9619
+    "recall_other_kinds": 0.9452,
+    "precision_overall": 0.9679
    },
    "heldout": {
-    "threshold": 0.48,
+    "threshold": 0.17,
     "n_pairs": 65,
     "caught": 63,
     "recall": 0.9692,
@@ -217,11 +217,11 @@
      0.8946,
      0.9915
     ],
-    "recall_other_kinds": 0.9498,
-    "precision_overall": 0.9783
+    "recall_other_kinds": 0.968,
+    "precision_overall": 0.9483
    },
    "heldout_no_dedicated_features": {
-    "threshold": 0.48,
+    "threshold": 0.17,
     "n_pairs": 65,
     "caught": 63,
     "recall": 0.9692,
@@ -229,8 +229,8 @@
      0.8946,
      0.9915
     ],
-    "recall_other_kinds": 0.9498,
-    "precision_overall": 0.9783
+    "recall_other_kinds": 0.968,
+    "precision_overall": 0.9483
    }
   },
   "email_typo": {
@@ -240,7 +240,7 @@
     "em_lev_le1"
    ],
    "seen": {
-    "threshold": 0.31,
+    "threshold": 0.45,
     "n_pairs": 23,
     "caught": 23,
     "recall": 1.0,
@@ -248,11 +248,11 @@
      0.8569,
      1.0
     ],
-    "recall_other_kinds": 0.977,
-    "precision_overall": 0.9619
+    "recall_other_kinds": 0.9502,
+    "precision_overall": 0.9679
    },
    "heldout": {
-    "threshold": 0.33,
+    "threshold": 0.23,
     "n_pairs": 23,
     "caught": 21,
     "recall": 0.913,
@@ -261,10 +261,10 @@
      0.9758
     ],
     "recall_other_kinds": 0.977,
-    "precision_overall": 0.9517
+    "precision_overall": 0.9583
    },
    "heldout_no_dedicated_features": {
-    "threshold": 0.33,
+    "threshold": 0.23,
     "n_pairs": 23,
     "caught": 21,
     "recall": 0.913,
@@ -273,7 +273,7 @@
      0.9758
     ],
     "recall_other_kinds": 0.977,
-    "precision_overall": 0.9517
+    "precision_overall": 0.9583
    }
   },
   "email_change": {
@@ -281,19 +281,7 @@
    "calib_pairs_removed": 233,
    "dedicated_features": [],
    "seen": {
-    "threshold": 0.31,
-    "n_pairs": 57,
-    "caught": 56,
-    "recall": 0.9825,
-    "recall_ci95": [
-     0.9071,
-     0.9969
-    ],
-    "recall_other_kinds": 0.978,
-    "precision_overall": 0.9619
-   },
-   "heldout": {
-    "threshold": 0.3,
+    "threshold": 0.45,
     "n_pairs": 57,
     "caught": 53,
     "recall": 0.9298,
@@ -301,8 +289,20 @@
      0.833,
      0.9724
     ],
-    "recall_other_kinds": 0.9868,
-    "precision_overall": 0.9719
+    "recall_other_kinds": 0.9604,
+    "precision_overall": 0.9679
+   },
+   "heldout": {
+    "threshold": 0.45,
+    "n_pairs": 57,
+    "caught": 43,
+    "recall": 0.7544,
+    "recall_ci95": [
+     0.629,
+     0.8477
+    ],
+    "recall_other_kinds": 0.9559,
+    "precision_overall": 0.9848
    }
   },
   "name_and_email_both": {
@@ -310,28 +310,28 @@
    "calib_pairs_removed": 225,
    "dedicated_features": [],
    "seen": {
-    "threshold": 0.31,
+    "threshold": 0.45,
     "n_pairs": 58,
-    "caught": 54,
-    "recall": 0.931,
+    "caught": 50,
+    "recall": 0.8621,
     "recall_ci95": [
-     0.8357,
-     0.9729
+     0.7507,
+     0.9284
     ],
-    "recall_other_kinds": 0.9912,
-    "precision_overall": 0.9619
+    "recall_other_kinds": 0.9779,
+    "precision_overall": 0.9679
    },
    "heldout": {
-    "threshold": 0.23,
+    "threshold": 0.1,
     "n_pairs": 58,
-    "caught": 39,
-    "recall": 0.6724,
+    "caught": 42,
+    "recall": 0.7241,
     "recall_ci95": [
-     0.5442,
-     0.7792
+     0.598,
+     0.8225
     ],
-    "recall_other_kinds": 0.9867,
-    "precision_overall": 0.9813
+    "recall_other_kinds": 0.9912,
+    "precision_overall": 0.9603
    }
   }
  }

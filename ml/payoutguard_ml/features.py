@@ -14,7 +14,7 @@ FEATURE_NAMES = [
     "em_local_jw", "em_local_ratio", "em_canon_equal", "em_domain_equal", "em_both_free",
     "em_lev", "em_lev_le1", "em_alpha_jw", "em_alpha_equal",
     "ne_cons_min", "ne_cons_max", "ne_cross",
-    "country_equal", "currency_equal", "amt_logratio",
+    "currency_equal", "amt_logratio",
 ]
 _FREE = set(FREE_DOMAINS)
 
@@ -48,7 +48,6 @@ def pair_features(t: RecordTable, i: int, j: int) -> list[float]:
     cons_a = fuzz.partial_ratio(aa, ja) / 100 if aa and ja else 0.0
     cons_b = fuzz.partial_ratio(ab, jb) / 100 if ab and jb else 0.0
     cross = max(fuzz.partial_ratio(aa, jb), fuzz.partial_ratio(ab, ja)) / 100 if (aa and jb and ab and ja) else 0.0
-    ca, cb = t.country[i], t.country[j]
     lev = Levenshtein.distance(ea, eb)
     return [
         fuzz.ratio(na, nb) / 100, JaroWinkler.similarity(na, nb), fuzz.token_sort_ratio(na, nb) / 100,
@@ -60,7 +59,7 @@ def pair_features(t: RecordTable, i: int, j: int) -> list[float]:
         float(t.domain[i] == t.domain[j]), float(t.domain[i] in _FREE and t.domain[j] in _FREE),
         float(lev), float(lev <= 1), JaroWinkler.similarity(aa, ab), float(aa == ab and bool(aa)),
         min(cons_a, cons_b), max(cons_a, cons_b), cross,
-        0.5 if (not ca or not cb) else (1.0 if ca == cb else 0.0), 1.0 if t.currency[i] == t.currency[j] else 0.0,
+        1.0 if t.currency[i] == t.currency[j] else 0.0,
         abs(t.log_median[i] - t.log_median[j]),
     ]
 

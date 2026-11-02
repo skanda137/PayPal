@@ -47,8 +47,6 @@ def pair_signals(f: dict, a: dict, b: dict) -> list[str]:
         s.append("EMAIL_CLOSE")
     elif f["em_local_jw"] < 0.6:
         s.append("EMAIL_UNRELATED")
-    if f["country_equal"] == 1.0:
-        s.append("COUNTRY_SAME")
     if f["amt_logratio"] <= 0.2:
         s.append("AMOUNT_SIMILAR")
     elif f["amt_logratio"] >= 0.7:
@@ -82,12 +80,11 @@ def explain_pair(prob: float, a: dict, b: dict, signals: list[str]) -> dict:
         "EMAIL_ONE_EDIT": f"The emails '{a['email']}' and '{b['email']}' differ by exactly one character.",
         "EMAIL_CLOSE": f"The emails '{a['email']}' and '{b['email']}' are nearly the same.",
         "EMAIL_UNRELATED": f"The emails '{a['email']}' and '{b['email']}' do not look related.",
-        "COUNTRY_SAME": f"Both records are from the same country ({a.get('country', '')}).",
         "AMOUNT_SIMILAR": "Their typical payout amounts are similar.",
         "AMOUNT_DIFFERENT": "Their typical payout amounts are quite different.",
     }
     for code in signals:
-        if code in T and not (code == "COUNTRY_SAME" and not a.get("country")):
+        if code in T:
             bullets.append(T[code])
     old, new = (a, b) if a["n_hist_rows"] >= b["n_hist_rows"] else (b, a)
     if "ONE_RECORD_NEW" in signals:

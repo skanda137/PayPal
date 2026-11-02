@@ -3,8 +3,8 @@
  "calibration_method": {
   "method": "sigmoid",
   "cv_brier": {
-   "isotonic": 0.0027394999998361573,
-   "sigmoid": 0.0022393573210171
+   "isotonic": 0.002954350393890406,
+   "sigmoid": 0.002655698564157964
   },
   "n_pos": 199,
   "n": 4489
@@ -17,88 +17,112 @@
     "lo": 0.0,
     "hi": 0.1,
     "n": 9879,
-    "mean_predicted": 0.0002,
-    "observed_rate": 0.0002,
-    "n_pos": 2
+    "mean_predicted": 0.0003,
+    "observed_rate": 0.0003,
+    "n_pos": 3
    },
    {
     "lo": 0.1,
     "hi": 0.2,
-    "n": 11,
-    "mean_predicted": 0.1601,
-    "observed_rate": 0.1818,
+    "n": 9,
+    "mean_predicted": 0.1478,
+    "observed_rate": 0.2222,
     "n_pos": 2
    },
    {
     "lo": 0.2,
     "hi": 0.3,
-    "n": 3,
-    "mean_predicted": 0.2531,
-    "observed_rate": 0.6667,
-    "n_pos": 2
+    "n": 7,
+    "mean_predicted": 0.2315,
+    "observed_rate": 0.4286,
+    "n_pos": 3
    },
    {
     "lo": 0.3,
     "hi": 0.4,
-    "n": 1,
-    "mean_predicted": 0.3259,
-    "observed_rate": 0.0,
-    "n_pos": 0
+    "n": 3,
+    "mean_predicted": 0.3347,
+    "observed_rate": 0.3333,
+    "n_pos": 1
    },
    {
     "lo": 0.4,
     "hi": 0.5,
-    "n": 4,
-    "mean_predicted": 0.4625,
-    "observed_rate": 0.5,
-    "n_pos": 2
+    "n": 5,
+    "mean_predicted": 0.4333,
+    "observed_rate": 0.8,
+    "n_pos": 4
    },
    {
     "lo": 0.5,
     "hi": 0.6,
-    "n": 4,
-    "mean_predicted": 0.5302,
-    "observed_rate": 0.75,
-    "n_pos": 3
+    "n": 3,
+    "mean_predicted": 0.5509,
+    "observed_rate": 0.3333,
+    "n_pos": 1
    },
    {
     "lo": 0.6,
     "hi": 0.7,
     "n": 9,
-    "mean_predicted": 0.655,
-    "observed_rate": 0.6667,
-    "n_pos": 6
+    "mean_predicted": 0.645,
+    "observed_rate": 0.8889,
+    "n_pos": 8
    },
    {
     "lo": 0.7,
     "hi": 0.8,
-    "n": 6,
-    "mean_predicted": 0.7537,
-    "observed_rate": 0.8333,
-    "n_pos": 5
+    "n": 5,
+    "mean_predicted": 0.7578,
+    "observed_rate": 0.6,
+    "n_pos": 3
    },
    {
     "lo": 0.8,
     "hi": 0.9,
-    "n": 5,
-    "mean_predicted": 0.8569,
-    "observed_rate": 0.8,
-    "n_pos": 4
+    "n": 17,
+    "mean_predicted": 0.8535,
+    "observed_rate": 0.9412,
+    "n_pos": 16
    },
    {
     "lo": 0.9,
     "hi": 1.0,
-    "n": 261,
-    "mean_predicted": 0.9883,
-    "observed_rate": 0.9885,
-    "n_pos": 258
+    "n": 246,
+    "mean_predicted": 0.9858,
+    "observed_rate": 0.9878,
+    "n_pos": 243
    }
   ],
   "adaptive_bins": [
    {
-    "lo": 0.0001,
+    "lo": 0.0,
+    "hi": 0.0,
+    "n": 70,
+    "mean_predicted": 0.0,
+    "observed_rate": 0.0,
+    "n_pos": 0
+   },
+   {
+    "lo": 0.0,
+    "hi": 0.0,
+    "n": 4895,
+    "mean_predicted": 0.0,
+    "observed_rate": 0.0,
+    "n_pos": 0
+   },
+   {
+    "lo": 0.0,
+    "hi": 0.0,
+    "n": 1140,
+    "mean_predicted": 0.0,
+    "observed_rate": 0.0,
+    "n_pos": 0
+   },
+   {
+    "lo": 0.0,
     "hi": 0.0001,
-    "n": 8077,
+    "n": 847,
     "mean_predicted": 0.0001,
     "observed_rate": 0.0,
     "n_pos": 0
@@ -106,25 +130,33 @@
    {
     "lo": 0.0001,
     "hi": 0.0001,
-    "n": 980,
+    "n": 1072,
     "mean_predicted": 0.0001,
     "observed_rate": 0.0,
     "n_pos": 0
    },
    {
     "lo": 0.0001,
-    "hi": 0.9968,
-    "n": 1126,
-    "mean_predicted": 0.2493,
-    "observed_rate": 0.2522,
+    "hi": 0.0001,
+    "n": 1138,
+    "mean_predicted": 0.0001,
+    "observed_rate": 0.0,
+    "n_pos": 0
+   },
+   {
+    "lo": 0.0001,
+    "hi": 0.9979,
+    "n": 1021,
+    "mean_predicted": 0.2709,
+    "observed_rate": 0.2782,
     "n_pos": 284
    }
   ],
-  "ece": 0.0004,
-  "ece_adaptive": 0.0004,
-  "max_calibration_error": 0.4136,
-  "brier": 0.0013,
-  "log_loss": 0.0047
+  "ece": 0.001,
+  "ece_adaptive": 0.0008,
+  "max_calibration_error": 0.3667,
+  "brier": 0.0016,
+  "log_loss": 0.0056
  },
  "calibrated": {
   "uniform_bins": [
@@ -132,88 +164,88 @@
     "lo": 0.0,
     "hi": 0.1,
     "n": 9880,
-    "mean_predicted": 0.0002,
-    "observed_rate": 0.0002,
-    "n_pos": 2
+    "mean_predicted": 0.0003,
+    "observed_rate": 0.0003,
+    "n_pos": 3
    },
    {
     "lo": 0.1,
     "hi": 0.2,
     "n": 12,
-    "mean_predicted": 0.141,
-    "observed_rate": 0.3333,
-    "n_pos": 4
+    "mean_predicted": 0.1531,
+    "observed_rate": 0.25,
+    "n_pos": 3
    },
    {
     "lo": 0.2,
     "hi": 0.3,
-    "n": 2,
-    "mean_predicted": 0.2456,
-    "observed_rate": 0.0,
-    "n_pos": 0
+    "n": 5,
+    "mean_predicted": 0.2426,
+    "observed_rate": 0.6,
+    "n_pos": 3
    },
    {
     "lo": 0.3,
     "hi": 0.4,
-    "n": 4,
-    "mean_predicted": 0.379,
-    "observed_rate": 0.5,
-    "n_pos": 2
+    "n": 5,
+    "mean_predicted": 0.3607,
+    "observed_rate": 0.8,
+    "n_pos": 4
    },
    {
     "lo": 0.4,
     "hi": 0.5,
-    "n": 4,
-    "mean_predicted": 0.4409,
-    "observed_rate": 0.75,
-    "n_pos": 3
+    "n": 3,
+    "mean_predicted": 0.4592,
+    "observed_rate": 0.3333,
+    "n_pos": 1
    },
    {
     "lo": 0.5,
     "hi": 0.6,
     "n": 8,
-    "mean_predicted": 0.5584,
-    "observed_rate": 0.625,
-    "n_pos": 5
+    "mean_predicted": 0.5624,
+    "observed_rate": 0.75,
+    "n_pos": 6
    },
    {
     "lo": 0.6,
     "hi": 0.7,
-    "n": 5,
-    "mean_predicted": 0.6372,
-    "observed_rate": 0.8,
-    "n_pos": 4
+    "n": 4,
+    "mean_predicted": 0.6404,
+    "observed_rate": 0.75,
+    "n_pos": 3
    },
    {
     "lo": 0.7,
     "hi": 0.8,
-    "n": 5,
-    "mean_predicted": 0.7503,
-    "observed_rate": 0.8,
-    "n_pos": 4
+    "n": 11,
+    "mean_predicted": 0.7565,
+    "observed_rate": 0.8182,
+    "n_pos": 9
    },
    {
     "lo": 0.8,
     "hi": 0.9,
-    "n": 6,
-    "mean_predicted": 0.8596,
+    "n": 19,
+    "mean_predicted": 0.8635,
     "observed_rate": 1.0,
-    "n_pos": 6
+    "n_pos": 19
    },
    {
     "lo": 0.9,
     "hi": 1.0,
-    "n": 257,
-    "mean_predicted": 0.9813,
-    "observed_rate": 0.9883,
-    "n_pos": 254
+    "n": 236,
+    "mean_predicted": 0.9821,
+    "observed_rate": 0.9873,
+    "n_pos": 233
    }
   ],
   "adaptive_bins": [
    {
     "lo": 0.0001,
     "hi": 0.0001,
-    "n": 8077,
+    "n": 70,
     "mean_predicted": 0.0001,
     "observed_rate": 0.0,
     "n_pos": 0
@@ -221,24 +253,56 @@
    {
     "lo": 0.0001,
     "hi": 0.0001,
-    "n": 980,
+    "n": 4895,
     "mean_predicted": 0.0001,
     "observed_rate": 0.0,
     "n_pos": 0
    },
    {
     "lo": 0.0001,
-    "hi": 0.9937,
-    "n": 1126,
-    "mean_predicted": 0.2446,
-    "observed_rate": 0.2522,
+    "hi": 0.0001,
+    "n": 1140,
+    "mean_predicted": 0.0001,
+    "observed_rate": 0.0,
+    "n_pos": 0
+   },
+   {
+    "lo": 0.0001,
+    "hi": 0.0001,
+    "n": 847,
+    "mean_predicted": 0.0001,
+    "observed_rate": 0.0,
+    "n_pos": 0
+   },
+   {
+    "lo": 0.0001,
+    "hi": 0.0001,
+    "n": 1072,
+    "mean_predicted": 0.0001,
+    "observed_rate": 0.0,
+    "n_pos": 0
+   },
+   {
+    "lo": 0.0001,
+    "hi": 0.0001,
+    "n": 1138,
+    "mean_predicted": 0.0001,
+    "observed_rate": 0.0,
+    "n_pos": 0
+   },
+   {
+    "lo": 0.0001,
+    "hi": 0.9962,
+    "n": 1021,
+    "mean_predicted": 0.2664,
+    "observed_rate": 0.2782,
     "n_pos": 284
    }
   ],
-  "ece": 0.0009,
-  "ece_adaptive": 0.0009,
-  "max_calibration_error": 0.3091,
-  "brier": 0.0014,
-  "log_loss": 0.0049
+  "ece": 0.0012,
+  "ece_adaptive": 0.0012,
+  "max_calibration_error": 0.4393,
+  "brier": 0.0016,
+  "log_loss": 0.0059
  }
 }

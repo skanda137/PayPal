@@ -1,17 +1,17 @@
 {
  "description": "Review-queue size versus threshold on the TEST pool current batch. flagged_rows counts rows on BOTH sides of a flagged pair. Pair precision/recall are against same-entity ground truth.",
  "n_current_rows": 1211,
- "recommended_er_threshold": 0.3,
+ "recommended_er_threshold": 0.37,
  "identity_matcher": [
   {
    "threshold": 0.05,
-   "flagged_pairs": 291,
-   "flagged_rows": 316,
-   "flagged_rows_per_1000": 260.9414,
-   "flagged_rows_new_record_per_1000": 104.872,
-   "pair_precision": 0.7595,
-   "pair_recall": 0.991,
-   "row_precision": 0.7468,
+   "flagged_pairs": 294,
+   "flagged_rows": 318,
+   "flagged_rows_per_1000": 262.5929,
+   "flagged_rows_new_record_per_1000": 104.0462,
+   "pair_precision": 0.7449,
+   "pair_recall": 0.9821,
+   "row_precision": 0.7358,
    "incident_recall": {
     "alias_duplicate": {
      "n": 48,
@@ -35,13 +35,13 @@
   },
   {
    "threshold": 0.1,
-   "flagged_pairs": 274,
-   "flagged_rows": 299,
-   "flagged_rows_per_1000": 246.9034,
-   "flagged_rows_new_record_per_1000": 100.7432,
-   "pair_precision": 0.792,
+   "flagged_pairs": 280,
+   "flagged_rows": 300,
+   "flagged_rows_per_1000": 247.7291,
+   "flagged_rows_new_record_per_1000": 99.9174,
+   "pair_precision": 0.775,
    "pair_recall": 0.9731,
-   "row_precision": 0.7726,
+   "row_precision": 0.7667,
    "incident_recall": {
     "alias_duplicate": {
      "n": 48,
@@ -65,13 +65,13 @@
   },
   {
    "threshold": 0.15,
-   "flagged_pairs": 263,
-   "flagged_rows": 286,
-   "flagged_rows_per_1000": 236.1685,
-   "flagged_rows_new_record_per_1000": 96.6144,
-   "pair_precision": 0.8175,
-   "pair_recall": 0.9641,
-   "row_precision": 0.8007,
+   "flagged_pairs": 265,
+   "flagged_rows": 283,
+   "flagged_rows_per_1000": 233.6912,
+   "flagged_rows_new_record_per_1000": 95.7886,
+   "pair_precision": 0.8151,
+   "pair_recall": 0.9686,
+   "row_precision": 0.8092,
    "incident_recall": {
     "alias_duplicate": {
      "n": 48,
@@ -95,13 +95,13 @@
   },
   {
    "threshold": 0.2,
-   "flagged_pairs": 252,
-   "flagged_rows": 270,
-   "flagged_rows_per_1000": 222.9562,
-   "flagged_rows_new_record_per_1000": 94.1371,
-   "pair_precision": 0.8532,
-   "pair_recall": 0.9641,
-   "row_precision": 0.8481,
+   "flagged_pairs": 258,
+   "flagged_rows": 276,
+   "flagged_rows_per_1000": 227.9108,
+   "flagged_rows_new_record_per_1000": 95.7886,
+   "pair_precision": 0.8256,
+   "pair_recall": 0.9552,
+   "row_precision": 0.8225,
    "incident_recall": {
     "alias_duplicate": {
      "n": 48,
@@ -125,13 +125,43 @@
   },
   {
    "threshold": 0.3,
-   "flagged_pairs": 241,
-   "flagged_rows": 261,
-   "flagged_rows_per_1000": 215.5244,
-   "flagged_rows_new_record_per_1000": 93.3113,
-   "pair_precision": 0.8755,
+   "flagged_pairs": 248,
+   "flagged_rows": 268,
+   "flagged_rows_per_1000": 221.3047,
+   "flagged_rows_new_record_per_1000": 94.1371,
+   "pair_precision": 0.8508,
    "pair_recall": 0.9462,
-   "row_precision": 0.8659,
+   "row_precision": 0.8396,
+   "incident_recall": {
+    "alias_duplicate": {
+     "n": 48,
+     "caught": 43,
+     "recall": 0.8958,
+     "recall_ci95": [
+      0.7783,
+      0.9547
+     ]
+    },
+    "email_typo": {
+     "n": 23,
+     "caught": 23,
+     "recall": 1.0,
+     "recall_ci95": [
+      0.8569,
+      1.0
+     ]
+    }
+   }
+  },
+  {
+   "threshold": 0.37,
+   "flagged_pairs": 244,
+   "flagged_rows": 264,
+   "flagged_rows_per_1000": 218.0017,
+   "flagged_rows_new_record_per_1000": 93.3113,
+   "pair_precision": 0.8566,
+   "pair_recall": 0.9372,
+   "row_precision": 0.8485,
    "incident_recall": {
     "alias_duplicate": {
      "n": 48,
@@ -155,13 +185,43 @@
   },
   {
    "threshold": 0.4,
-   "flagged_pairs": 232,
-   "flagged_rows": 248,
-   "flagged_rows_per_1000": 204.7894,
-   "flagged_rows_new_record_per_1000": 90.834,
-   "pair_precision": 0.9009,
+   "flagged_pairs": 244,
+   "flagged_rows": 264,
+   "flagged_rows_per_1000": 218.0017,
+   "flagged_rows_new_record_per_1000": 93.3113,
+   "pair_precision": 0.8566,
    "pair_recall": 0.9372,
-   "row_precision": 0.8992,
+   "row_precision": 0.8485,
+   "incident_recall": {
+    "alias_duplicate": {
+     "n": 48,
+     "caught": 43,
+     "recall": 0.8958,
+     "recall_ci95": [
+      0.7783,
+      0.9547
+     ]
+    },
+    "email_typo": {
+     "n": 23,
+     "caught": 23,
+     "recall": 1.0,
+     "recall_ci95": [
+      0.8569,
+      1.0
+     ]
+    }
+   }
+  },
+  {
+   "threshold": 0.5,
+   "flagged_pairs": 232,
+   "flagged_rows": 250,
+   "flagged_rows_per_1000": 206.441,
+   "flagged_rows_new_record_per_1000": 90.834,
+   "pair_precision": 0.8793,
+   "pair_recall": 0.9148,
+   "row_precision": 0.872,
    "incident_recall": {
     "alias_duplicate": {
      "n": 48,
@@ -184,44 +244,14 @@
    }
   },
   {
-   "threshold": 0.5,
-   "flagged_pairs": 228,
-   "flagged_rows": 244,
-   "flagged_rows_per_1000": 201.4864,
-   "flagged_rows_new_record_per_1000": 89.1825,
-   "pair_precision": 0.9035,
-   "pair_recall": 0.9238,
-   "row_precision": 0.9016,
-   "incident_recall": {
-    "alias_duplicate": {
-     "n": 48,
-     "caught": 41,
-     "recall": 0.8542,
-     "recall_ci95": [
-      0.7283,
-      0.9275
-     ]
-    },
-    "email_typo": {
-     "n": 23,
-     "caught": 23,
-     "recall": 1.0,
-     "recall_ci95": [
-      0.8569,
-      1.0
-     ]
-    }
-   }
-  },
-  {
    "threshold": 0.6,
-   "flagged_pairs": 217,
-   "flagged_rows": 232,
-   "flagged_rows_per_1000": 191.5772,
+   "flagged_pairs": 219,
+   "flagged_rows": 235,
+   "flagged_rows_per_1000": 194.0545,
    "flagged_rows_new_record_per_1000": 85.8794,
-   "pair_precision": 0.9217,
-   "pair_recall": 0.8969,
-   "row_precision": 0.9224,
+   "pair_precision": 0.895,
+   "pair_recall": 0.8789,
+   "row_precision": 0.8979,
    "incident_recall": {
     "alias_duplicate": {
      "n": 48,
@@ -246,12 +276,12 @@
   {
    "threshold": 0.7,
    "flagged_pairs": 209,
-   "flagged_rows": 224,
-   "flagged_rows_per_1000": 184.9711,
-   "flagged_rows_new_record_per_1000": 83.4021,
-   "pair_precision": 0.933,
-   "pair_recall": 0.8744,
-   "row_precision": 0.9375,
+   "flagged_rows": 226,
+   "flagged_rows_per_1000": 186.6226,
+   "flagged_rows_new_record_per_1000": 82.5764,
+   "pair_precision": 0.9043,
+   "pair_recall": 0.8475,
+   "row_precision": 0.8982,
    "incident_recall": {
     "alias_duplicate": {
      "n": 48,
@@ -276,12 +306,12 @@
   {
    "threshold": 0.8,
    "flagged_pairs": 196,
-   "flagged_rows": 209,
-   "flagged_rows_per_1000": 172.5846,
-   "flagged_rows_new_record_per_1000": 78.4476,
-   "pair_precision": 0.9439,
-   "pair_recall": 0.8296,
-   "row_precision": 0.9522,
+   "flagged_rows": 214,
+   "flagged_rows_per_1000": 176.7135,
+   "flagged_rows_new_record_per_1000": 80.0991,
+   "pair_precision": 0.9235,
+   "pair_recall": 0.8117,
+   "row_precision": 0.9206,
    "incident_recall": {
     "alias_duplicate": {
      "n": 48,
@@ -305,72 +335,72 @@
   },
   {
    "threshold": 0.9,
-   "flagged_pairs": 171,
-   "flagged_rows": 185,
-   "flagged_rows_per_1000": 152.7663,
-   "flagged_rows_new_record_per_1000": 67.7126,
-   "pair_precision": 0.9766,
-   "pair_recall": 0.7489,
-   "row_precision": 0.9784,
+   "flagged_pairs": 164,
+   "flagged_rows": 181,
+   "flagged_rows_per_1000": 149.4633,
+   "flagged_rows_new_record_per_1000": 69.3642,
+   "pair_precision": 0.9756,
+   "pair_recall": 0.7175,
+   "row_precision": 0.9669,
    "incident_recall": {
     "alias_duplicate": {
      "n": 48,
-     "caught": 30,
-     "recall": 0.625,
+     "caught": 33,
+     "recall": 0.6875,
      "recall_ci95": [
-      0.4836,
-      0.7478
+      0.5467,
+      0.8005
      ]
     },
     "email_typo": {
      "n": 23,
-     "caught": 22,
-     "recall": 0.9565,
+     "caught": 23,
+     "recall": 1.0,
      "recall_ci95": [
-      0.7901,
-      0.9923
+      0.8569,
+      1.0
      ]
     }
    }
   },
   {
    "threshold": 0.95,
-   "flagged_pairs": 141,
-   "flagged_rows": 152,
-   "flagged_rows_per_1000": 125.5161,
-   "flagged_rows_new_record_per_1000": 58.6292,
-   "pair_precision": 0.9858,
-   "pair_recall": 0.6233,
-   "row_precision": 0.9934,
+   "flagged_pairs": 125,
+   "flagged_rows": 139,
+   "flagged_rows_per_1000": 114.7812,
+   "flagged_rows_new_record_per_1000": 55.3262,
+   "pair_precision": 0.984,
+   "pair_recall": 0.5516,
+   "row_precision": 0.9784,
    "incident_recall": {
     "alias_duplicate": {
      "n": 48,
-     "caught": 25,
-     "recall": 0.5208,
+     "caught": 26,
+     "recall": 0.5417,
      "recall_ci95": [
-      0.3833,
-      0.6553
+      0.4029,
+      0.6742
      ]
     },
     "email_typo": {
      "n": 23,
-     "caught": 20,
-     "recall": 0.8696,
+     "caught": 19,
+     "recall": 0.8261,
      "recall_ci95": [
-      0.6787,
-      0.9546
+      0.6286,
+      0.9302
      ]
     }
    }
   },
   {
    "threshold": 0.99,
-   "flagged_pairs": 39,
-   "flagged_rows": 41,
-   "flagged_rows_per_1000": 33.8563,
-   "flagged_rows_new_record_per_1000": 16.5153,
+   "flagged_pairs": 30,
+   "flagged_rows": 34,
+   "flagged_rows_per_1000": 28.076,
+   "flagged_rows_new_record_per_1000": 12.3865,
    "pair_precision": 1.0,
-   "pair_recall": 0.1749,
+   "pair_recall": 0.1345,
    "row_precision": 1.0,
    "incident_recall": {
     "alias_duplicate": {
@@ -384,11 +414,11 @@
     },
     "email_typo": {
      "n": 23,
-     "caught": 8,
-     "recall": 0.3478,
+     "caught": 4,
+     "recall": 0.1739,
      "recall_ci95": [
-      0.1881,
-      0.5511
+      0.0698,
+      0.3714
      ]
     }
    }
@@ -512,117 +542,126 @@
   {
    "er_threshold": 0.05,
    "anomaly_threshold": 10.0,
-   "flagged_rows": 367,
-   "flagged_rows_per_1000": 303.0553,
-   "rows_from_identity": 316,
+   "flagged_rows": 369,
+   "flagged_rows_per_1000": 304.7069,
+   "rows_from_identity": 318,
    "rows_from_amount": 29,
    "rows_from_exact_dup": 38
   },
   {
    "er_threshold": 0.1,
    "anomaly_threshold": 10.0,
-   "flagged_rows": 350,
-   "flagged_rows_per_1000": 289.0173,
-   "rows_from_identity": 299,
+   "flagged_rows": 353,
+   "flagged_rows_per_1000": 291.4946,
+   "rows_from_identity": 300,
    "rows_from_amount": 29,
    "rows_from_exact_dup": 38
   },
   {
    "er_threshold": 0.15,
    "anomaly_threshold": 10.0,
-   "flagged_rows": 337,
-   "flagged_rows_per_1000": 278.2824,
-   "rows_from_identity": 286,
+   "flagged_rows": 338,
+   "flagged_rows_per_1000": 279.1082,
+   "rows_from_identity": 283,
    "rows_from_amount": 29,
    "rows_from_exact_dup": 38
   },
   {
    "er_threshold": 0.2,
    "anomaly_threshold": 10.0,
-   "flagged_rows": 325,
-   "flagged_rows_per_1000": 268.3732,
-   "rows_from_identity": 270,
+   "flagged_rows": 331,
+   "flagged_rows_per_1000": 273.3278,
+   "rows_from_identity": 276,
    "rows_from_amount": 29,
    "rows_from_exact_dup": 38
   },
   {
    "er_threshold": 0.3,
    "anomaly_threshold": 10.0,
-   "flagged_rows": 316,
-   "flagged_rows_per_1000": 260.9414,
-   "rows_from_identity": 261,
+   "flagged_rows": 323,
+   "flagged_rows_per_1000": 266.7217,
+   "rows_from_identity": 268,
+   "rows_from_amount": 29,
+   "rows_from_exact_dup": 38
+  },
+  {
+   "er_threshold": 0.37,
+   "anomaly_threshold": 10.0,
+   "flagged_rows": 319,
+   "flagged_rows_per_1000": 263.4187,
+   "rows_from_identity": 264,
    "rows_from_amount": 29,
    "rows_from_exact_dup": 38
   },
   {
    "er_threshold": 0.4,
    "anomaly_threshold": 10.0,
-   "flagged_rows": 303,
-   "flagged_rows_per_1000": 250.2064,
-   "rows_from_identity": 248,
+   "flagged_rows": 319,
+   "flagged_rows_per_1000": 263.4187,
+   "rows_from_identity": 264,
    "rows_from_amount": 29,
    "rows_from_exact_dup": 38
   },
   {
    "er_threshold": 0.5,
    "anomaly_threshold": 10.0,
-   "flagged_rows": 299,
-   "flagged_rows_per_1000": 246.9034,
-   "rows_from_identity": 244,
+   "flagged_rows": 307,
+   "flagged_rows_per_1000": 253.5095,
+   "rows_from_identity": 250,
    "rows_from_amount": 29,
    "rows_from_exact_dup": 38
   },
   {
    "er_threshold": 0.6,
    "anomaly_threshold": 10.0,
-   "flagged_rows": 287,
-   "flagged_rows_per_1000": 236.9942,
-   "rows_from_identity": 232,
+   "flagged_rows": 293,
+   "flagged_rows_per_1000": 241.9488,
+   "rows_from_identity": 235,
    "rows_from_amount": 29,
    "rows_from_exact_dup": 38
   },
   {
    "er_threshold": 0.7,
    "anomaly_threshold": 10.0,
-   "flagged_rows": 279,
-   "flagged_rows_per_1000": 230.3881,
-   "rows_from_identity": 224,
+   "flagged_rows": 284,
+   "flagged_rows_per_1000": 234.5169,
+   "rows_from_identity": 226,
    "rows_from_amount": 29,
    "rows_from_exact_dup": 38
   },
   {
    "er_threshold": 0.8,
    "anomaly_threshold": 10.0,
-   "flagged_rows": 267,
-   "flagged_rows_per_1000": 220.4789,
-   "rows_from_identity": 209,
+   "flagged_rows": 274,
+   "flagged_rows_per_1000": 226.2593,
+   "rows_from_identity": 214,
    "rows_from_amount": 29,
    "rows_from_exact_dup": 38
   },
   {
    "er_threshold": 0.9,
    "anomaly_threshold": 10.0,
-   "flagged_rows": 245,
-   "flagged_rows_per_1000": 202.3121,
-   "rows_from_identity": 185,
+   "flagged_rows": 243,
+   "flagged_rows_per_1000": 200.6606,
+   "rows_from_identity": 181,
    "rows_from_amount": 29,
    "rows_from_exact_dup": 38
   },
   {
    "er_threshold": 0.95,
    "anomaly_threshold": 10.0,
-   "flagged_rows": 216,
-   "flagged_rows_per_1000": 178.365,
-   "rows_from_identity": 152,
+   "flagged_rows": 205,
+   "flagged_rows_per_1000": 169.2816,
+   "rows_from_identity": 139,
    "rows_from_amount": 29,
    "rows_from_exact_dup": 38
   },
   {
    "er_threshold": 0.99,
    "anomaly_threshold": 10.0,
-   "flagged_rows": 107,
-   "flagged_rows_per_1000": 88.3567,
-   "rows_from_identity": 41,
+   "flagged_rows": 101,
+   "flagged_rows_per_1000": 83.4021,
+   "rows_from_identity": 34,
    "rows_from_amount": 29,
    "rows_from_exact_dup": 38
   }

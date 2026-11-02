@@ -2,13 +2,13 @@
  "generated_by": "payoutguard_ml 0.1.0",
  "seed": 2026,
  "synthetic_data": true,
- "elapsed_seconds": 11.6,
+ "elapsed_seconds": 8.9,
  "dataset": {
   "n_rows": 21730,
   "n_current_rows": 4183,
   "n_entities": 6000,
   "n_distinct_records": 6987,
-  "ledger_sha256": "a4f7826dd677a8743b72355a94683751ba8876a3b0fd93af6443c723a3a0d12f",
+  "ledger_sha256": "1c98f893cea7583fefe65264199b276746aac960f008b5157f1cfbde2ffd3c27",
   "injected_counts_current_batch": {
    "alias_duplicate": 162,
    "email_typo": 81,
@@ -48,21 +48,21 @@
  "calibration_method": {
   "method": "sigmoid",
   "cv_brier": {
-   "isotonic": 0.0027394999998361573,
-   "sigmoid": 0.0022393573210171
+   "isotonic": 0.002954350393890406,
+   "sigmoid": 0.002655698564157964
   },
   "n_pos": 199,
   "n": 4489
  },
  "identity_matcher": {
-  "recommended_threshold": 0.31,
+  "recommended_threshold": 0.45,
   "threshold_chosen_on": "calibration split (out-of-fold calibrated scores, max F1)",
   "at_threshold": {
-   "precision": 0.9619,
-   "recall": 0.9789,
-   "f1": 0.9703,
-   "flagged_rows_per_1000": 198.8728,
-   "flagged_rows_new_record_per_1000": 81.3205,
+   "precision": 0.9679,
+   "recall": 0.9542,
+   "f1": 0.961,
+   "flagged_rows_per_1000": 195.6522,
+   "flagged_rows_new_record_per_1000": 80.5153,
    "incident_recall": {
     "alias_duplicate": {
      "n": 49,
@@ -85,35 +85,36 @@
    }
   },
   "average_precision": {
-   "matcher": 0.9942,
+   "matcher": 0.9934,
    "baseline_name": 0.6511,
-   "baseline_name_plus_email": 0.7748
+   "baseline_name_plus_email": 0.7748,
+   "baseline_logreg_same_features": 0.9867
   },
   "best_f1": {
-   "matcher": 0.9705,
+   "matcher": 0.9688,
    "baseline_name": 0.7355,
    "baseline_name_plus_email": 0.7703
   },
   "baselines_at_matcher_queue_size": {
    "name": {
-    "threshold_for_same_queue": 0.95,
-    "flagged_pairs": 297,
-    "precision": 0.6801,
-    "recall": 0.7113
+    "threshold_for_same_queue": 0.96,
+    "flagged_pairs": 282,
+    "precision": 0.695,
+    "recall": 0.6901
    },
    "combined": {
-    "threshold_for_same_queue": 0.915,
-    "flagged_pairs": 298,
-    "precision": 0.7517,
-    "recall": 0.7887
+    "threshold_for_same_queue": 0.92,
+    "flagged_pairs": 287,
+    "precision": 0.7631,
+    "recall": 0.7711
    }
   },
   "recall_by_alias_kind": {
    "email_only:email_change": {
     "n_pairs": 52,
-    "matcher_recall": 0.9808,
+    "matcher_recall": 0.9423,
     "baseline_name_recall_same_queue": 1.0,
-    "baseline_name_plus_email_recall_same_queue": 0.6731
+    "baseline_name_plus_email_recall_same_queue": 0.6346
    },
    "email_only:email_typo": {
     "n_pairs": 19,
@@ -129,15 +130,15 @@
    },
    "multiple_aliases": {
     "n_pairs": 13,
-    "matcher_recall": 1.0,
-    "baseline_name_recall_same_queue": 0.4615,
-    "baseline_name_plus_email_recall_same_queue": 0.4615
+    "matcher_recall": 0.9231,
+    "baseline_name_recall_same_queue": 0.3846,
+    "baseline_name_plus_email_recall_same_queue": 0.3846
    },
    "name+email": {
     "n_pairs": 53,
-    "matcher_recall": 0.9245,
-    "baseline_name_recall_same_queue": 0.434,
-    "baseline_name_plus_email_recall_same_queue": 0.5849
+    "matcher_recall": 0.8491,
+    "baseline_name_recall_same_queue": 0.3962,
+    "baseline_name_plus_email_recall_same_queue": 0.5472
    },
    "name_only:honorific": {
     "n_pairs": 10,
@@ -160,7 +161,7 @@
    "name_only:middle_add": {
     "n_pairs": 11,
     "matcher_recall": 1.0,
-    "baseline_name_recall_same_queue": 0.0909,
+    "baseline_name_recall_same_queue": 0.0,
     "baseline_name_plus_email_recall_same_queue": 1.0
    },
    "name_only:middle_drop": {
@@ -184,70 +185,70 @@
    "name_only:typo_name": {
     "n_pairs": 28,
     "matcher_recall": 1.0,
-    "baseline_name_recall_same_queue": 0.5357,
+    "baseline_name_recall_same_queue": 0.4643,
     "baseline_name_plus_email_recall_same_queue": 1.0
    }
   },
   "ablation_no_context_features": {
    "average_precision": 0.9504,
-   "note": "same model trained without country/currency/amount features"
+   "note": "same model trained without currency/amount features"
   },
   "ece": {
-   "raw": 0.0004,
-   "calibrated": 0.0009
+   "raw": 0.001,
+   "calibrated": 0.0012
   },
   "brier": {
-   "raw": 0.0013,
-   "calibrated": 0.0014
+   "raw": 0.0016,
+   "calibrated": 0.0016
   },
   "top_features_by_permutation_ap_drop": [
    {
     "feature": "aligned_jw",
-    "ap_drop": 0.2372
+    "ap_drop": 0.2543
    },
    {
-    "feature": "country_equal",
-    "ap_drop": 0.204
+    "feature": "currency_equal",
+    "ap_drop": 0.0912
    },
    {
     "feature": "amt_logratio",
-    "ap_drop": 0.0331
-   },
-   {
-    "feature": "em_local_ratio",
-    "ap_drop": 0.005
-   },
-   {
-    "feature": "nm_partial",
-    "ap_drop": 0.0033
+    "ap_drop": 0.0635
    },
    {
     "feature": "em_lev",
-    "ap_drop": 0.0023
+    "ap_drop": 0.006
+   },
+   {
+    "feature": "em_local_ratio",
+    "ap_drop": 0.004
    },
    {
     "feature": "nm_token_set",
-    "ap_drop": 0.002
+    "ap_drop": 0.0023
+   },
+   {
+    "feature": "nm_partial",
+    "ap_drop": 0.0018
    },
    {
     "feature": "tok_jaccard",
-    "ap_drop": 0.0012
-   },
-   {
-    "feature": "em_local_jw",
-    "ap_drop": 0.0009
-   },
-   {
-    "feature": "nm_jw",
-    "ap_drop": 0.0005
-   },
-   {
-    "feature": "ne_cons_min",
-    "ap_drop": 0.0003
+    "ap_drop": 0.0016
    },
    {
     "feature": "tok_shared",
-    "ap_drop": 0.0002
+    "ap_drop": 0.0008
+   },
+   {
+    "feature": "em_domain_equal",
+    "ap_drop": 0.0008
+   },
+   {
+    "feature": "em_both_free",
+    "ap_drop": 0.0007
+   },
+   {
+    "feature": "em_local_jw",
+    "ap_drop": 0.0007
    }
   ]
  },

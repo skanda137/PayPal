@@ -398,11 +398,11 @@ def write_dataset(out_dir: str | Path, seed: int = SEED, n_entities: int = 6000,
     d = generate(seed, n_entities, rates, hard)
     led, lab, ent = d["ledger"], d["row_labels"], d["entity_labels"]
     cur_id = f"B{CURRENT_MONTH}"
-    led.to_csv(out / "ledger.csv", index=False)
-    led[led.batch_id != cur_id].to_csv(out / "history.csv", index=False)
-    led[led.batch_id == cur_id].to_csv(out / "current_batch.csv", index=False)
-    lab.to_csv(out / "labels" / "row_labels.csv", index=False)
-    ent.to_csv(out / "labels" / "entity_labels.csv", index=False)
+    led.to_csv(out / "ledger.csv", index=False, lineterminator="\n")
+    led[led.batch_id != cur_id].to_csv(out / "history.csv", index=False, lineterminator="\n")
+    led[led.batch_id == cur_id].to_csv(out / "current_batch.csv", index=False, lineterminator="\n")
+    lab.to_csv(out / "labels" / "row_labels.csv", index=False, lineterminator="\n")
+    ent.to_csv(out / "labels" / "entity_labels.csv", index=False, lineterminator="\n")
     cur_lab = lab[lab.row_id.isin(led[led.batch_id == cur_id].row_id)]
     counts = {t: int(cur_lab.error_types.str.contains(t).sum()) for t in ERROR_TYPES}
     manifest = dict(
@@ -417,5 +417,5 @@ def write_dataset(out_dir: str | Path, seed: int = SEED, n_entities: int = 6000,
                "Amounts are not currency-converted; per-payee spread is 0 (fixed fee, 35%), small or larger."],
         sha256=dict(ledger=hashlib.sha256((out / "ledger.csv").read_bytes()).hexdigest(),
                     row_labels=hashlib.sha256((out / "labels" / "row_labels.csv").read_bytes()).hexdigest()))
-    (out / "labels" / "manifest.json").write_text(json.dumps(manifest, indent=2))
+    (out / "labels" / "manifest.json").write_text(json.dumps(manifest, indent=2), newline="\n")
     return manifest

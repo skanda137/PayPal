@@ -12,7 +12,10 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import average_precision_score, brier_score_loss, log_loss, precision_recall_curve
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
 
 from . import SEED, __version__
 from .anomaly import AmountAnomalyModel
@@ -267,6 +270,9 @@ def run(data_dir: str | Path, art_dir: str | Path, seed: int = SEED) -> dict:
     total_pos = n_true_pairs(rsub.entity_id.values)
     matcher_curve = curve_from_scores(p_cal, yte, total_pos)
     raw_curve = curve_from_scores(p_raw, yte, total_pos)
+    # baseline: logistic regression on the same train-split pair features, scored on the same test candidates
+    lr = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000)).fit(Xtr, ytr)
+    logreg_curve = curve_from_scores(lr.predict_proba(Xte)[:, 1], yte, total_pos)
     mp = next(p for p in matcher_curve["points"] if abs(p["threshold"] - round(m.threshold, 2)) < 1e-9)
     k_match = mp["tp"] + mp["fp"]          # number of pairs the matcher flags at its operating point
     blocking = dict(bstats, true_pairs_total=total_pos, true_pairs_in_candidates=int(yte.sum()),
@@ -334,12 +340,12 @@ def run(data_dir: str | Path, art_dir: str | Path, seed: int = SEED) -> dict:
         by_kind[kd] = dict(n_pairs=len(idx), matcher_recall=r4(m_hit[idx].mean()),
                            baseline_name_recall_same_queue=r4(base_hit["name"][idx].mean()),
                            baseline_name_plus_email_recall_same_queue=r4(base_hit["combined"][idx].mean()))
-    # --- ablation: name+email features only (no country / amount / currency context)
-    ctx = [FEATURE_NAMES.index(c) for c in ("country_equal", "currency_equal", "amt_logratio")]
+    # --- ablation: name+email features only (no amount / currency context)
+    ctx = [FEATURE_NAMES.index(c) for c in ("currency_equal", "amt_logratio")]
     keep = [i for i in range(len(FEATURE_NAMES)) if i not in ctx]
     m_abl = PairMatcher(seed).fit(Xtr[:, keep], ytr)
     ablation = dict(average_precision=r4(average_precision_score(yte, m_abl.raw(Xte[:, keep])) * (yte.sum() / total_pos)),
-                    note="same model trained without country/currency/amount features")
+                    note="same model trained without currency/amount features")
 
     pr_json = dict(
         description="Pair-level precision/recall on the TEST entity pool. Universe = all record pairs; the matcher is "
@@ -347,6 +353,7 @@ def run(data_dir: str | Path, art_dir: str | Path, seed: int = SEED) -> dict:
                     "brute-force over all pairs.",
         n_test_records=int(n), n_true_pairs=total_pos, matcher_calibrated=matcher_curve, matcher_raw=raw_curve,
         baseline_name_token_sort=base_curves["name"], baseline_name_plus_email=base_curves["combined"],
+        baseline_logreg_same_features=logreg_curve,
         recommended_threshold=m.threshold, baselines_at_matcher_queue_size=base_same_queue, recall_by_alias_kind=by_kind, ablation_no_context_features=ablation)
     (art_dir / "eval" / "pr_curve.json").write_text(json.dumps(pr_json, indent=1))
 
@@ -463,7 +470,8 @@ def run(data_dir: str | Path, art_dir: str | Path, seed: int = SEED) -> dict:
                                                 flagged_rows_new_record_per_1000=rec_at["flagged_rows_new_record_per_1000"],
                                                 incident_recall=rec_at["incident_recall"]),
                               average_precision=dict(matcher=matcher_curve["average_precision"], baseline_name=base_curves["name"]["average_precision"],
-                                                     baseline_name_plus_email=base_curves["combined"]["average_precision"]),
+                                                     baseline_name_plus_email=base_curves["combined"]["average_precision"],
+                                                     baseline_logreg_same_features=logreg_curve["average_precision"]),
                               best_f1=dict(matcher=matcher_curve["best_f1"], baseline_name=base_curves["name"]["best_f1"],
                                            baseline_name_plus_email=base_curves["combined"]["best_f1"]),
                               baselines_at_matcher_queue_size=base_same_queue, recall_by_alias_kind=by_kind, ablation_no_context_features=ablation,

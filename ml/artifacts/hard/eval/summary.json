@@ -2,13 +2,13 @@
  "generated_by": "payoutguard_ml 0.1.0",
  "seed": 2026,
  "synthetic_data": true,
- "elapsed_seconds": 13.6,
+ "elapsed_seconds": 10.3,
  "dataset": {
   "n_rows": 21672,
   "n_current_rows": 4184,
   "n_entities": 6000,
   "n_distinct_records": 6996,
-  "ledger_sha256": "75ae9e4462009cbaa4238195fba5d6b86af63597cd6c60427137bc764fdf793e",
+  "ledger_sha256": "d86627106b70a60aa523633f34a73af39e41d66585fe5274e3942255d84f572b",
   "injected_counts_current_batch": {
    "alias_duplicate": 162,
    "email_typo": 81,
@@ -48,20 +48,20 @@
  "calibration_method": {
   "method": "sigmoid",
   "cv_brier": {
-   "isotonic": 0.006577685190331705,
-   "sigmoid": 0.006290476924079104
+   "isotonic": 0.007205801775453351,
+   "sigmoid": 0.007073532491016541
   },
   "n_pos": 205,
   "n": 4676
  },
  "identity_matcher": {
-  "recommended_threshold": 0.3,
+  "recommended_threshold": 0.37,
   "threshold_chosen_on": "calibration split (out-of-fold calibrated scores, max F1)",
   "at_threshold": {
-   "precision": 0.8689,
-   "recall": 0.9532,
-   "f1": 0.9091,
-   "flagged_rows_per_1000": 215.5244,
+   "precision": 0.859,
+   "recall": 0.9424,
+   "f1": 0.8988,
+   "flagged_rows_per_1000": 218.0017,
    "flagged_rows_new_record_per_1000": 93.3113,
    "incident_recall": {
     "alias_duplicate": {
@@ -85,12 +85,13 @@
    }
   },
   "average_precision": {
-   "matcher": 0.9716,
+   "matcher": 0.9658,
    "baseline_name": 0.5378,
-   "baseline_name_plus_email": 0.6188
+   "baseline_name_plus_email": 0.6188,
+   "baseline_logreg_same_features": 0.9322
   },
   "best_f1": {
-   "matcher": 0.9234,
+   "matcher": 0.902,
    "baseline_name": 0.6529,
    "baseline_name_plus_email": 0.6612
   },
@@ -111,7 +112,7 @@
   "recall_by_alias_kind": {
    "email_only:email_change": {
     "n_pairs": 19,
-    "matcher_recall": 1.0,
+    "matcher_recall": 0.9474,
     "baseline_name_recall_same_queue": 1.0,
     "baseline_name_plus_email_recall_same_queue": 0.6316
    },
@@ -135,7 +136,7 @@
    },
    "name+email": {
     "n_pairs": 171,
-    "matcher_recall": 0.9415,
+    "matcher_recall": 0.9298,
     "baseline_name_recall_same_queue": 0.5497,
     "baseline_name_plus_email_recall_same_queue": 0.6316
    },
@@ -184,63 +185,63 @@
   },
   "ablation_no_context_features": {
    "average_precision": 0.9247,
-   "note": "same model trained without country/currency/amount features"
+   "note": "same model trained without currency/amount features"
   },
   "ece": {
-   "raw": 0.0016,
-   "calibrated": 0.0012
+   "raw": 0.0027,
+   "calibrated": 0.0021
   },
   "brier": {
-   "raw": 0.0039,
-   "calibrated": 0.0038
+   "raw": 0.0049,
+   "calibrated": 0.0047
   },
   "top_features_by_permutation_ap_drop": [
    {
     "feature": "currency_equal",
-    "ap_drop": 0.1697
+    "ap_drop": 0.2065
    },
    {
     "feature": "aligned_jw",
-    "ap_drop": 0.0691
+    "ap_drop": 0.0713
    },
    {
     "feature": "amt_logratio",
-    "ap_drop": 0.0442
-   },
-   {
-    "feature": "country_equal",
-    "ap_drop": 0.0263
+    "ap_drop": 0.0623
    },
    {
     "feature": "em_alpha_equal",
-    "ap_drop": 0.0219
+    "ap_drop": 0.0266
    },
    {
     "feature": "em_lev",
-    "ap_drop": 0.02
+    "ap_drop": 0.0242
    },
    {
     "feature": "nm_token_set",
-    "ap_drop": 0.015
-   },
-   {
-    "feature": "nm_jw",
-    "ap_drop": 0.0066
+    "ap_drop": 0.0157
    },
    {
     "feature": "em_domain_equal",
-    "ap_drop": 0.0066
+    "ap_drop": 0.0118
    },
    {
     "feature": "tok_jaccard",
-    "ap_drop": 0.0062
-   },
-   {
-    "feature": "nm_token_sort",
-    "ap_drop": 0.0056
+    "ap_drop": 0.0107
    },
    {
     "feature": "ne_cons_min",
+    "ap_drop": 0.0092
+   },
+   {
+    "feature": "nm_token_sort",
+    "ap_drop": 0.0054
+   },
+   {
+    "feature": "em_local_ratio",
+    "ap_drop": 0.005
+   },
+   {
+    "feature": "nm_jw",
     "ap_drop": 0.0048
    }
   ]

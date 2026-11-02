@@ -151,9 +151,17 @@ def test_analyzer_rejects_bad_input(ds, tmp_path):
     assert sum(1 for f in out["findings"] if f["type"] == "invalid_input") == 2
 
 
+CONTRACT_COLS = ["row_id", "sender_item_id", "receiver_email", "recipient_name", "amount", "currency", "note", "date"]
+
+
 def _contract_frames(d):
+    """Exactly the agreed contract columns: no country, no batch_id."""
     ren = {"payee_email": "receiver_email", "payee_name": "recipient_name", "batch_date": "date"}
-    return (pd.read_csv(d / "current_batch.csv").rename(columns=ren), pd.read_csv(d / "history.csv").rename(columns=ren))
+    def one(f):
+        df = pd.read_csv(d / f).rename(columns=ren)
+        df["sender_item_id"] = df["row_id"]
+        return df[CONTRACT_COLS]
+    return one("current_batch.csv"), one("history.csv")
 
 
 def test_score_batch_contract(ds, tmp_path, monkeypatch):
@@ -163,17 +171,57 @@ def test_score_batch_contract(ds, tmp_path, monkeypatch):
     monkeypatch.setenv("PAYOUTGUARD_ARTIFACTS", str(tmp_path / "art"))
     sc._analyzer.cache_clear()
     cur, hist = _contract_frames(d)
+    assert list(cur.columns) == CONTRACT_COLS
     for mode in ("model", "baseline"):
         res = sc.score_batch(cur, hist, mode=mode)
         assert [r["row_id"] for r in res] == list(cur.row_id)            # one entry per row, batch order
         assert {r["action"] for r in res} <= set(sc.ACTIONS)
+        n_identity = 0
         for r in res:
             assert (r["action"] == "proceed") == (not r["flags"])
             for f in r["flags"]:
                 assert f["type"] in sc.FLAG_TYPES and "linked_rows" in f and "evidence" in f
+                if f["type"] in ("duplicate_payee", "typo_receiver") and not f["evidence"].get("exact_row_repeat"):
+                    assert f["evidence"]["category"] in ("new_record_matches_known_payee", "two_records_same_payee")
+                    n_identity += 1
+        assert n_identity > 0
         json.dumps(res)
     ids = [r["row_id"] for r in sc.score_batch(cur, hist)]
     assert ids == list(cur.row_id)
+
+
+def test_score_batch_contract_columns_catch_injected_identity_errors(ds, tmp_path, monkeypatch):
+    """Regression: without `country` in the input, alias duplicates and email typos must still be flagged."""
+    from payoutguard_ml import score as sc
+    d, _ = ds
+    evaluate.run(d, tmp_path / "art", seed=7)
+    monkeypatch.setenv("PAYOUTGUARD_ARTIFACTS", str(tmp_path / "art"))
+    sc._analyzer.cache_clear()
+    cur, hist = _contract_frames(d)
+    act = {r["row_id"]: r["action"] for r in sc.score_batch(cur, hist)}
+    lab = pd.read_csv(d / "labels" / "row_labels.csv").fillna("")
+    ent = pd.read_csv(d / "labels" / "entity_labels.csv")
+    cluster = dict(zip(ent.entity_id, ent.cluster_id))
+    inj = lab[lab.row_id.isin(act) & lab.error_types.isin(["alias_duplicate", "email_typo"])]
+    test_ids = [r for r, e in zip(inj.row_id, inj.entity_id) if split_of(cluster[e], 7) == "test"]
+    assert len(test_ids) >= 5
+    rate = sum(act[r] != "proceed" for r in test_ids) / len(test_ids)
+    print(f"contract-path identity recall on test split: {rate:.3f} ({len(test_ids)} rows)")
+    assert rate >= 0.8
+
+
+def test_score_batch_ignores_country(ds, tmp_path, monkeypatch):
+    """The contract has no country column, so adding one must not change anything."""
+    from payoutguard_ml import score as sc
+    d, _ = ds
+    evaluate.run(d, tmp_path / "art", seed=7)
+    monkeypatch.setenv("PAYOUTGUARD_ARTIFACTS", str(tmp_path / "art"))
+    sc._analyzer.cache_clear()
+    cur, hist = _contract_frames(d)
+    country = dict(zip(*pd.read_csv(d / "ledger.csv")[["row_id", "country"]].values.T))
+    without = sc.score_batch(cur, hist)
+    with_country = sc.score_batch(cur.assign(country=cur.row_id.map(country)), hist.assign(country=hist.row_id.map(country)))
+    assert json.dumps(without, sort_keys=True) == json.dumps(with_country, sort_keys=True)
 
 
 def test_score_batch_history_id_clash_is_prefixed(ds, tmp_path, monkeypatch):

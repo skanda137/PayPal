@@ -82,7 +82,7 @@ def _flag_from_identity(f: dict, row_id: str) -> dict:
     typo = "EMAIL_ONE_EDIT" in sig and "NAME_IDENTICAL" in sig and "ONE_RECORD_NEW" in sig
     return dict(type="typo_receiver" if typo else "duplicate_payee", prob=f["probability"], linked_rows=list(other["row_ids"]),
                 evidence=dict(name_sim=round(feat["nm_token_sort"], 3), email_edit_dist=int(feat["em_lev"]),
-                              signals=f["signals"]),
+                              signals=f["signals"], category=f["category"]),
                 explanation=f["explanation"]["text"])
 
 
