@@ -2,13 +2,13 @@
  "generated_by": "payoutguard_ml 0.1.0",
  "seed": 2026,
  "synthetic_data": true,
- "elapsed_seconds": 10.3,
+ "elapsed_seconds": 8.0,
  "dataset": {
   "n_rows": 21672,
   "n_current_rows": 4184,
   "n_entities": 6000,
   "n_distinct_records": 6996,
-  "ledger_sha256": "d86627106b70a60aa523633f34a73af39e41d66585fe5274e3942255d84f572b",
+  "ledger_sha256": "75ae9e4462009cbaa4238195fba5d6b86af63597cd6c60427137bc764fdf793e",
   "injected_counts_current_batch": {
    "alias_duplicate": 162,
    "email_typo": 81,

@@ -8,13 +8,25 @@ evaluation harness (JSON outputs for the UI) and plain-language explanations.
 
 ## Run
 
+Requires Python 3.12 or newer (the pinned numpy 2.5.4 and scipy declare `>=3.12`). The repo-root `requirements.txt` pins were installed
+and all tests pass on Python 3.12.10 and 3.14.7. Run from the `ml/` directory
+(use `python3` instead of `python` where that is your interpreter's name):
+
 ```bash
-pip install -r requirements.txt
-make all          # generate -> train+evaluate -> hard-mode stress test -> held-out check -> demo findings   (~1.5 min on 2 CPUs)
-make test         # 16 tests
+pip install -r ../requirements.txt
+# the five steps of `make all`, in order: generate -> train+evaluate -> hard-mode stress test -> held-out check -> demo findings
+python -m payoutguard_ml.cli generate --data data/eval --n-entities 6000
+python -m payoutguard_ml.cli evaluate --data data/eval --artifacts artifacts
+python -m payoutguard_ml.cli generate --hard --data data/hard --n-entities 6000
+python -c "from payoutguard_ml import evaluate; evaluate.run('data/hard','artifacts/hard')"
+python -c "from payoutguard_ml import heldout; heldout.run('data/eval','artifacts/eval/heldout_alias_kind.json'); heldout.run('data/hard','artifacts/hard/eval/heldout_alias_kind.json')"
+python -m payoutguard_ml.cli demo --artifacts artifacts
+# tests (17)
+python -m pytest -q tests
 ```
+Where `make` is installed, `make all` and `make test` are shortcuts for the same commands.
 Model files in `artifacts/models/*.joblib` (and `artifacts/hard/models/`) are scikit-learn-version-specific. If loading fails or you are on
-a different scikit-learn than `requirements.txt` pins, run `make all` to regenerate them.
+a different scikit-learn than `requirements.txt` pins, rerun the five steps above to regenerate them.
 Single seed (`payoutguard_ml.SEED = 2026`) drives everything: generation, splits (hash of seed + cluster id),
 model training, bootstrap. Same seed gives byte-identical `ledger.csv` (SHA-256 in `labels/manifest.json`).
 
@@ -113,6 +125,7 @@ Identity matching, standard data (hard-mode in brackets):
 | | Matcher (gradient boosting) | Logistic regression, same features | Baseline name | Baseline name+email |
 |---|---|---|---|---|
 | Average precision (all pairs) | 0.993 (0.966) | 0.987 (0.932) | 0.651 (0.538) | 0.775 (0.619) |
+| Average precision, conservative figure: name+email features only, no currency or amount context (ablation) | 0.950 (0.925) | not computed | n/a | n/a |
 | Best F1 | 0.969 (0.902) | 0.954 (0.897) | 0.736 (0.653) | 0.770 (0.661) |
 | At the matcher's queue size (same number of flagged pairs): precision / recall | 0.968 / 0.954 (0.859 / 0.942) | not computed | 0.695 / 0.690 (0.577 / 0.662) | 0.763 / 0.771 (0.634 / 0.716) |
 
