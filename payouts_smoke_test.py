@@ -2,6 +2,7 @@ import json
 import os
 import time
 import uuid
+from pathlib import Path
 
 import requests
 
@@ -11,6 +12,18 @@ TERMINAL_BATCH = {"SUCCESS", "DENIED", "CANCELED"}
 POLL_SECONDS, POLL_LIMIT_S = 5, 180
 
 log = []
+
+
+def load_dotenv():
+    """Read KEY=value lines from a .env beside this script. Variables already set in the shell win."""
+    path = Path(__file__).resolve().parent / ".env"
+    if not path.exists():
+        return
+    for line in path.read_text(encoding="utf-8-sig").splitlines():
+        line = line.strip()
+        if line and not line.startswith("#") and "=" in line:
+            key, value = line.split("=", 1)
+            os.environ.setdefault(key.strip(), value.strip().strip("\"'"))
 
 
 def env(name):
@@ -96,7 +109,7 @@ def main():
         time.sleep(POLL_SECONDS)
         waited += POLL_SECONDS
 
-    summary = {
+    return {
         "payouts_scope_present": has_scope,
         "main_batch_id": batch_id,
         "main_batch_final_status": final.get("batch_header", {}).get("batch_status"),
@@ -106,10 +119,17 @@ def main():
         },
         "http_status_by_step": {e["step"]: e["status"] for e in log if e["step"] != "poll_main_batch"},
     }
-    with open("smoke_report.json", "w") as f:
-        json.dump({"summary": summary, "log": log}, f, indent=2)
-    print(json.dumps(summary, indent=2))
 
 
 if __name__ == "__main__":
-    main()
+    load_dotenv()
+    summary, error = None, None
+    try:
+        summary = main()
+        print(json.dumps(summary, indent=2))
+    except Exception as e:
+        error = str(e)
+        raise
+    finally:  # a failed run still leaves the log of what PayPal answered
+        with open("smoke_report.json", "w") as f:
+            json.dump({"summary": summary, "error": error, "log": log}, f, indent=2)
