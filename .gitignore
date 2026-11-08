@@ -4,3 +4,8 @@ __pycache__/
 .env
 smoke_report.json
 *.db
+.venv/
+node_modules/
+frontend/dist/
+# live sandbox CSVs (real sandbox emails), regenerate with demo/make_live_csv.py
+demo/live_*.csv

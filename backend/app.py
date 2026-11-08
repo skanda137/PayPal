@@ -2,7 +2,8 @@
 
 ML is advisory. Money movement is deterministic and gated here: /send reads only rows whose stored
 decision is 'approve'. proceed rows default to approve; review/hold rows start undecided and are never sent
-unless an operator approves them. Decisions lock once a payout exists.
+unless an operator approves them. Approving a 'hold' row additionally requires override=true and is written to
+the audit log as an 'override' event. Decisions lock once a payout exists.
 """
 from __future__ import annotations
 
@@ -22,7 +23,7 @@ from pathlib import Path
 
 import pandas as pd
 from dotenv import load_dotenv
-from fastapi import Body, FastAPI, File, HTTPException, UploadFile
+from fastapi import Body, FastAPI, File, HTTPException, Query, UploadFile
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "ml"))
@@ -230,7 +231,8 @@ def create_app(db_path: str | None = None, paypal_client: PayPalClient | None = 
             return batch_view(c, batch_id)
 
     @app.put("/api/batches/{batch_id}/decisions")
-    def put_decisions(batch_id: str, decisions: dict[str, str] = Body(...)):
+    def put_decisions(batch_id: str, decisions: dict[str, str] = Body(...),
+                      override: bool = Query(False, description="required to approve rows whose action is 'hold'")):
         with db() as c:
             c.execute("BEGIN IMMEDIATE")
             batch_view(c, batch_id)  # 404 if missing
@@ -239,15 +241,25 @@ def create_app(db_path: str | None = None, paypal_client: PayPalClient | None = 
             bad = {k: v for k, v in decisions.items() if v not in ("approve", "hold")}
             if bad:
                 raise HTTPException(422, f"decision must be 'approve' or 'hold': {bad}")
-            current = {r["row_id"]: r["decision"] for r in
-                       c.execute("SELECT row_id, decision FROM rows WHERE batch_id=?", (batch_id,))}
-            unknown = [k for k in decisions if k not in current]
+            db_rows = {r["row_id"]: r for r in
+                       c.execute("SELECT row_id, decision, action, flags_json FROM rows WHERE batch_id=?", (batch_id,))}
+            unknown = [k for k in decisions if k not in db_rows]
             if unknown:
                 raise HTTPException(422, f"unknown row_id(s): {unknown}")
+            held = [rid for rid, d in decisions.items() if d == "approve" and db_rows[rid]["action"] == "hold"
+                    and db_rows[rid]["decision"] != "approve"]
+            if held and not override:
+                raise HTTPException(409, dict(message="approving rows the model marked 'hold' requires override=true",
+                                              row_ids=held))
             for rid, d in decisions.items():
-                if current[rid] != d:
+                old = db_rows[rid]["decision"]
+                if old != d:
                     c.execute("UPDATE rows SET decision=? WHERE batch_id=? AND row_id=?", (d, batch_id, rid))
-                    audit(c, batch_id, "decision", {"row_id": rid, "from": current[rid], "to": d})
+                    if rid in held:
+                        audit(c, batch_id, "override", {"row_id": rid, "from": old, "to": d, "action": "hold",
+                                                        "flag_types": [f["type"] for f in json.loads(db_rows[rid]["flags_json"])]})
+                    else:
+                        audit(c, batch_id, "decision", {"row_id": rid, "from": old, "to": d})
             return batch_view(c, batch_id)
 
     def payout_view(c, batch_id) -> dict:
@@ -267,6 +279,7 @@ def create_app(db_path: str | None = None, paypal_client: PayPalClient | None = 
         with db() as c:
             c.execute("BEGIN IMMEDIATE")  # serialises concurrent sends for this database
             batch_view(c, batch_id)
+            client = paypal()  # fail on missing credentials BEFORE anything is written or locked
             approved = c.execute("SELECT * FROM rows WHERE batch_id=? AND decision='approve' ORDER BY idx",
                                  (batch_id,)).fetchall()
             if not approved:
@@ -295,7 +308,7 @@ def create_app(db_path: str | None = None, paypal_client: PayPalClient | None = 
             audit(c, batch_id, "payout_request", dict(sender_batch_id=sbid, items=items))
             c.commit()  # sender_batch_id is durable BEFORE the PayPal call
             try:
-                resp = paypal().create_batch(sbid, items, email_subject="You have a payout")
+                resp = client.create_batch(sbid, items, email_subject="You have a payout")
             except PayPalError as e:
                 c.execute("UPDATE payouts SET last_error_json=? WHERE batch_id=?", (json.dumps(e.to_dict()), batch_id))
                 audit(c, batch_id, "payout_error", e.to_dict())

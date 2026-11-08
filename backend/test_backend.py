@@ -151,11 +151,47 @@ def test_decisions_lock_after_send(env):
     assert r.status_code == 409
 
 
+def test_exact_duplicate_holds_every_occurrence(env):
+    client, _, _ = env
+    b = upload(client, SMALL).json()
+    rows = {r["row_id"]: r for r in b["rows"]}
+    for rid in ("r3", "r4"):                     # first occurrence is held too, not silently passed
+        assert rows[rid]["action"] == "hold" and rows[rid]["decision"] is None
+        assert [f["type"] for f in rows[rid]["flags"]] == ["duplicate_payee"]
+
+
+def test_approving_hold_row_requires_override_and_is_audited(env):
+    client, fake, _ = env
+    b = upload(client, SMALL).json()
+    bid = b["batch_id"]
+    r = client.put(f"/api/batches/{bid}/decisions", json={"r3": "approve"})
+    assert r.status_code == 409 and r.json()["detail"]["row_ids"] == ["r3"]
+    assert {x["row_id"]: x["decision"] for x in client.get(f"/api/batches/{bid}").json()["rows"]}["r3"] is None
+    client.put(f"/api/batches/{bid}/decisions?override=true", json={"r3": "approve"}).raise_for_status()
+    ev = [e for e in client.get(f"/api/batches/{bid}/audit").json() if e["kind"] == "override"]
+    assert len(ev) == 1 and ev[0]["payload"]["row_id"] == "r3" and ev[0]["payload"]["flag_types"] == ["duplicate_payee"]
+    client.post(f"/api/batches/{bid}/send").raise_for_status()
+    assert sorted(it["sender_item_id"] for it in fake.creates[0]["items"]) == ["si-r1", "si-r2", "si-r3"]
+
+
 def test_bad_decision_values_and_unknown_rows(env):
     client, _, _ = env
     b = upload(client, SMALL).json()
     assert client.put(f"/api/batches/{b['batch_id']}/decisions", json={"r1": "yes"}).status_code == 422
     assert client.put(f"/api/batches/{b['batch_id']}/decisions", json={"zz": "hold"}).status_code == 422
+
+
+def test_send_without_credentials_fails_before_locking(tmp_path, monkeypatch):
+    for k in ("PAYPAL_CLIENT_ID", "PAYPAL_CLIENT_SECRET"):
+        monkeypatch.setenv(k, "")          # empty, so a real .env (if present) is not loaded over it
+    monkeypatch.setenv("PAYPAL_BASE_URL", "https://api-m.sandbox.paypal.com")
+    client = TestClient(create_app(str(tmp_path / "pg.db")))
+    b = upload(client, SMALL).json()
+    r = client.post(f"/api/batches/{b['batch_id']}/send")
+    assert r.status_code == 500 and "PAYPAL_CLIENT_ID" in r.json()["detail"]
+    assert client.get(f"/api/batches/{b['batch_id']}").json()["summary"]["locked"] is False
+    assert client.put(f"/api/batches/{b['batch_id']}/decisions", json={"r2": "hold"}).status_code == 200
+    assert [e["kind"] for e in client.get(f"/api/batches/{b['batch_id']}/audit").json()] == ["upload", "score", "decision"]
 
 
 def test_non_usd_approved_row_blocks_send(env):
