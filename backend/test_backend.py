@@ -160,6 +160,29 @@ def test_exact_duplicate_holds_every_occurrence(env):
         assert [f["type"] for f in rows[rid]["flags"]] == ["duplicate_payee"]
 
 
+SEEDED = Path(__file__).resolve().parent.parent / "demo"
+
+
+def test_committed_seeded_demo_flags_exactly_the_seeded_rows(env):
+    """demo/seeded_*.csv (placeholder emails) must flag the same 6 rows as the local live version."""
+    client, _, _ = env
+    files = {"file": ("seeded_batch.csv", (SEEDED / "seeded_batch.csv").read_bytes(), "text/csv"),
+             "history": ("seeded_history.csv", (SEEDED / "seeded_history.csv").read_bytes(), "text/csv")}
+    r = client.post("/api/batches", files=files)
+    assert r.status_code == 200, r.text
+    b = r.json()
+    assert b["summary"]["n_rows"] == 212 and b["summary"]["n_history"] == 599
+    flagged = {x["row_id"]: (x["action"], [f["type"] for f in x["flags"]]) for x in b["rows"] if x["action"] != "proceed" or x["flags"]}
+    assert flagged == {
+        "r070": ("hold", ["amount_anomaly"]),
+        "r073": ("review", ["duplicate_payee"]),
+        "r116": ("hold", ["typo_receiver"]),
+        "r122": ("hold", ["duplicate_payee"]),
+        "r129": ("hold", ["duplicate_payee"]),
+        "r144": ("review", ["duplicate_payee"]),
+    }
+
+
 def test_approving_hold_row_requires_override_and_is_audited(env):
     client, fake, _ = env
     b = upload(client, SMALL).json()

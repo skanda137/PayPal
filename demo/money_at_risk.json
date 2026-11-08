@@ -1,0 +1,153 @@
+{
+  "label": "SYNTHETIC: seeded incidents on a curated demo batch. Not a real-world estimate.",
+  "batch": {
+    "rows": 212,
+    "nominal_total": 4061.12,
+    "currencies": [
+      "USD"
+    ],
+    "currency_note": "Amounts are not converted between currencies."
+  },
+  "unguarded": {
+    "wrongly_sent_by_currency": {
+      "USD": 498.29
+    },
+    "wrongly_sent_nominal": 498.29,
+    "share_of_batch_nominal": 0.1227,
+    "share_note": "An artifact of seeding 4 incidents (one is a x10 amount) into 212 rows. Do not quote it as a real-world error rate.",
+    "n_incidents": 4,
+    "incidents": [
+      {
+        "row_id": "r122",
+        "incident": "exact_duplicate",
+        "currency": "USD",
+        "row_amount": 4.8,
+        "wrongly_sent": 4.8,
+        "expected_unguarded_outcome": "second payout reaches the same real account (expected SUCCESS twice)",
+        "note": "second copy of the same row; the original is a legitimate payout"
+      },
+      {
+        "row_id": "r070",
+        "incident": "amount_anomaly",
+        "currency": "USD",
+        "row_amount": 462.2,
+        "wrongly_sent": 415.98,
+        "expected_unguarded_outcome": "10x amount reaches a real account (expected SUCCESS, overpaid)",
+        "note": "x10 of the intended 46.22; excess is the overpayment"
+      },
+      {
+        "row_id": "r116",
+        "incident": "typo_receiver",
+        "currency": "USD",
+        "row_amount": 41.2,
+        "wrongly_sent": 41.2,
+        "expected_unguarded_outcome": "address is not a registered account (expected UNCLAIMED; not yet confirmed by the smoke test)",
+        "note": "intended billing-0457219@kestrelworks.io; one-character edit sends it to an address that is not the payee's"
+      },
+      {
+        "row_id": "r073",
+        "incident": "duplicate_payee",
+        "currency": "USD",
+        "row_amount": 36.31,
+        "wrongly_sent": 36.31,
+        "expected_unguarded_outcome": "second identity, a real account, is paid (expected SUCCESS, double payment)",
+        "note": "same person paid again as 'Martin, Andre' with a different email"
+      }
+    ]
+  },
+  "guarded": {
+    "model": {
+      "incidents_stopped": 4,
+      "incidents_total": 4,
+      "wrongly_sent_stopped_nominal": 498.29,
+      "wrongly_sent_leaked_nominal": 0.0,
+      "share_of_unguarded_risk_stopped": 1.0,
+      "per_incident": [
+        {
+          "row_id": "r122",
+          "incident": "exact_duplicate",
+          "action": "hold",
+          "stopped": true
+        },
+        {
+          "row_id": "r070",
+          "incident": "amount_anomaly",
+          "action": "hold",
+          "stopped": true
+        },
+        {
+          "row_id": "r116",
+          "incident": "typo_receiver",
+          "action": "hold",
+          "stopped": true
+        },
+        {
+          "row_id": "r073",
+          "incident": "duplicate_payee",
+          "action": "review",
+          "stopped": true
+        }
+      ],
+      "rows_held": 4,
+      "rows_review": 2,
+      "flagged_rows_per_1000": 28.3,
+      "involved_legitimate_rows": {
+        "rows": 2,
+        "amount_delayed_nominal": 41.11
+      },
+      "other_unseeded_flags": {
+        "rows": 0,
+        "amount_delayed_nominal": 0,
+        "row_ids": []
+      }
+    },
+    "baseline": {
+      "incidents_stopped": 3,
+      "incidents_total": 4,
+      "wrongly_sent_stopped_nominal": 461.98,
+      "wrongly_sent_leaked_nominal": 36.31,
+      "share_of_unguarded_risk_stopped": 0.9271,
+      "per_incident": [
+        {
+          "row_id": "r122",
+          "incident": "exact_duplicate",
+          "action": "hold",
+          "stopped": true
+        },
+        {
+          "row_id": "r070",
+          "incident": "amount_anomaly",
+          "action": "hold",
+          "stopped": true
+        },
+        {
+          "row_id": "r116",
+          "incident": "typo_receiver",
+          "action": "review",
+          "stopped": true
+        },
+        {
+          "row_id": "r073",
+          "incident": "duplicate_payee",
+          "action": "proceed",
+          "stopped": false
+        }
+      ],
+      "rows_held": 3,
+      "rows_review": 3,
+      "flagged_rows_per_1000": 28.3,
+      "involved_legitimate_rows": {
+        "rows": 1,
+        "amount_delayed_nominal": 4.8
+      },
+      "other_unseeded_flags": {
+        "rows": 2,
+        "amount_delayed_nominal": 71.2,
+        "row_ids": [
+          "r005",
+          "r107"
+        ]
+      }
+    }
+  }
+}

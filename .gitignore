@@ -7,5 +7,6 @@ smoke_report.json
 .venv/
 node_modules/
 frontend/dist/
-# live sandbox CSVs (real sandbox emails), regenerate with demo/make_live_csv.py
+# real sandbox emails: keep local. Committed placeholders come from demo/make_seeded_placeholders.py
 demo/live_*.csv
+demo/sandbox_accounts.json

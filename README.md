@@ -51,11 +51,27 @@ cd ml && python -m pytest -q tests
 
 | File | What | Send it? |
 |---|---|---|
-| `demo/demo_batch.csv` + `demo/demo_history.csv` | 155 USD rows + 1,179 history rows from the ML's **synthetic** demo set (`python demo/make_demo_csv.py`) | **No.** About 110 rows start approved, and they go to made-up addresses. Use it to show the review screen |
-| `demo/live_batch.csv` + `demo/live_history.csv` | 3 rows: two real sandbox Personal accounts plus one mistyped email, USD 1.00 each. Generated from `.env` by `python demo/make_live_csv.py` (gitignored) | Yes. This is the live sandbox run |
+| `demo/seeded_batch.csv` + `demo/seeded_history.csv` | 212 USD rows (total 4,061.12) + 599 history rows, all **synthetic**, with 4 seeded incidents. Placeholder emails | **Never send the full batch.** 206 rows start approved (3,475.50 USD), mostly to made-up addresses. Use it to show the review screen |
+| `demo/money_at_risk.json` | What the 4 incidents would have paid out with and without PayoutGuard | n/a |
+| `demo/live_seeded_*.csv`, `demo/sandbox_accounts.json` | The same batch with the real sandbox Personal accounts. **Local only, gitignored** | No, use the subset |
+| `demo/live_subset_batch.csv` + `demo/live_subset_history.csv` | 7 rows: the sandbox-account rows plus the typo row, 608.26 USD. Made by `python demo/make_live_subset.py` (gitignored) | Yes. This is the live sandbox run |
 
-In the live batch, the mistyped row is held by the model (`typo_receiver`). Sending it anyway requires the
-operator override, which is recorded in the audit log.
+The seeded incidents, and what the model does with them (the committed and live versions score identically):
+
+| Row | Incident | Model |
+|---|---|---|
+| r122 | exact duplicate of r129 (both held) | hold |
+| r070 | amount ×10 for this payee | hold |
+| r116 | one-character email typo | hold (`typo_receiver`) |
+| r073 | same payee as r144 under a reordered name and a new email (both in review) | review |
+
+**SYNTHETIC: 498.29 USD** would have been paid wrongly without the gate, and the model stops all of it (the baseline
+in that file stops 461.98). This is seeded incidents on a curated batch, not a real-world estimate.
+
+`python demo/make_seeded_placeholders.py` rebuilds the committed files from the local live ones. It swaps each
+sandbox email for a placeholder and writes the files only if every row still gets the same action and flags. A
+backend test pins the 6 flagged rows. In the live subset, only r163 starts approved. Sending the typo row or a
+held row anyway requires the operator override, which is recorded in the audit log.
 
 ## Screens
 
