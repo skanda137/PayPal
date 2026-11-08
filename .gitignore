@@ -3,3 +3,4 @@ __pycache__/
 .pytest_cache/
 .env
 smoke_report.json
+*.db
