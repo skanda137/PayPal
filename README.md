@@ -69,34 +69,55 @@ shared:
 - The full UI flow (upload errors, review, override, send, payout status, audit log, evaluation) was run in a
   headless browser against the real backend with a fake PayPal client.
 
-**Not yet run against the real PayPal sandbox.** Nothing below is claimed as observed:
+**Observed in the PayPal sandbox** on 2026-11-10: **one run, USD only.** `payouts_smoke_test.py` created four
+batches, and `check_batches.py` read the results back afterwards.
 
-- TODO(live-run): a token request succeeds with our sandbox credentials. The last attempts returned
-  `401 invalid_client`.
-- TODO(live-run): a payout batch is created through the backend, and how long sandbox takes to reach a final
-  status.
-- TODO(live-run): the item status PayPal gives a mistyped or unregistered receiver email. We expect `UNCLAIMED`;
-  it is unconfirmed.
-- TODO(live-run): PayPal's response to a reused `sender_batch_id`. The client's duplicate handling is built from
-  PayPal's documentation and tested only against mocks.
-- TODO(live-run): PayPal's response to the same `sender_item_id` twice in one batch, and whether it accepts two
-  payouts to one receiver under different item ids.
-- TODO(live-run): non-USD payouts. The backend refuses to send them until this is tested.
+| Case | What PayPal did |
+|---|---|
+| Token request | Succeeded, and the Payouts scope is present. |
+| Valid receivers (3 registered sandbox Personal accounts) | Items `SUCCESS`. The batch reached `SUCCESS` 25 seconds after creation. |
+| Mistyped receiver email | Item `UNCLAIMED`, error `RECEIVER_UNREGISTERED`. |
+| Replayed `sender_batch_id` | HTTP 400 `USER_BUSINESS_ERROR`, "Batch with given sender_batch_id already exists". The link to the original batch is under `details[].link[]`; the top-level `links` is empty. |
+| Same `sender_item_id` twice in one batch | Created with HTTP 201. The first item was paid; the second ended `FAILED` with `DUPLICATE_ITEM`. The **batch status still read `SUCCESS`**. |
+| Same receiver under two different `sender_item_id`s | Both items `SUCCESS`: **the receiver was paid twice, with no warning.** |
 
-`payouts_smoke_test.py` and `demo/live_run.py` (below) produce these results.
+What this means for the product:
+
+- PayPal's duplicate protection works on ids only. An identical `sender_item_id` is caught; the same person under
+  different ids is not. Catching that (and name variants, and typo'd emails) is what PayoutGuard adds.
+- A `SUCCESS` batch can contain `FAILED` and `UNCLAIMED` items, so the Payout screen judges each item and never
+  shows "all paid" from the batch status.
+- The client reads the original batch link from `details[].link[]` as well as the top level, because of the shape
+  above. Its recovery path (fetch the original batch and check its `sender_batch_id`) is tested against a mock built
+  from that exact response; it has not been exercised against the live sandbox.
+
+The backend has also made one live payout (`demo/live_run.py`, before the account file was corrected): the batch was
+created through the backend and settled as `SUCCESS`, and its one approved item came back `UNCLAIMED`
+(`RECEIVER_UNREGISTERED`), because that email was not a registered account.
+
+**Not yet observed:**
+
+- `demo/live_run.py` with the three registered accounts in `demo/sandbox_accounts.json`. Those rows are expected to
+  come back `SUCCESS`, as the same accounts did in the smoke test.
+- Non-USD payouts. The backend refuses to send them.
 
 ## The live sandbox run (team)
 
 ```bash
 python demo/preflight.py               # offline checks of .env and the sandbox account file; prints no values
 python payouts_smoke_test.py           # direct PayPal sandbox calls; prints a summary, writes smoke_report.json
-python demo/make_live_subset.py        # writes the 7-row live batch from the local live files
+python demo/make_live_from_accounts.py # local live files = committed placeholders + the accounts in sandbox_accounts.json
+python demo/make_live_subset.py        # writes the 9-row live batch
 uvicorn backend.app:create_app --factory --port 8000     # second terminal
-python demo/live_run.py                # upload, approve r163 only, send, poll, save the audit events
+python demo/live_run.py                # upload, approve the 3 unflagged rows, hold the rest, send, poll, save the audit
 python demo/live_run.py --override r116                   # also override the hold on the typo row and send it
 ```
 
-`live_run.py` refuses to start if the backend is not reachable, and refuses batches of more than 10 rows.
+`demo/sandbox_accounts.json` (gitignored) maps the roles `clean`, `clean2` and `clean3` to three registered
+sandbox Personal accounts; use the `RECEIVERS` from `.env`, which delivered `SUCCESS` in the smoke test.
+`live_run.py` refuses to start if the backend is not reachable, and refuses batches of more than 10 rows. Its
+report goes to `demo/live_run_report.json` (gitignored); `--report PATH` writes it elsewhere, for example when
+testing against a fake PayPal.
 
 ## Demo data
 
@@ -104,8 +125,8 @@ python demo/live_run.py --override r116                   # also override the ho
 |---|---|---|
 | `demo/seeded_batch.csv` + `demo/seeded_history.csv` | 212 USD rows (total 4,061.12) + 599 history rows, all **synthetic**, with 4 seeded incidents. Placeholder emails | **Never send the full batch.** 206 rows start approved (3,475.50 USD), mostly to made-up addresses. Use it to show the review screen |
 | `demo/money_at_risk.json` | What the 4 incidents would have paid out with and without PayoutGuard | n/a |
-| `demo/live_seeded_*.csv`, `demo/sandbox_accounts.json` | The same batch with the real sandbox Personal accounts. **Local only, gitignored** | No, use the subset |
-| `demo/live_subset_batch.csv` | 7 rows: the sandbox-account rows plus the typo row, 608.26 USD. Made by `python demo/make_live_subset.py` (gitignored) | Yes, with `demo/live_seeded_history.csv` as history. This is the live sandbox run |
+| `demo/live_seeded_*.csv`, `demo/sandbox_accounts.json` | The same batch with three payees (r163, r016, r028) swapped to the registered sandbox Personal accounts. **Local only, gitignored** | No, use the subset |
+| `demo/live_subset_batch.csv` | 9 rows, 623.10 USD: the three payouts to registered accounts (r016, r028, r163; 37.48 USD; the only rows that start approved) plus the six flagged incident rows. Made by `python demo/make_live_subset.py` (gitignored) | Yes, with `demo/live_seeded_history.csv` as history. This is the live sandbox run |
 
 The seeded incidents, and what the model does with them (the committed and live versions score identically):
 
@@ -119,10 +140,11 @@ The seeded incidents, and what the model does with them (the committed and live 
 **SYNTHETIC: 498.29 USD** would have been paid wrongly without the gate, and the model stops all of it (the baseline
 in that file stops 461.98). This is seeded incidents on a curated batch, not a real-world estimate.
 
-`python demo/make_seeded_placeholders.py` rebuilds the committed files from the local live ones. It swaps each
-sandbox email for a placeholder and writes the files only if every row still gets the same action and flags. In the
-live subset, only r163 starts approved. Sending the typo row or a held row anyway requires the operator override,
-which is recorded in the audit log.
+`python demo/make_live_from_accounts.py` builds the local live files from the committed ones, and
+`python demo/make_seeded_placeholders.py` does the reverse. Each swaps emails for the accounts or the placeholders
+and writes its files only if every row still gets the same action and flags. In the live subset, only the three
+payouts to registered accounts start approved. The six flagged rows go to placeholder addresses, so they are never
+sent unless an operator overrides; the override of r116, the typo row, is recorded in the audit log.
 
 ## Developing the front end
 
@@ -189,7 +211,8 @@ sent unless approved.
 - **The review queue is large.** On the synthetic test batch about 196 rows per 1,000 are flagged at the operating
   threshold. About 81 of those involve a record never paid before; the rest are payees who legitimately have two
   records.
-- **PayPal behaviour is unobserved.** See "Verification status".
+- **PayPal behaviour was observed once.** The sandbox results in "Verification status" come from one run, in USD
+  only, so treat them as one observation, not a guarantee.
 - Payout status updates only while someone polls (the Payout screen or the API). There are no webhooks.
 - Status calls with more than one page of items are refused rather than truncated.
 

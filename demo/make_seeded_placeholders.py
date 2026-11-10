@@ -4,7 +4,8 @@ Reads   demo/live_seeded_batch.csv, demo/live_seeded_history.csv, demo/sandbox_a
 Writes  demo/seeded_batch.csv, demo/seeded_history.csv                                      (committed)
 
 Each real sandbox email is replaced by a placeholder for its role, and the typo row r116 gets the
-typo_base placeholder with one inserted character, as in the live file. Both versions are then scored
+typo_base placeholder with one inserted character, as in the live file. sandbox_accounts.json may hold any
+subset of the roles below; roles it does not list are already placeholders in the live files. Both versions are then scored
 through the real API. The files are written only if every row gets the same action and flags.
 
 Placeholders were chosen by trial: name-shaped emails (e.g. anil_anderson@...) made the model link the
@@ -31,6 +32,8 @@ PLACEHOLDER = {
     "typo_base": "billing-0457219@kestrelworks.io",
     "alias_canonical": "andre.martin@martinmail.com",
     "alias_dup": "ateliersol@proton.me",
+    "clean2": "oliviajones2@outlook.com",   # r016, an unflagged payee: the 2nd registered account in the live run
+    "clean3": "tevans@yahoo.com",           # r028, an unflagged payee: the 3rd registered account in the live run
 }
 TYPO_ROW, TYPO_EMAIL = "r116", "billing-04577219@kestrelworks.io"
 
@@ -61,9 +64,10 @@ def score(client, batch: bytes, history: bytes) -> dict:
 
 def main():
     accounts = json.loads((DEMO / "sandbox_accounts.json").read_text(encoding="utf-8"))
-    if set(accounts) != set(PLACEHOLDER):
-        raise SystemExit(f"sandbox_accounts.json roles {sorted(accounts)} do not match {sorted(PLACEHOLDER)}")
-    real_to_ph = {accounts[k].lower(): v for k, v in PLACEHOLDER.items()}
+    unknown = sorted(set(accounts) - set(PLACEHOLDER))
+    if not accounts or unknown:
+        raise SystemExit(f"sandbox_accounts.json needs at least one of the roles {sorted(PLACEHOLDER)}; unknown roles: {unknown}")
+    real_to_ph = {accounts[k].lower(): PLACEHOLDER[k] for k in accounts}
 
     live_b = (DEMO / "live_seeded_batch.csv").read_bytes()
     live_h = (DEMO / "live_seeded_history.csv").read_bytes()

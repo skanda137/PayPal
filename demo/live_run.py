@@ -2,12 +2,14 @@
 
     python demo/make_live_subset.py                         # once: writes demo/live_subset_batch.csv
     uvicorn backend.app:create_app --factory --port 8000    # in another terminal
-    python demo/live_run.py                                 # approves only r163, holds the rest, sends, polls
+    python demo/live_run.py                                 # approves the unflagged rows, holds the rest, sends, polls
     python demo/live_run.py --override r116                 # also overrides the hold on r116 and sends it
 
-Steps: upload the 7-row subset with the seeded history, print the flag summary, approve r163 and hold every other
-row (rows named by --override are approved with override=true), send, poll every 3 s for up to 180 s, print each
-item's status and error text, and save the audit events to demo/live_run_report.json (gitignored).
+Steps: upload the live subset (9 rows) with the seeded history, print the flag summary, approve the rows the model
+let through (the 3 registered accounts), hold every flagged row (rows named by --override are approved with
+override=true), send, poll every 3 s for up to 180 s, print each item's status and error text, and save the audit
+events to demo/live_run_report.json (gitignored). Use --report PATH to write the report somewhere else, for example
+when testing against a fake PayPal, so a real run's report is never overwritten.
 
 Prints row ids, amounts and statuses. Prints no email addresses and no secrets.
 """
@@ -23,7 +25,6 @@ import requests
 DEMO = Path(__file__).resolve().parent
 BATCH, HISTORY = DEMO / "live_subset_batch.csv", DEMO / "live_seeded_history.csv"
 REPORT = DEMO / "live_run_report.json"
-APPROVE = "r163"          # the one row the model lets through
 MAX_ROWS = 10             # the full 212-row seeded batch must never be sent
 POLL_SECONDS, POLL_LIMIT_S = 3, 180
 STILL_MOVING = {None, "PENDING"}
@@ -50,8 +51,10 @@ def main():
     ap.add_argument("--base", default="http://127.0.0.1:8000", help="backend URL")
     ap.add_argument("--override", nargs="+", default=[], metavar="ROW_ID",
                     help="held or review rows to approve as an operator override and send")
+    ap.add_argument("--report", type=Path, default=REPORT, help="where to write the report (default: demo/live_run_report.json)")
     args = ap.parse_args()
     api = args.base.rstrip("/") + "/api"
+    report_path = args.report
 
     for p in (BATCH, HISTORY):
         if not p.exists():
@@ -72,9 +75,10 @@ def main():
         rows = {r["row_id"]: r for r in batch["rows"]}
         if len(rows) > MAX_ROWS:
             fail(f"{len(rows)} rows uploaded; this script only sends the small subset (max {MAX_ROWS})")
-        unknown = [r for r in [APPROVE, *args.override] if r not in rows]
+        unknown = [r for r in args.override if r not in rows]
         if unknown:
             fail(f"rows not in the batch: {unknown}")
+        let_through = [rid for rid, r in rows.items() if r["decision"] == "approve"]   # proceed rows start approved
 
         print(f"1. UPLOAD  batch {batch_id}: {batch['summary']['n_rows']} rows, {batch['summary']['n_history']} history rows, "
               f"model actions {batch['summary']['actions']}")
@@ -82,8 +86,8 @@ def main():
             print(f"     {r['row_id']:<5} {r['amount']:>8} {r['currency']}  {r['action']:<8} "
                   f"{', '.join(f['type'] for f in r['flags']) or '-'}")
 
-        hold = {rid: "hold" for rid in rows if rid != APPROVE and rid not in args.override}
-        batch = call("PUT", f"{api}/batches/{batch_id}/decisions", json={APPROVE: "approve", **hold})
+        hold = {rid: "hold" for rid in rows if rid not in let_through and rid not in args.override}
+        batch = call("PUT", f"{api}/batches/{batch_id}/decisions", json={**{rid: "approve" for rid in let_through}, **hold})
         if args.override:
             batch = call("PUT", f"{api}/batches/{batch_id}/decisions", params={"override": "true"},
                          json={rid: "approve" for rid in args.override})
@@ -118,10 +122,10 @@ def main():
         if batch_id:
             report["batch_id"] = batch_id
             report["audit"] = call("GET", f"{api}/batches/{batch_id}/audit")
-            REPORT.write_text(json.dumps(report, indent=2), encoding="utf-8")
+            report_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
             kinds = [e["kind"] for e in report["audit"]]
             print(f"5. AUDIT   {len(kinds)} events: {', '.join(kinds)}")
-            print(f"     saved to demo/{REPORT.name} (gitignored; it contains receiver emails)")
+            print(f"     saved to {report_path} (it contains receiver emails; keep it out of git)")
     sys.exit(1 if "error" in report else 0)
 
 

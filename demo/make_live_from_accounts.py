@@ -5,8 +5,11 @@ Reads   demo/seeded_batch.csv, demo/seeded_history.csv   (committed, placeholder
 Writes  demo/live_seeded_batch.csv, demo/live_seeded_history.csv   (gitignored)
 
 This is make_seeded_placeholders.py in reverse: each role's placeholder email is replaced by that role's
-sandbox account. The typo row r116 gets the typo_base account with one character doubled, so it stays one
-edit away from a known payee and is not a real account. Both versions are scored through the real API and
+sandbox account. sandbox_accounts.json may list any of the roles in PLACEHOLDER (make_seeded_placeholders.py):
+clean, clean2 and clean3 are the three registered accounts used for the live send. Roles it does not list keep
+their placeholder, which is fine: those rows are held and never sent. If typo_base is listed, the typo row r116
+gets that account with one character doubled (one edit from a known payee, not a real account); otherwise r116
+keeps its placeholder typo address. Both versions are scored through the real API and
 the live files are written only if every row gets the same action and flags as the committed version.
 
 Run from the repo root after editing sandbox_accounts.json, then run make_live_subset.py:
@@ -49,20 +52,24 @@ def convert(path: Path, mapping: dict) -> bytes:
 def main():
     dry = "--dry-run" in sys.argv[1:]
     accounts = json.loads((DEMO / "sandbox_accounts.json").read_text(encoding="utf-8"))
-    if set(accounts) != set(PLACEHOLDER):
-        raise SystemExit(f"sandbox_accounts.json roles {sorted(accounts)} do not match {sorted(PLACEHOLDER)}")
-    emails = [accounts[r].strip().lower() for r in PLACEHOLDER]
+    unknown = sorted(set(accounts) - set(PLACEHOLDER))
+    if not accounts or unknown:
+        raise SystemExit(f"sandbox_accounts.json needs at least one of the roles {sorted(PLACEHOLDER)}; unknown roles: {unknown}")
+    emails = [accounts[r].strip().lower() for r in accounts]
     if len(set(emails)) != len(emails):
         raise SystemExit("two roles share an account; each role needs its own address")
-    mapping = {PLACEHOLDER[r]: accounts[r].strip() for r in PLACEHOLDER}
-    typo = typo_of(accounts["typo_base"].strip())
-    if typo.lower() in emails:
-        raise SystemExit("the generated typo address is itself one of the accounts")
-    mapping[TYPO_EMAIL] = typo
+    mapping = {PLACEHOLDER[r]: accounts[r].strip() for r in accounts}
+    if "typo_base" in accounts:
+        typo = typo_of(accounts["typo_base"].strip())
+        if typo.lower() in emails:
+            raise SystemExit("the generated typo address is itself one of the accounts")
+        mapping[TYPO_EMAIL] = typo
+    print("roles replaced with accounts:", sorted(accounts), "| r116 typo address:",
+          "built from typo_base" if "typo_base" in accounts else "kept as its placeholder")
 
     ph_b, ph_h = (DEMO / "seeded_batch.csv").read_bytes(), (DEMO / "seeded_history.csv").read_bytes()
     live_b, live_h = convert(DEMO / "seeded_batch.csv", mapping), convert(DEMO / "seeded_history.csv", mapping)
-    left = [p for p in list(PLACEHOLDER.values()) + [TYPO_EMAIL] if p in (live_b + live_h).decode().lower()]
+    left = [p for p in mapping if p in (live_b + live_h).decode().lower()]
     if left:
         raise SystemExit(f"{len(left)} placeholder address(es) were not replaced")
 
@@ -78,7 +85,7 @@ def main():
     diff = sorted(k for k in ph if live[k] != ph[k])
     if diff:
         raise SystemExit(f"scoring differs on rows {diff}; nothing written")
-    print(f"all {len(ph)} rows score the same as the committed files; {TYPO_ROW} is one edit from typo_base")
+    print(f"all {len(ph)} rows score the same as the committed files")
     if dry:
         print("dry run: nothing written")
         return

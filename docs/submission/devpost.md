@@ -1,7 +1,7 @@
 # PayoutGuard: Devpost submission draft
 
-Draft from repository facts only. Every `TODO(live-run)` must be replaced with what the sandbox actually returned,
-or the sentence removed, before submitting. Repo: https://github.com/skanda137/PayPal
+Draft from repository facts only. PayPal results below were observed in the sandbox on 2026-11-10: one run, USD
+only. One line is still open: `TODO(team)` under "AI tools used". Repo: https://github.com/skanda137/PayPal
 
 ## Tagline
 
@@ -29,6 +29,21 @@ On our seeded demo batch (212 synthetic rows, 4 planted incidents), the 4 incide
 **498.29 USD wrongly (SYNTHETIC)**. The model holds 3 and sends the 4th to review, so none is sent without an
 operator decision. This is a curated batch, not a real-world estimate.
 
+## What PayPal catches, and what it does not
+
+We tested PayPal Payouts' own duplicate protection in the sandbox (one run, USD only):
+
+- **Same `sender_item_id` twice in one batch:** PayPal paid the first and failed the second with `FAILED` /
+  `DUPLICATE_ITEM`. The batch status still read `SUCCESS`.
+- **Same receiver under two different `sender_item_id`s:** both items `SUCCESS`. The person was paid twice, with no
+  warning.
+- **Replayed `sender_batch_id`:** rejected with HTTP 400.
+- **Mistyped email:** the item came back `UNCLAIMED` with `RECEIVER_UNREGISTERED`.
+
+So PayPal's duplicate protection works on ids only. PayoutGuard checks who is being paid, including name variants
+and different emails, which an id cannot capture. We reproduced this once in the sandbox; we are not claiming it
+for every account or every region.
+
 ## How we use PayPal Payouts
 
 - OAuth client-credentials token, then `POST /v1/payments/payouts` to create one batch from the approved rows, and
@@ -38,11 +53,14 @@ operator decision. This is a curated batch, not a real-world estimate.
   PayPal call and also sent as `PayPal-Request-Id`. Timeouts and 5xx responses are retried up to 3 times with the
   same ids, and pressing Send twice never creates a second batch.
 - **Money.** Amounts are validated and sent as decimal strings. No float math touches an amount that is paid.
-- **Item statuses.** The Payout screen shows each item's `transaction_status` with PayPal's error text.
-- TODO(live-run): one sentence on the observed live result: batch status, seconds to final, and the status of the
-  mistyped-email item.
-- TODO(live-run): what PayPal returned for a reused `sender_batch_id`. Our handling of that rejection is built from
-  PayPal's documentation and tested against mocks only.
+- **Item statuses.** The Payout screen judges each item by its `transaction_status` and shows PayPal's error text.
+  This matters because a batch marked `SUCCESS` can contain `FAILED` and `UNCLAIMED` items, so the screen never
+  shows "all paid" from the batch status.
+- **Observed in the sandbox (one run, USD only).** A batch to three registered sandbox accounts plus one mistyped
+  email reached batch status `SUCCESS` 25 seconds after creation. The three items were `SUCCESS` and the mistyped
+  one was `UNCLAIMED` (`RECEIVER_UNREGISTERED`). A replayed `sender_batch_id` returned HTTP 400, with the link to the
+  original batch under `details[].link[]`. Our client reads the link from there. Its recovery path is tested against
+  a mock of that exact response, not yet against the live sandbox.
 
 ## How we use AI
 
@@ -103,9 +121,11 @@ Python, FastAPI, SQLite, scikit-learn, rapidfuzz, pandas, React, Vite, AG Grid, 
   test batch. About 81 of those involve a record never paid before; the rest are payees who legitimately have two
   records.
 - **Small counts.** Incident recall rests on 21 to 49 cases; read the confidence intervals in `ml/README.md`.
-- **UNCLAIMED is unconfirmed.** We expect a payout to an unregistered email to come back `UNCLAIMED`.
-  TODO(live-run): confirm or correct this.
-- USD only. Status updates by polling, no webhooks. Batches with more than one page of items are refused.
+- **One sandbox run, USD only.** The PayPal behaviour above was observed once. The backend refuses to send other
+  currencies because we have not tested them.
+- **UNCLAIMED is not a failure at PayPal.** A payout to an unregistered email is created and shows `UNCLAIMED`. PayPal
+  documents that unclaimed funds return after 30 days; we have not observed that.
+- Status updates by polling, no webhooks. Batches with more than one page of items are refused.
 
 ## What's next
 

@@ -13,10 +13,10 @@ ROOT = Path(__file__).resolve().parent.parent
 ENV, EXAMPLE = ROOT / ".env", ROOT / ".env.example"
 ACCOUNTS = ROOT / "demo" / "sandbox_accounts.json"
 REQUIRED = ["PAYPAL_CLIENT_ID", "PAYPAL_CLIENT_SECRET", "RECEIVERS", "TYPO_RECEIVER"]
-ROLES = ["clean", "repeat", "shift", "typo_base", "alias_dup", "alias_canonical"]
+ROLES = ["clean", "clean2", "clean3"]   # the registered accounts that get paid in the live run; other roles are optional
 SANDBOX_URL = "https://api-m.sandbox.paypal.com"
 EMAIL = re.compile(r"[^@\s]+@[^@\s]+\.[^@\s]+")
-USUAL_CREDENTIAL_LENGTH = 80
+CREDENTIAL_LENGTH_RANGE = (60, 100)   # working sandbox client ids and secrets have been 80 to 82 characters
 
 failed = False
 
@@ -77,8 +77,8 @@ def main():
     for name in ("PAYPAL_CLIENT_ID", "PAYPAL_CLIENT_SECRET"):
         value = env.get(name, "")
         if value:
-            check(len(value) == USUAL_CREDENTIAL_LENGTH, f"{name} length",
-                  f"{len(value)} characters; sandbox credentials are usually {USUAL_CREDENTIAL_LENGTH}", "WARN")
+            check(CREDENTIAL_LENGTH_RANGE[0] <= len(value) <= CREDENTIAL_LENGTH_RANGE[1], f"{name} length",
+                  f"{len(value)} characters; expected {CREDENTIAL_LENGTH_RANGE[0]} to {CREDENTIAL_LENGTH_RANGE[1]}", "WARN")
             check(re.fullmatch(r"[A-Za-z0-9_-]+", value) is not None, f"{name} has only letters, digits, - and _",
                   "contains other characters")
     if env.get("PAYPAL_CLIENT_ID") and env.get("PAYPAL_CLIENT_SECRET"):
@@ -102,9 +102,12 @@ def main():
         return
     accounts = json.loads(ACCOUNTS.read_text(encoding="utf-8"))
     absent = [r for r in ROLES if not isinstance(accounts.get(r), str) or not EMAIL.fullmatch(accounts[r])]
-    check(not absent, f"sandbox_accounts.json resolves all {len(ROLES)} roles to email addresses", f"missing or invalid: {absent}")
-    values = [accounts[r] for r in ROLES if r not in absent]
-    check(len(set(values)) == len(values), "each role has its own address", "two roles share an address")
+    check(not absent, f"sandbox_accounts.json resolves the {len(ROLES)} roles {ROLES} to email addresses", f"missing or invalid: {absent}")
+    values = [v for v in accounts.values() if isinstance(v, str)]
+    check(len(set(v.lower() for v in values)) == len(values), "each role has its own address", "two roles share an address")
+    not_registered = sorted(r for r in ROLES if isinstance(accounts.get(r), str) and accounts[r].lower() not in {x.lower() for x in receivers})
+    check(not not_registered, "the paid roles are RECEIVERS (accounts that delivered SUCCESS in the smoke test)",
+          f"not in RECEIVERS: {not_registered}; a payout to an unregistered email comes back UNCLAIMED", "WARN")
     check(git("check-ignore", "-q", "demo/sandbox_accounts.json") == 0, "demo/sandbox_accounts.json is ignored by git",
           "add it to .gitignore")
 
