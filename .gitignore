@@ -10,3 +10,5 @@ frontend/dist/
 # real sandbox emails: keep local. Committed placeholders come from demo/make_seeded_placeholders.py
 demo/live_*.csv
 demo/sandbox_accounts.json
+# output of demo/live_run.py (contains receiver emails)
+demo/live_run_report.json

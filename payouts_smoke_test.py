@@ -1,5 +1,6 @@
 import json
 import os
+import sys
 import time
 import uuid
 from pathlib import Path
@@ -14,8 +15,12 @@ POLL_SECONDS, POLL_LIMIT_S = 5, 180
 log = []
 
 
-def load_dotenv():
-    """Read KEY=value lines from a .env beside this script. Variables already set in the shell win."""
+class TokenError(Exception):
+    """The token request failed. Carries only PayPal's error code and description."""
+
+
+def load_dotenv(override=False):
+    """Read KEY=value lines from a .env beside this script. With override=True the file wins over the shell."""
     path = Path(__file__).resolve().parent / ".env"
     if not path.exists():
         return
@@ -23,7 +28,9 @@ def load_dotenv():
         line = line.strip()
         if line and not line.startswith("#") and "=" in line:
             key, value = line.split("=", 1)
-            os.environ.setdefault(key.strip(), value.strip().strip("\"'"))
+            key, value = key.strip(), value.strip().strip("\"'")
+            if override or key not in os.environ:
+                os.environ[key] = value
 
 
 def env(name):
@@ -75,7 +82,16 @@ def main():
     # 1. Token and scope: is Payouts enabled for this app?
     r = requests.post(f"{BASE}/v1/oauth2/token", auth=(client_id, secret),
                       data={"grant_type": "client_credentials"}, timeout=30)
-    r.raise_for_status()
+    if r.status_code != 200:
+        try:
+            body = r.json()
+        except ValueError:
+            body = {}
+        log.append({"step": "oauth", "status": r.status_code, "error": body.get("error"),
+                    "error_description": body.get("error_description"),
+                    "paypal_debug_id": r.headers.get("Paypal-Debug-Id")})
+        raise TokenError(f"token request failed: HTTP {r.status_code}, error={body.get('error')!r}, "
+                         f"error_description={body.get('error_description')!r}")
     auth = r.json()
     token = auth["access_token"]
     has_scope = PAYOUTS_SCOPE in auth.get("scope", "").split()
@@ -109,24 +125,61 @@ def main():
         time.sleep(POLL_SECONDS)
         waited += POLL_SECONDS
 
+    by_step = {e["step"]: e for e in log}
+    replay, dup, semdup = (by_step[s] for s in
+                           ("replay_same_sender_batch_id", "dup_sender_item_id_in_batch", "same_receiver_different_item_ids"))
+    statuses = {i["payout_item"]["sender_item_id"]: i.get("transaction_status") for i in final.get("items", [])}
+    typo_item = next((i for i in final.get("items", []) if i["payout_item"]["sender_item_id"] == "main-typo"), {})
     return {
+        "mistyped_email_item": {"transaction_status": typo_item.get("transaction_status"),
+                                "error_name": (typo_item.get("errors") or {}).get("name")},
+        "replay_same_sender_batch_id": {
+            "http_status": replay["status"], "error_name": replay["response"].get("name"),
+            "links_to_original_batch": any(batch_id in (l.get("href") or "") for l in replay["response"].get("links", [])),
+        },
+        "dup_sender_item_id_in_batch": {"http_status": dup["status"], "error_name": dup["response"].get("name")},
+        "same_receiver_different_item_ids": {
+            "http_status": semdup["status"], "accepted_at_create": semdup["status"] == 201,
+            "error_name": semdup["response"].get("name"),
+        },
         "payouts_scope_present": has_scope,
         "main_batch_id": batch_id,
         "main_batch_final_status": final.get("batch_header", {}).get("batch_status"),
         "seconds_to_terminal_or_timeout": waited,
-        "main_item_statuses": {
-            i["payout_item"]["sender_item_id"]: i.get("transaction_status") for i in final.get("items", [])
-        },
+        "main_item_statuses": statuses,
         "http_status_by_step": {e["step"]: e["status"] for e in log if e["step"] != "poll_main_batch"},
     }
 
 
+def print_summary(s):
+    """Plain summary. Sender item ids only: no emails, no secrets."""
+    r, d, m, t = (s["replay_same_sender_batch_id"], s["dup_sender_item_id_in_batch"],
+                  s["same_receiver_different_item_ids"], s["mistyped_email_item"])
+    done = s["main_batch_final_status"] in TERMINAL_BATCH
+    print("SMOKE TEST SUMMARY (PayPal sandbox)")
+    print(f"  payouts scope present:              {s['payouts_scope_present']}")
+    print(f"  main batch:                         {s['main_batch_final_status']} after {s['seconds_to_terminal_or_timeout']} s"
+          + ("" if done else f" (not final within {POLL_LIMIT_S} s)"))
+    print(f"  item statuses:                      {s['main_item_statuses']}")
+    print(f"  mistyped-email item (main-typo):    {t['transaction_status']}, error name {t['error_name']}")
+    print(f"  replay, same sender_batch_id:       HTTP {r['http_status']}, error name {r['error_name']}, "
+          f"links to original batch: {r['links_to_original_batch']}")
+    print(f"  same sender_item_id twice:          HTTP {d['http_status']}, error name {d['error_name']}")
+    print(f"  same receiver, different item ids:  {'accepted' if m['accepted_at_create'] else 'rejected'} at create "
+          f"(HTTP {m['http_status']}, error name {m['error_name']})")
+    print("  full requests and responses: smoke_report.json (gitignored)")
+
+
 if __name__ == "__main__":
-    load_dotenv()
+    load_dotenv(override=True)
     summary, error = None, None
     try:
         summary = main()
-        print(json.dumps(summary, indent=2))
+        print_summary(summary)
+    except TokenError as e:  # print PayPal's error code and description only, no traceback
+        error = str(e)
+        print(error)
+        sys.exit(1)
     except Exception as e:
         error = str(e)
         raise

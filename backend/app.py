@@ -1,5 +1,7 @@
 """PayoutGuard backend. Run from the repo root:  uvicorn backend.app:create_app --factory --port 8000
 
+If the front end has been built (frontend/dist exists), it is served at / by the same process.
+
 ML is advisory. Money movement is deterministic and gated here: /send reads only rows whose stored
 decision is 'approve'. proceed rows default to approve; review/hold rows start undecided and are never sent
 unless an operator approves them. Approving a 'hold' row additionally requires override=true and is written to
@@ -24,8 +26,10 @@ from pathlib import Path
 import pandas as pd
 from dotenv import load_dotenv
 from fastapi import Body, FastAPI, File, HTTPException, Query, UploadFile
+from fastapi.staticfiles import StaticFiles
 
 ROOT = Path(__file__).resolve().parent.parent
+UI_DIST = ROOT / "frontend" / "dist"  # built front end (npm run build); served at / when present
 sys.path.insert(0, str(ROOT / "ml"))
 from payoutguard_ml import score_batch  # noqa: E402
 from payoutguard_ml.score import _analyzer  # noqa: E402  (cached Analyzer; source of the thresholds used)
@@ -170,8 +174,11 @@ def create_app(db_path: str | None = None, paypal_client: PayPalClient | None = 
             missing = [k for k in ("PAYPAL_CLIENT_ID", "PAYPAL_CLIENT_SECRET", "PAYPAL_BASE_URL") if not os.environ.get(k)]
             if missing:
                 raise HTTPException(500, f"missing env vars {missing}, see .env.example")
-            state["paypal"] = PayPalClient(os.environ["PAYPAL_CLIENT_ID"], os.environ["PAYPAL_CLIENT_SECRET"],
-                                           os.environ["PAYPAL_BASE_URL"])
+            try:
+                state["paypal"] = PayPalClient(os.environ["PAYPAL_CLIENT_ID"], os.environ["PAYPAL_CLIENT_SECRET"],
+                                               os.environ["PAYPAL_BASE_URL"])
+            except ValueError as e:  # non-sandbox PAYPAL_BASE_URL
+                raise HTTPException(500, f"PAYPAL_BASE_URL in .env is not accepted: {e}")
         return state["paypal"]
 
     def audit(c, batch_id, kind, payload):
@@ -375,5 +382,8 @@ def create_app(db_path: str | None = None, paypal_client: PayPalClient | None = 
         if not files:
             raise HTTPException(500, f"no eval JSON in {d}")
         return {p.stem: json.loads(p.read_text(encoding="utf-8")) for p in files}
+
+    if (UI_DIST / "index.html").is_file():  # mounted last, so /api routes win
+        app.mount("/", StaticFiles(directory=UI_DIST, html=True), name="ui")
 
     return app

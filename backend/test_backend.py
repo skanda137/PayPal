@@ -204,6 +204,33 @@ def test_bad_decision_values_and_unknown_rows(env):
     assert client.put(f"/api/batches/{b['batch_id']}/decisions", json={"zz": "hold"}).status_code == 422
 
 
+def test_built_front_end_is_served_at_root_and_api_still_works(tmp_path, monkeypatch):
+    import backend.app as app_module
+    dist = tmp_path / "dist"
+    dist.mkdir()
+    (dist / "index.html").write_text("<!doctype html><title>PayoutGuard</title>", encoding="utf-8")
+    monkeypatch.setattr(app_module, "UI_DIST", dist)
+    client = TestClient(create_app(str(tmp_path / "pg.db"), paypal_client=FakePayPal()))
+    assert "PayoutGuard" in client.get("/").text
+    assert client.get("/api/eval").status_code == 200
+    assert client.get("/api/batches/nope").status_code == 404
+
+    monkeypatch.setattr(app_module, "UI_DIST", tmp_path / "missing")
+    client = TestClient(create_app(str(tmp_path / "pg2.db"), paypal_client=FakePayPal()))
+    assert client.get("/").status_code == 404
+
+
+def test_send_with_non_sandbox_base_url_is_a_clear_error(tmp_path, monkeypatch):
+    monkeypatch.setenv("PAYPAL_CLIENT_ID", "id")
+    monkeypatch.setenv("PAYPAL_CLIENT_SECRET", "secret")
+    monkeypatch.setenv("PAYPAL_BASE_URL", "https://api-m.paypal.com")
+    client = TestClient(create_app(str(tmp_path / "pg.db")))
+    b = upload(client, SMALL).json()
+    r = client.post(f"/api/batches/{b['batch_id']}/send")
+    assert r.status_code == 500 and "sandbox only" in r.json()["detail"]
+    assert client.get(f"/api/batches/{b['batch_id']}").json()["summary"]["locked"] is False
+
+
 def test_send_without_credentials_fails_before_locking(tmp_path, monkeypatch):
     for k in ("PAYPAL_CLIENT_ID", "PAYPAL_CLIENT_SECRET"):
         monkeypatch.setenv(k, "")          # empty, so a real .env (if present) is not loaded over it
