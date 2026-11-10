@@ -5,6 +5,7 @@ __pycache__/
 smoke_report.json
 *.db
 .venv/
+.venv-1/
 node_modules/
 frontend/dist/
 # real sandbox emails: keep local. Committed placeholders come from demo/make_seeded_placeholders.py
