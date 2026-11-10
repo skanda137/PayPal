@@ -349,7 +349,8 @@ def create_app(db_path: str | None = None, paypal_client: PayPalClient | None = 
                           "WHERE batch_id=? AND row_id=?",
                           (it.get("payout_item_id"), new_status, json.dumps(errs) if errs else None, batch_id, old["row_id"]))
                 audit(c, batch_id, "status_change", {"row_id": old["row_id"], "sender_item_id": sid,
-                                                     "from": old["transaction_status"], "to": new_status, "errors": errs})
+                                                     "from": old["transaction_status"], "to": new_status,
+                                                     "error_name": (errs or {}).get("name"), "errors": errs})
 
     @app.get("/api/batches/{batch_id}/payout")
     def get_payout(batch_id: str):

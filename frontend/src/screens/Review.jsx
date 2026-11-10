@@ -36,7 +36,7 @@ function DecisionCell({ data, context }) {
   return (
     <span className="decision-cell">
       <Badge value={data.decision} kind="decision" />
-      {!context.locked && <span className="caret">▾</span>}
+      {!context.current.locked && <span className="caret">▾</span>}
     </span>
   );
 }
@@ -55,9 +55,6 @@ export default function Review({ batchId, onSent }) {
   const [modalError, setModalError] = useState(null);
   const gridRef = useRef(null);
   const filters = useRef({ action: "all", category: "all" });
-  const shownDetail = useRef(null); // read by the grid's row class rule
-  const prevDetail = useRef(null);
-  shownDetail.current = detailId;
 
   useEffect(() => {
     let live = true;
@@ -116,24 +113,15 @@ export default function Review({ batchId, onSent }) {
     gridRef.current?.api?.onFilterChanged();
   }, [actionFilter, categoryFilter]);
 
-  // Row highlight for the row shown in the side panel.
-  useEffect(() => {
-    const grid = gridRef.current?.api;
-    if (!grid) return;
-    const nodes = [prevDetail.current, detailId].map((id) => id && grid.getRowNode(id)).filter(Boolean);
-    prevDetail.current = detailId;
-    if (nodes.length && !grid.getEditingCells().length) grid.redrawRows({ rowNodes: nodes });
-  }, [detailId, batch]);
-
   const columnDefs = useMemo(
     () => [
-      { field: "row_id", headerName: "Row", width: 84, pinned: "left", filter: "agTextColumnFilter" },
-      { field: "recipient_name", headerName: "Name", flex: 1, minWidth: 130, filter: "agTextColumnFilter", tooltipField: "recipient_name" },
-      { field: "receiver_email", headerName: "Email", flex: 1.4, minWidth: 180, filter: "agTextColumnFilter", tooltipField: "receiver_email" },
+      { field: "row_id", headerName: "Row", width: 72, pinned: "left" },
+      { field: "recipient_name", headerName: "Name", flex: 1, minWidth: 138, filter: "agTextColumnFilter", tooltipField: "recipient_name" },
+      { field: "receiver_email", headerName: "Email", flex: 1.6, minWidth: 220, filter: "agTextColumnFilter", tooltipField: "receiver_email" },
       {
         colId: "amount",
         headerName: "Amount",
-        width: 122,
+        width: 132,
         type: "rightAligned",
         filter: "agNumberColumnFilter",
         valueGetter: (p) => Number(p.data.amount), // for sorting and filtering only; the text shown is the exact string
@@ -144,7 +132,7 @@ export default function Review({ batchId, onSent }) {
       {
         field: "action",
         headerName: "Model",
-        width: 96,
+        width: 104,
         cellRenderer: ActionPill,
         comparator: (a, b) => RANK[a] - RANK[b],
         sort: "asc",
@@ -153,7 +141,7 @@ export default function Review({ batchId, onSent }) {
       {
         colId: "flags",
         headerName: "Flags",
-        width: 170,
+        width: 124,
         sortable: false,
         filter: "agTextColumnFilter",
         valueGetter: (p) => flagText(p.data),
@@ -163,7 +151,8 @@ export default function Review({ batchId, onSent }) {
       {
         colId: "decision",
         headerName: "Decision",
-        width: 128,
+        width: 124,
+        sortable: false,
         pinned: "right",
         valueGetter: (p) => p.data.decision ?? "undecided",
         cellRenderer: DecisionCell,
@@ -186,6 +175,27 @@ export default function Review({ batchId, onSent }) {
       ...gridDefaults.defaultColDef,
       // A and H are row shortcuts, so they must not start a cell edit.
       suppressKeyboardEvent: (p) => !p.editing && !p.event.ctrlKey && !p.event.metaKey && /^[ah]$/i.test(p.event.key),
+    }),
+    [],
+  );
+
+  // Stable props: the grid redraws rows (and closes an open cell editor) when these change identity.
+  const gridProps = useMemo(
+    () => ({
+      getRowId: (p) => p.data.row_id,
+      isExternalFilterPresent: () => filters.current.action !== "all" || filters.current.category !== "all",
+      doesExternalFilterPass: (node) =>
+        (filters.current.action === "all" || node.data.action === filters.current.action) &&
+        (filters.current.category === "all" || (firstCategory(node.data) ?? "none") === filters.current.category),
+      rowSelection: { mode: "multiRow", enableClickSelection: false },
+      selectionColumnDef: { pinned: "left", width: 40 },
+      onSelectionChanged: (e) => setSelected(e.api.getSelectedRows().map((r) => r.row_id)),
+      onRowClicked: (e) => {
+        setDetailId(e.data.row_id);
+        setPanelOpen(true);
+      },
+      rowClassRules: { "row-hold": (p) => p.data.action === "hold", "row-review": (p) => p.data.action === "review" },
+      overlayNoRowsTemplate: "No rows match these filters.",
     }),
     [],
   );
@@ -333,6 +343,8 @@ export default function Review({ batchId, onSent }) {
         Click a Decision cell to change it, or focus a row and press <kbd>A</kbd> to approve or <kbd>H</kbd> to hold.
       </p>
 
+      {/* Highlight for the row shown in the side panel. Plain CSS, so the grid never has to redraw a row for it. */}
+      {detailId && <style>{`.grid-wrap .ag-row[row-id="${CSS.escape(detailId)}"] .ag-cell { background: var(--info-bg); }`}</style>}
       <div className={`review-layout ${panelOpen ? "" : "no-panel"}`}>
         <div className="grid-wrap">
           <AgGridReact
@@ -341,28 +353,10 @@ export default function Review({ batchId, onSent }) {
             rowData={batch.rows}
             columnDefs={columnDefs}
             defaultColDef={defaultColDef}
-            getRowId={(p) => p.data.row_id}
-            context={{ locked }}
+            {...gridProps}
+            context={live}
             quickFilterText={search}
-            isExternalFilterPresent={() => filters.current.action !== "all" || filters.current.category !== "all"}
-            doesExternalFilterPass={(node) =>
-              (filters.current.action === "all" || node.data.action === filters.current.action) &&
-              (filters.current.category === "all" || (firstCategory(node.data) ?? "none") === filters.current.category)
-            }
-            rowSelection={{ mode: "multiRow", enableClickSelection: false }}
-            selectionColumnDef={{ pinned: "left", width: 44 }}
-            onSelectionChanged={(e) => setSelected(e.api.getSelectedRows().map((r) => r.row_id))}
-            onRowClicked={(e) => {
-              setDetailId(e.data.row_id);
-              setPanelOpen(true);
-            }}
             onCellKeyDown={onCellKeyDown}
-            rowClassRules={{
-              "row-hold": (p) => p.data.action === "hold",
-              "row-review": (p) => p.data.action === "review",
-              "row-active": (p) => p.data.row_id === shownDetail.current,
-            }}
-            overlayNoRowsTemplate="No rows match these filters."
           />
         </div>
         {panelOpen && (

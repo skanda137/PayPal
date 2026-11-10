@@ -65,13 +65,13 @@ export default function Audit({ batchId }) {
       <h2>Audit log</h2>
       <p className="muted">Append-only: the database rejects updates and deletes on this table. Click a row to see the raw payload.</p>
       <button onClick={load}>Refresh</button>
-      <div className="grid-auto">
+      <div className={`grid-auto ${events.length > 15 ? "tall" : ""}`}>
         <AgGridReact
           {...gridDefaults}
           rowData={events}
           columnDefs={columnDefs}
           getRowId={(p) => String(p.data.id)}
-          domLayout="autoHeight"
+          domLayout={events.length > 15 ? "normal" : "autoHeight"}
           onRowClicked={(e) => setOpen(open === e.data.id ? null : e.data.id)}
           rowClassRules={{ "row-hold": (p) => p.data.kind === "override" || p.data.kind === "payout_error" }}
         />

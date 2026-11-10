@@ -137,8 +137,16 @@ class PayPalClient:
             body = r.json()
         except ValueError:
             return None
-        for link in body.get("links", []) if isinstance(body, dict) else []:
-            m = _BATCH_LINK.search(link.get("href", ""))
+        if not isinstance(body, dict):
+            return None
+        # Observed in the sandbox (2026-11-10): the link to the original batch is in details[].link[],
+        # and the top-level links list is empty. PayPal's docs describe a top-level link, so both are read.
+        links = list(body.get("links") or [])
+        for d in body.get("details") or []:
+            if isinstance(d, dict):
+                links += list(d.get("link") or []) + list(d.get("links") or [])
+        for link in links:
+            m = _BATCH_LINK.search(link.get("href", "")) if isinstance(link, dict) else None
             if m:
                 return m.group(1)
         return None

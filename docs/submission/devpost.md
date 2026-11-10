@@ -84,7 +84,7 @@ uvicorn backend.app:create_app --factory --port 8000
 Open http://127.0.0.1:8000 and upload `demo/seeded_batch.csv` with `demo/seeded_history.csv` as history. Review,
 override, audit log and evaluation all work without a PayPal account. A live send needs your own sandbox app
 credentials and sandbox Personal account emails; our sandbox accounts are not shared. Tests:
-`python -m pytest -q backend` (26 tests, PayPal mocked).
+`python -m pytest -q backend` (29 tests, PayPal mocked).
 
 ## Built with
 

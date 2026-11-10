@@ -8,6 +8,7 @@ export const gridTheme = themeQuartz.withParams({
   accentColor: "#1d4ed8",
   headerFontWeight: 600,
   wrapperBorderRadius: 10,
+  valueChangeValueHighlightBackgroundColor: "#bfdbfe", // neutral blue: a flash must not look like "success"
 });
 
 export const defaultColDef = {

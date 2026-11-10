@@ -135,7 +135,10 @@ def main():
                                 "error_name": (typo_item.get("errors") or {}).get("name")},
         "replay_same_sender_batch_id": {
             "http_status": replay["status"], "error_name": replay["response"].get("name"),
-            "links_to_original_batch": any(batch_id in (l.get("href") or "") for l in replay["response"].get("links", [])),
+            "links_to_original_batch": any(
+                batch_id in (l.get("href") or "")
+                for l in list(replay["response"].get("links") or [])
+                + [x for d in replay["response"].get("details") or [] for x in (d.get("link") or [])]),
         },
         "dup_sender_item_id_in_batch": {"http_status": dup["status"], "error_name": dup["response"].get("name")},
         "same_receiver_different_item_ids": {

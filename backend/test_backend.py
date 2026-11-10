@@ -338,6 +338,37 @@ def test_status_poll_stores_item_statuses_and_audit_is_append_only(env):
             c.execute("UPDATE events SET kind='x'")
 
 
+def test_failed_item_inside_a_success_batch_is_stored_as_failed(env):
+    """Shape observed in the sandbox on 2026-11-10: same sender_item_id twice -> batch SUCCESS, second item FAILED."""
+    client, fake, _ = env
+    b = decided(client, SMALL)                               # sends r1 and r2
+    bid = b["batch_id"]
+
+    def observed(pid):
+        items = fake.batches[pid]["items"]
+        return {"batch_header": {"payout_batch_id": pid, "batch_status": "SUCCESS", "funding_source": "BALANCE",
+                                 "sender_batch_header": {"sender_batch_id": fake.batches[pid]["sbid"]}},
+                "items": [
+                    {"payout_item_id": "ITEM1", "transaction_id": "TX1", "transaction_status": "SUCCESS",
+                     "payout_batch_id": pid, "payout_item": {"sender_item_id": items[0]["sender_item_id"]}},
+                    {"payout_item_id": "ITEM2", "transaction_status": "FAILED", "payout_batch_id": pid,
+                     "payout_item": {"sender_item_id": items[1]["sender_item_id"]},
+                     "errors": {"name": "DUPLICATE_ITEM", "message": "Duplicate payout item", "information_link": "",
+                                "details": [], "links": []}}]}
+
+    fake.get_batch = observed
+    client.post(f"/api/batches/{bid}/send").raise_for_status()
+    p = client.get(f"/api/batches/{bid}/payout").json()
+    assert p["batch_status"] == "SUCCESS" and p["terminal"]
+    st = {i["row_id"]: i for i in p["items"]}
+    assert st["r1"]["transaction_status"] == "SUCCESS" and st["r1"]["errors"] is None
+    assert st["r2"]["transaction_status"] == "FAILED" and st["r2"]["errors"]["name"] == "DUPLICATE_ITEM"
+    changes = [e["payload"] for e in client.get(f"/api/batches/{bid}/audit").json() if e["kind"] == "status_change"]
+    failed = [c for c in changes if c.get("row_id") == "r2"]
+    assert failed[-1]["to"] == "FAILED" and failed[-1]["error_name"] == "DUPLICATE_ITEM"
+    assert [c for c in changes if c.get("row_id") == "r1"][-1]["error_name"] is None
+
+
 def test_eval_endpoint_merges_artifacts(env):
     client, _, _ = env
     e = client.get("/api/eval").json()
@@ -433,6 +464,23 @@ def test_client_timeout_then_duplicate_rejection_fetches_original():
     methods = [x["method"] for x in s.calls]
     assert methods == ["POST", "POST", "GET"]                       # no third create
     assert s.calls[0]["headers"]["PayPal-Request-Id"] == s.calls[1]["headers"]["PayPal-Request-Id"] == "pg-abc"
+
+
+def test_client_duplicate_rejection_in_the_observed_sandbox_shape_fetches_original():
+    """Sandbox, 2026-11-10: HTTP 400 USER_BUSINESS_ERROR, empty top-level links, link under details[0].link."""
+    dup = FakeResp(400, {"name": "USER_BUSINESS_ERROR", "message": "User business error.", "debug_id": "d1",
+                         "information_link": "https://developer.paypal.com/docs/api/payments.payouts-batch/#errors",
+                         "details": [{"field": "SENDER_BATCH_ID", "location": "body",
+                                      "issue": "Batch with given sender_batch_id already exists",
+                                      "link": [{"href": "https://api.sandbox.paypal.com/v1/payments/payouts/PBORIG",
+                                                "rel": "self", "method": "GET", "encType": "application/json"}]}],
+                         "links": []})
+    orig = FakeResp(200, {"batch_header": {"payout_batch_id": "PBORIG", "batch_status": "SUCCESS",
+                                           "sender_batch_header": {"sender_batch_id": "pg-abc"}}, "items": []})
+    c, s, _ = client_with([requests.Timeout("read timeout"), dup, orig])
+    out = c.create_batch("pg-abc", ITEMS)
+    assert out["batch_header"]["payout_batch_id"] == "PBORIG"
+    assert [x["method"] for x in s.calls] == ["POST", "POST", "GET"]            # no third create
 
 
 def test_client_duplicate_link_to_other_batch_raises():

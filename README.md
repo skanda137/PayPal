@@ -44,7 +44,7 @@ Do not press Send on this batch. Without credentials it stops with "missing env 
 **3. Run the tests** (PayPal is mocked; no network)
 
 ```bash
-python -m pytest -q backend             # 26 tests: API, gate, idempotency, PayPal client
+python -m pytest -q backend             # 29 tests: API, gate, idempotency, PayPal client
 cd ml && python -m pytest -q tests      # 17 tests, up to 2 minutes
 ```
 
@@ -61,7 +61,7 @@ shared:
 
 **Verified with automated tests and a browser run, against a mocked PayPal:**
 
-- 26 backend tests and 17 ML tests pass, including in a fresh copy of the committed files that follows the quick
+- 29 backend tests and 17 ML tests pass, including in a fresh copy of the committed files that follows the quick
   start above.
 - The approval gate, the hold override, decision locking, retries with the same ids, and the audit log's
   append-only rule each have a test.

@@ -6,6 +6,7 @@ import { itemStatus } from "../labels.js";
 
 const POLL_MS = 3000;
 const STILL_MOVING = new Set([null, "PENDING"]);
+const TONE_RANK = { bad: 0, warn: 1, neutral: 2, good: 3 }; // items that did not arrive come first
 
 function StatusPill({ value }) {
   const [, tone] = itemStatus(value);
@@ -78,7 +79,13 @@ export default function Payout({ batchId }) {
       { field: "recipient_name", headerName: "Name", flex: 1, minWidth: 130, tooltipField: "recipient_name" },
       { field: "receiver_email", headerName: "Email", flex: 1.3, minWidth: 180, tooltipField: "receiver_email" },
       { field: "amount", headerName: "Amount", width: 122, type: "rightAligned", sortable: false },
-      { field: "transaction_status", headerName: "PayPal status", width: 130, cellRenderer: StatusPill, enableCellChangeFlash: true },
+      { field: "transaction_status", headerName: "PayPal status",
+        width: 130,
+        cellRenderer: StatusPill,
+        enableCellChangeFlash: true,
+        comparator: (a, b) => TONE_RANK[itemStatus(a)[1]] - TONE_RANK[itemStatus(b)[1]],
+        sort: "asc",
+      },
       {
         field: "meaning",
         headerName: "What it means",
@@ -175,14 +182,14 @@ export default function Payout({ batchId }) {
             </div>
           )}
           {rows && (
-            <div className="grid-auto">
+            <div className={`grid-auto ${rows.length > 15 ? "tall" : ""}`}>
               <AgGridReact
                 {...gridDefaults}
                 ref={grid}
                 rowData={rows}
                 columnDefs={columnDefs}
                 getRowId={(p) => p.data.row_id}
-                domLayout="autoHeight"
+                domLayout={rows.length > 15 ? "normal" : "autoHeight"}
                 rowClassRules={{
                   "row-hold": (p) => itemStatus(p.data.transaction_status)[1] === "bad",
                   "row-review": (p) => itemStatus(p.data.transaction_status)[1] === "warn",
