@@ -289,6 +289,13 @@ def create_app(db_path: str | None = None, paypal_client: PayPalClient | None = 
             client = paypal()  # fail on missing credentials BEFORE anything is written or locked
             approved = c.execute("SELECT * FROM rows WHERE batch_id=? AND decision='approve' ORDER BY idx",
                                  (batch_id,)).fetchall()
+            undecided = [r["row_id"] for r in c.execute(
+                "SELECT row_id FROM rows WHERE batch_id=? AND decision IS NULL AND action IN ('review','hold') ORDER BY idx",
+                (batch_id,))]
+            if undecided and not c.execute("SELECT 1 FROM payouts WHERE batch_id=?", (batch_id,)).fetchone():
+                raise HTTPException(409, dict(
+                    message=f"{len(undecided)} flagged row(s) are still undecided; approve or hold each one before sending",
+                    row_ids=undecided))
             if not approved:
                 raise HTTPException(409, "no approved rows to send")
             wrong_cur = [r["row_id"] for r in approved if r["currency"] not in SEND_CURRENCIES]

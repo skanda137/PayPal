@@ -75,6 +75,13 @@ def upload(client, rows, history=None):
     return client.post("/api/batches", files=files)
 
 
+def decided(client, rows):
+    """Upload, then hold every flagged row that starts undecided, so the batch may be sent."""
+    b = upload(client, rows).json()
+    undecided = {r["row_id"]: "hold" for r in b["rows"] if r["decision"] is None}
+    return client.put(f"/api/batches/{b['batch_id']}/decisions", json=undecided).json()
+
+
 SMALL = [row("r1", "Alice Moreno", "alice.moreno@example.com", "120.00"),
          row("r2", "Bilal Okafor", "bilal.okafor@example.org", "75.50"),
          row("r3", "Chen Wei", "chen.wei@example.net", "300"),
@@ -125,27 +132,46 @@ def test_gate_only_approved_rows_reach_payouts(env):
     assert rows["r3"]["action"] == rows["r4"]["action"] == "hold"
     assert rows["r3"]["decision"] is None and rows["r4"]["decision"] is None      # hold starts undecided
     assert rows["r1"]["action"] == "proceed" and rows["r1"]["decision"] == "approve"
-    client.put(f"/api/batches/{b['batch_id']}/decisions", json={"r2": "hold"}).raise_for_status()
+    client.put(f"/api/batches/{b['batch_id']}/decisions", json={"r2": "hold", "r3": "hold", "r4": "hold"}).raise_for_status()
 
     r = client.post(f"/api/batches/{b['batch_id']}/send")
     assert r.status_code == 200, r.text
     assert len(fake.creates) == 1
     sent = [it["sender_item_id"] for it in fake.creates[0]["items"]]
-    assert sent == ["si-r1"]                                                    # held r2, undecided r3/r4 never sent
+    assert sent == ["si-r1"]                                                    # held r2, r3, r4 never sent
     assert fake.creates[0]["items"][0]["amount"] == {"value": "120.00", "currency": "USD"}
+
+
+def test_send_is_refused_while_a_flagged_row_is_undecided(env):
+    client, fake, _ = env
+    b = upload(client, SMALL).json()                         # r3 and r4 are held by the model and undecided
+    bid = b["batch_id"]
+    r = client.post(f"/api/batches/{bid}/send")
+    assert r.status_code == 409 and r.json()["detail"]["row_ids"] == ["r3", "r4"]
+    assert "undecided" in r.json()["detail"]["message"]
+    client.put(f"/api/batches/{bid}/decisions", json={"r3": "hold"}).raise_for_status()
+    r = client.post(f"/api/batches/{bid}/send")
+    assert r.status_code == 409 and r.json()["detail"]["row_ids"] == ["r4"]
+    assert fake.creates == []
+    assert client.get(f"/api/batches/{bid}").json()["summary"]["locked"] is False       # nothing written or locked
+    assert "payout_request" not in [e["kind"] for e in client.get(f"/api/batches/{bid}/audit").json()]
+    client.put(f"/api/batches/{bid}/decisions", json={"r4": "hold"}).raise_for_status()
+    assert client.post(f"/api/batches/{bid}/send").status_code == 200
+    assert [it["sender_item_id"] for it in fake.creates[0]["items"]] == ["si-r1", "si-r2"]
 
 
 def test_no_approved_rows_is_refused(env):
     client, fake, _ = env
     b = upload(client, SMALL).json()
-    client.put(f"/api/batches/{b['batch_id']}/decisions", json={"r1": "hold", "r2": "hold"}).raise_for_status()
-    assert client.post(f"/api/batches/{b['batch_id']}/send").status_code == 409
+    client.put(f"/api/batches/{b['batch_id']}/decisions", json={r: "hold" for r in ("r1", "r2", "r3", "r4")}).raise_for_status()
+    r = client.post(f"/api/batches/{b['batch_id']}/send")
+    assert r.status_code == 409 and r.json()["detail"] == "no approved rows to send"
     assert fake.creates == []
 
 
 def test_decisions_lock_after_send(env):
     client, _, _ = env
-    b = upload(client, SMALL).json()
+    b = decided(client, SMALL)
     client.post(f"/api/batches/{b['batch_id']}/send").raise_for_status()
     r = client.put(f"/api/batches/{b['batch_id']}/decisions", json={"r3": "approve"})
     assert r.status_code == 409
@@ -193,6 +219,7 @@ def test_approving_hold_row_requires_override_and_is_audited(env):
     client.put(f"/api/batches/{bid}/decisions?override=true", json={"r3": "approve"}).raise_for_status()
     ev = [e for e in client.get(f"/api/batches/{bid}/audit").json() if e["kind"] == "override"]
     assert len(ev) == 1 and ev[0]["payload"]["row_id"] == "r3" and ev[0]["payload"]["flag_types"] == ["duplicate_payee"]
+    client.put(f"/api/batches/{bid}/decisions", json={"r4": "hold"}).raise_for_status()
     client.post(f"/api/batches/{bid}/send").raise_for_status()
     assert sorted(it["sender_item_id"] for it in fake.creates[0]["items"]) == ["si-r1", "si-r2", "si-r3"]
 
@@ -256,7 +283,7 @@ def test_non_usd_approved_row_blocks_send(env):
 
 def test_second_send_creates_no_second_batch(env):
     client, fake, _ = env
-    b = upload(client, SMALL).json()
+    b = decided(client, SMALL)
     first = client.post(f"/api/batches/{b['batch_id']}/send").json()
     second = client.post(f"/api/batches/{b['batch_id']}/send").json()
     assert len(fake.creates) == 1 and len(fake.by_sbid) == 1
@@ -276,7 +303,7 @@ def test_failed_create_is_retried_with_same_sender_batch_id(env):
         return FakePayPal.create_batch(fake, sbid, items, email_subject)
 
     fake.create_batch = flaky
-    b = upload(client, SMALL).json()
+    b = decided(client, SMALL)
     assert client.post(f"/api/batches/{b['batch_id']}/send").status_code == 502
     assert client.get(f"/api/batches/{b['batch_id']}/payout").status_code == 409
     assert client.post(f"/api/batches/{b['batch_id']}/send").status_code == 200
@@ -294,7 +321,7 @@ def test_sender_batch_id_is_deterministic_and_order_independent():
 
 def test_status_poll_stores_item_statuses_and_audit_is_append_only(env):
     client, _, db = env
-    b = upload(client, SMALL).json()
+    b = decided(client, SMALL)
     client.post(f"/api/batches/{b['batch_id']}/send").raise_for_status()
     p = client.get(f"/api/batches/{b['batch_id']}/payout").json()
     assert p["batch_status"] == "SUCCESS" and p["terminal"]
