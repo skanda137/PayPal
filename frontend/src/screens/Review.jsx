@@ -55,7 +55,9 @@ export default function Review({ batchId, onSent }) {
   const [modalError, setModalError] = useState(null);
   const gridRef = useRef(null);
   const filters = useRef({ action: "all", category: "all" });
-  const shownDetail = useRef(null);
+  const shownDetail = useRef(null); // read by the grid's row class rule
+  const prevDetail = useRef(null);
+  shownDetail.current = detailId;
 
   useEffect(() => {
     let live = true;
@@ -118,8 +120,8 @@ export default function Review({ batchId, onSent }) {
   useEffect(() => {
     const grid = gridRef.current?.api;
     if (!grid) return;
-    const nodes = [shownDetail.current, detailId].map((id) => id && grid.getRowNode(id)).filter(Boolean);
-    shownDetail.current = detailId;
+    const nodes = [prevDetail.current, detailId].map((id) => id && grid.getRowNode(id)).filter(Boolean);
+    prevDetail.current = detailId;
     if (nodes.length && !grid.getEditingCells().length) grid.redrawRows({ rowNodes: nodes });
   }, [detailId, batch]);
 

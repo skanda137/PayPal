@@ -1,5 +1,7 @@
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { AgGridReact } from "ag-grid-react";
 import { api } from "../api.js";
+import { gridDefaults } from "../grid.js";
 
 function summary(e) {
   const p = e.payload;
@@ -15,7 +17,7 @@ function summary(e) {
     case "payout_request":
       return `payout request ${p.sender_batch_id} with ${p.items.length} items`;
     case "payout_response":
-      return `PayPal accepted: batch ${p.batch_header?.payout_batch_id} (${p.batch_header?.batch_status})`;
+      return `PayPal accepted the request: batch ${p.batch_header?.payout_batch_id} (${p.batch_header?.batch_status})`;
     case "payout_error":
       return `PayPal error ${p.status ?? ""} ${p.name}: ${p.message}`;
     case "status_change":
@@ -24,6 +26,8 @@ function summary(e) {
       return "";
   }
 }
+
+const KindPill = ({ value }) => <span className={`badge kind-${value}`}>{value}</span>;
 
 export default function Audit({ batchId }) {
   const [events, setEvents] = useState(null);
@@ -35,45 +39,51 @@ export default function Audit({ batchId }) {
     load();
   }, [batchId]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  const columnDefs = useMemo(
+    () => [
+      { field: "id", headerName: "#", width: 70, pinned: "left" },
+      { colId: "ts", headerName: "Time (UTC)", width: 200, valueGetter: (p) => p.data.ts.replace("T", " ").slice(0, 23), cellClass: "mono" },
+      { field: "kind", headerName: "Event", width: 160, cellRenderer: KindPill, filter: "agTextColumnFilter" },
+      {
+        colId: "what",
+        headerName: "What happened",
+        flex: 1,
+        minWidth: 300,
+        valueGetter: (p) => summary(p.data),
+        filter: "agTextColumnFilter",
+        tooltipValueGetter: (p) => p.value,
+      },
+    ],
+    [],
+  );
+
   if (error) return <div className="alert error">{error.message}</div>;
   if (!events) return <p className="muted">Loading…</p>;
+  const shown = events.find((e) => e.id === open);
   return (
     <section>
       <h2>Audit log</h2>
-      <p className="muted">Append-only: the database rejects updates and deletes on this table.</p>
+      <p className="muted">Append-only: the database rejects updates and deletes on this table. Click a row to see the raw payload.</p>
       <button onClick={load}>Refresh</button>
-      <table className="table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Time (UTC)</th>
-            <th>Event</th>
-            <th>What happened</th>
-          </tr>
-        </thead>
-        <tbody>
-          {events.map((e) => (
-            <Fragment key={e.id}>
-              <tr className={e.kind === "override" ? "row-override" : ""} onClick={() => setOpen(open === e.id ? null : e.id)}>
-                <td>{e.id}</td>
-                <td className="mono small">{e.ts.replace("T", " ").slice(0, 23)}</td>
-                <td>
-                  <span className={`badge kind-${e.kind}`}>{e.kind}</span>
-                </td>
-                <td>{summary(e)}</td>
-              </tr>
-              {open === e.id && (
-                <tr>
-                  <td colSpan={4}>
-                    <pre className="raw">{JSON.stringify(e.payload, null, 2)}</pre>
-                  </td>
-                </tr>
-              )}
-            </Fragment>
-          ))}
-        </tbody>
-      </table>
-      <p className="muted small">Click a row to see the raw payload.</p>
+      <div className="grid-auto">
+        <AgGridReact
+          {...gridDefaults}
+          rowData={events}
+          columnDefs={columnDefs}
+          getRowId={(p) => String(p.data.id)}
+          domLayout="autoHeight"
+          onRowClicked={(e) => setOpen(open === e.data.id ? null : e.data.id)}
+          rowClassRules={{ "row-hold": (p) => p.data.kind === "override" || p.data.kind === "payout_error" }}
+        />
+      </div>
+      {shown && (
+        <div className="card">
+          <h3>
+            Event #{shown.id} <KindPill value={shown.kind} />
+          </h3>
+          <pre className="raw">{JSON.stringify(shown.payload, null, 2)}</pre>
+        </div>
+      )}
     </section>
   );
 }

@@ -1,15 +1,39 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { AgGridReact } from "ag-grid-react";
 import { api } from "../api.js";
+import { gridDefaults } from "../grid.js";
 import { itemStatus } from "../labels.js";
 
 const POLL_MS = 3000;
+const STILL_MOVING = new Set([null, "PENDING"]);
+
+function StatusPill({ value }) {
+  const [, tone] = itemStatus(value);
+  return <span className={`status ${tone}`}>{value ?? "—"}</span>;
+}
 
 export default function Payout({ batchId }) {
   const [payout, setPayout] = useState(null);
   const [problem, setProblem] = useState(null); // {status, message, last_error}
-  const [rowsById, setRowsById] = useState(new Map());
+  const [rows, setRows] = useState(null); // the grid's first rows; later changes go in as row transactions
   const [retrying, setRetrying] = useState(false);
   const timer = useRef(null);
+  const grid = useRef(null);
+  const info = useRef(new Map()); // row_id -> uploaded row (name, email, amount)
+  const shown = useRef(null); // row_id -> status text currently in the grid
+
+  const toRow = (it) => {
+    const r = info.current.get(it.row_id);
+    return {
+      row_id: it.row_id,
+      recipient_name: r?.recipient_name,
+      receiver_email: r?.receiver_email,
+      amount: r ? `${r.amount} ${r.currency}` : "",
+      transaction_status: it.transaction_status,
+      meaning: itemStatus(it.transaction_status)[0],
+      error: it.errors ? `${it.errors.name}: ${it.errors.message}` : "",
+    };
+  };
 
   const poll = useCallback(async () => {
     clearTimeout(timer.current);
@@ -17,18 +41,58 @@ export default function Payout({ batchId }) {
       const p = await api.payout(batchId);
       setPayout(p);
       setProblem(null);
-      if (!p.terminal) timer.current = setTimeout(poll, POLL_MS);
+      const data = p.items.map(toRow);
+      const sig = (d) => `${d.transaction_status}|${d.error}`;
+      if (!shown.current || !grid.current?.api) {
+        setRows(data);
+      } else {
+        // Only the items whose status changed are updated, so the grid flashes exactly those cells.
+        const changed = data.filter((d) => shown.current.get(d.row_id) !== sig(d));
+        if (changed.length) grid.current.api.applyTransaction({ update: changed });
+      }
+      shown.current = new Map(data.map((d) => [d.row_id, sig(d)]));
+      const moving = !p.terminal || p.items.some((i) => STILL_MOVING.has(i.transaction_status));
+      if (moving) timer.current = setTimeout(poll, POLL_MS);
     } catch (e) {
       setProblem({ status: e.status, message: e.message, last_error: e.detail?.last_error, paypal: e.detail?.paypal });
       if (e.status === 502 || e.status === 0) timer.current = setTimeout(poll, POLL_MS * 2); // transient: keep trying
     }
-  }, [batchId]);
+  }, [batchId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    api.batch(batchId).then((b) => setRowsById(new Map(b.rows.map((r) => [r.row_id, r]))), () => {});
-    poll();
+    shown.current = null;
+    setRows(null);
+    api.batch(batchId).then(
+      (b) => {
+        info.current = new Map(b.rows.map((r) => [r.row_id, r]));
+        poll();
+      },
+      (e) => setProblem({ status: e.status, message: e.message }),
+    );
     return () => clearTimeout(timer.current);
   }, [batchId, poll]);
+
+  const columnDefs = useMemo(
+    () => [
+      { field: "row_id", headerName: "Row", width: 84, pinned: "left" },
+      { field: "recipient_name", headerName: "Name", flex: 1, minWidth: 130, tooltipField: "recipient_name" },
+      { field: "receiver_email", headerName: "Email", flex: 1.3, minWidth: 180, tooltipField: "receiver_email" },
+      { field: "amount", headerName: "Amount", width: 122, type: "rightAligned", sortable: false },
+      { field: "transaction_status", headerName: "PayPal status", width: 130, cellRenderer: StatusPill, enableCellChangeFlash: true },
+      {
+        field: "meaning",
+        headerName: "What it means",
+        flex: 2.2,
+        minWidth: 260,
+        wrapText: true,
+        autoHeight: true,
+        enableCellChangeFlash: true,
+        cellClassRules: { "cell-bad": (p) => itemStatus(p.data.transaction_status)[1] === "bad" },
+      },
+      { field: "error", headerName: "PayPal error", flex: 1.6, minWidth: 200, wrapText: true, autoHeight: true, enableCellChangeFlash: true },
+    ],
+    [],
+  );
 
   async function retrySend() {
     setRetrying(true);
@@ -50,6 +114,11 @@ export default function Payout({ batchId }) {
       </p>
     );
   }
+
+  const items = payout?.items ?? [];
+  const delivered = items.filter((i) => i.transaction_status === "SUCCESS").length;
+  const waiting = items.filter((i) => STILL_MOVING.has(i.transaction_status)).length;
+  const notDelivered = items.length - delivered - waiting;
 
   return (
     <section>
@@ -76,43 +145,51 @@ export default function Payout({ batchId }) {
       {payout && (
         <>
           <div className="chips">
-            <span className={`chip status-${payout.terminal ? "done" : "live"}`}>
-              batch status: <strong>{payout.batch_status ?? "unknown"}</strong>
+            <span className={`chip ${delivered ? "proceed" : ""}`}>
+              {delivered} of {items.length} delivered
+            </span>
+            <span className={`chip ${notDelivered ? "hold" : ""}`}>{notDelivered} not delivered</span>
+            <span className="chip">{waiting} waiting for PayPal</span>
+            <span
+              className="chip status-live"
+              title="PayPal's status for the batch as a whole. It says processing finished, not that every item was paid."
+            >
+              PayPal batch processing: <strong>{payout.batch_status ?? "unknown"}</strong>
               {!payout.terminal && " · refreshing every 3 s"}
             </span>
             <span className="chip">PayPal batch {payout.payout_batch_id}</span>
             <span className="chip mono">sender_batch_id {payout.sender_batch_id}</span>
           </div>
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Row</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th className="num">Amount</th>
-                <th>Status</th>
-                <th>PayPal error</th>
-              </tr>
-            </thead>
-            <tbody>
-              {payout.items.map((it) => {
-                const r = rowsById.get(it.row_id);
-                const [label, tone] = itemStatus(it.transaction_status);
-                return (
-                  <tr key={it.row_id}>
-                    <td>{it.row_id}</td>
-                    <td>{r?.recipient_name}</td>
-                    <td>{r?.receiver_email}</td>
-                    <td className="num">{r && `${r.amount} ${r.currency}`}</td>
-                    <td>
-                      <span className={`status ${tone}`}>{it.transaction_status ?? "—"}</span> {label}
-                    </td>
-                    <td className="small">{it.errors ? `${it.errors.name}: ${it.errors.message}` : ""}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+          {payout.batch_status === "SUCCESS" && (
+            <p className="muted small">
+              Batch status SUCCESS means PayPal finished processing the batch. It does not mean every item was delivered: check each
+              item below.
+            </p>
+          )}
+          {notDelivered > 0 && (
+            <div className="alert error">
+              <strong>
+                {notDelivered} of {items.length} item{items.length > 1 ? "s" : ""} did not reach the recipient.
+              </strong>{" "}
+              See "What it means" for each one.
+            </div>
+          )}
+          {rows && (
+            <div className="grid-auto">
+              <AgGridReact
+                {...gridDefaults}
+                ref={grid}
+                rowData={rows}
+                columnDefs={columnDefs}
+                getRowId={(p) => p.data.row_id}
+                domLayout="autoHeight"
+                rowClassRules={{
+                  "row-hold": (p) => itemStatus(p.data.transaction_status)[1] === "bad",
+                  "row-review": (p) => itemStatus(p.data.transaction_status)[1] === "warn",
+                }}
+              />
+            </div>
+          )}
           <button onClick={poll}>Refresh now</button>
         </>
       )}
