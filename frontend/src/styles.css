@@ -135,7 +135,7 @@ kbd { border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 
 .confirm-total div { display: flex; flex-direction: column; background: #f9fafb; padding: 10px; border-radius: 8px; }
 .confirm-total b { font-size: 1.25rem; }
 .confirm-total span { font-size: 0.8rem; color: var(--muted); }
-.not-sent { max-height: 220px; overflow: auto; border: 1px solid var(--border); border-radius: 8px; }
+.not-sent { max-height: 60vh; overflow: auto; border: 1px solid var(--border); border-radius: 8px; }
 .not-sent .table { margin: 0; }
 
 .eval-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(460px, 1fr)); gap: 16px; }

@@ -85,18 +85,22 @@ export default function Review({ batchId, onSent }) {
   );
 
   const decide = useCallback(
-    async (ids, decision) => {
+    async (ids, decision, bulk = false) => {
       setError(null);
       ids = ids.filter((id) => byId.get(id) && byId.get(id).decision !== decision);
-      if (!ids.length) return;
+      if (!ids.length) {
+        if (bulk) gridRef.current?.api?.deselectAll();
+        return;
+      }
       const needOverride = ids.filter((id) => decision === "approve" && byId.get(id).action === "hold");
       if (needOverride.length) {
         setModalError(null);
-        setModal({ kind: "override", ids, rows: needOverride.map((id) => byId.get(id)) });
+        setModal({ kind: "override", ids, rows: needOverride.map((id) => byId.get(id)), bulk });
         return;
       }
       try {
         await apply(ids, decision, false);
+        if (bulk) gridRef.current?.api?.deselectAll(); // a bulk action is done: the bulk buttons go back to (0)
       } catch (e) {
         setError(e);
       }
@@ -121,7 +125,7 @@ export default function Review({ batchId, onSent }) {
       {
         colId: "amount",
         headerName: "Amount",
-        width: 132,
+        width: 144,
         type: "rightAligned",
         filter: "agNumberColumnFilter",
         valueGetter: (p) => Number(p.data.amount), // for sorting and filtering only; the text shown is the exact string
@@ -132,7 +136,7 @@ export default function Review({ batchId, onSent }) {
       {
         field: "action",
         headerName: "Model",
-        width: 104,
+        width: 116,
         cellRenderer: ActionPill,
         comparator: (a, b) => RANK[a] - RANK[b],
         sort: "asc",
@@ -229,6 +233,7 @@ export default function Review({ batchId, onSent }) {
     setModalError(null);
     try {
       await apply(modal.ids, "approve", true);
+      if (modal.bulk) gridRef.current?.api?.deselectAll();
       setModal(null);
     } catch (e) {
       setModalError(e.message);
@@ -346,10 +351,10 @@ export default function Review({ batchId, onSent }) {
           </select>
         </label>
         <span className="spacer" />
-        <button disabled={locked || !selected.length} onClick={() => decide(selected, "approve")}>
+        <button disabled={locked || !selected.length} onClick={() => decide(selected, "approve", true)}>
           Approve selected ({selected.length})
         </button>
-        <button disabled={locked || !selected.length} onClick={() => decide(selected, "hold")}>
+        <button disabled={locked || !selected.length} onClick={() => decide(selected, "hold", true)}>
           Hold selected ({selected.length})
         </button>
         <button disabled={!notSent.length} onClick={exportHeld} title="CSV of every row whose decision is hold">
