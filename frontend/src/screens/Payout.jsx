@@ -151,22 +151,49 @@ export default function Payout({ batchId }) {
       {!payout && !problem && <p className="muted">Loading…</p>}
       {payout && (
         <>
-          <div className="chips">
-            <span className={`chip ${delivered ? "proceed" : ""}`}>
-              {delivered} of {items.length} delivered
-            </span>
-            <span className={`chip ${notDelivered ? "hold" : ""}`}>{notDelivered} not delivered</span>
-            <span className="chip">{waiting} waiting for PayPal</span>
-            <span
-              className="chip status-live"
-              title="PayPal's status for the batch as a whole. It says processing finished, not that every item was paid."
-            >
-              PayPal batch processing: <strong>{payout.batch_status ?? "unknown"}</strong>
-              {!payout.terminal && " · refreshing every 3 s"}
-            </span>
-            <span className="chip">PayPal batch {payout.payout_batch_id}</span>
-            <span className="chip mono">sender_batch_id {payout.sender_batch_id}</span>
-          </div>
+            <div className="payout-metrics">
+  <div className="metric-card metric-success">
+    <span className="metric-label">Delivered</span>
+    <strong className="metric-value">{delivered}</strong>
+    <span className="metric-caption">Successfully delivered to recipients</span>
+  </div>
+
+  <div className="metric-card metric-danger">
+    <span className="metric-label">Not delivered</span>
+    <strong className="metric-value">{notDelivered}</strong>
+    <span className="metric-caption">Failed or unsuccessful payments</span>
+  </div>
+
+  <div className="metric-card metric-warning">
+    <span className="metric-label">Awaiting confirmation</span>
+    <strong className="metric-value">{waiting}</strong>
+    <span className="metric-caption">Still processing with PayPal</span>
+  </div>
+
+  <div className="metric-card">
+    <span className="metric-label">Total payout items</span>
+    <strong className="metric-value">{items.length}</strong>
+    <span className="metric-caption">Items submitted in this batch</span>
+  </div>
+</div>
+
+<div className="payout-metadata">
+  <div>
+    <span className="metadata-label">PayPal batch status</span>
+    <strong className="metadata-value">{payout.batch_status ?? "Unknown"}</strong>
+    {!payout.terminal && <span className="live-indicator">Refreshing every 3 seconds</span>}
+  </div>
+
+  <div>
+    <span className="metadata-label">PayPal payout batch ID</span>
+    <strong className="metadata-id">{payout.payout_batch_id}</strong>
+  </div>
+
+  <div>
+    <span className="metadata-label">Sender batch ID</span>
+    <strong className="metadata-id">{payout.sender_batch_id}</strong>
+  </div>
+</div>
           {payout.batch_status === "SUCCESS" && (
             <p className="muted small">
               Batch status SUCCESS means PayPal finished processing the batch. It does not mean every item was delivered: check each

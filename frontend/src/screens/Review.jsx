@@ -263,19 +263,52 @@ export default function Review({ batchId, onSent }) {
 
   return (
     <section>
-      <div className="chips">
-        <span className="chip">{s.n_rows} rows</span>
-        <span className="chip proceed">{s.actions.proceed} proceed</span>
-        <span className="chip review">{s.actions.review} review</span>
-        <span className="chip hold">{s.actions.hold} hold</span>
-        <span className="chip">
-          decisions: {s.decisions.approve} approve · {s.decisions.hold} hold · {s.decisions.undecided} undecided
-        </span>
-        <span className="chip" title="Sum of amounts on rows the model flagged. Demo batches use synthetic data.">
-          Money at risk (flagged): {fmtTotals(flagged)} <em>synthetic data</em>
-        </span>
-        <span className="chip">held by model: {fmtTotals(held)}</span>
-      </div>
+     
+<div className="review-metrics">
+  <div className="metric-card">
+    <span className="metric-label">Total transactions</span>
+    <strong className="metric-value">{s.n_rows}</strong>
+    <span className="metric-caption">Transactions in this batch</span>
+  </div>
+
+  <div className="metric-card metric-success">
+    <span className="metric-label">Proceed</span>
+    <strong className="metric-value">{s.actions.proceed}</strong>
+    <span className="metric-caption">Low-risk transactions</span>
+  </div>
+
+  <div className="metric-card metric-warning">
+    <span className="metric-label">Needs review</span>
+    <strong className="metric-value">{s.actions.review}</strong>
+    <span className="metric-caption">Requires operator attention</span>
+  </div>
+
+  <div className="metric-card metric-danger">
+    <span className="metric-label">Hold</span>
+    <strong className="metric-value">{s.actions.hold}</strong>
+    <span className="metric-caption">Flagged transactions</span>
+  </div>
+
+  <div className="metric-card">
+    <span className="metric-label">Money at risk</span>
+    <strong className="metric-value">{fmtTotals(flagged)}</strong>
+    <span className="metric-caption">Flagged amount · synthetic data</span>
+  </div>
+
+  <div className="metric-card">
+    <span className="metric-label">Held by model</span>
+    <strong className="metric-value">{fmtTotals(held)}</strong>
+    <span className="metric-caption">Amount currently on hold</span>
+  </div>
+</div>
+
+<div className="review-decisions">
+  <span>Operator decisions</span>
+  <span><strong>{s.decisions.approve}</strong> Approved</span>
+  <span><strong>{s.decisions.hold}</strong> Held</span>
+  <span><strong>{s.decisions.undecided}</strong> Undecided</span>
+</div>
+ 
       <p className="muted small">
         model {s.model_version} · match threshold {s.er_threshold} · amount z threshold {s.z_threshold} · history rows {s.n_history}
       </p>
@@ -287,7 +320,7 @@ export default function Review({ batchId, onSent }) {
       )}
       {error && <div className="alert error">{error.message}</div>}
 
-      <div className="toolbar">
+      <div className="toolbar review-toolbar">
         <label>
           Search
           <input type="search" value={search} placeholder="name, email, row, flag" onChange={(e) => setSearch(e.target.value)} />
@@ -512,3 +545,6 @@ export default function Review({ batchId, onSent }) {
     </section>
   );
 }
+
+/* Transaction Review metric cards */
+
