@@ -265,7 +265,7 @@ def test_send_without_credentials_fails_before_locking(tmp_path, monkeypatch):
     client = TestClient(create_app(str(tmp_path / "pg.db")))
     b = upload(client, SMALL).json()
     r = client.post(f"/api/batches/{b['batch_id']}/send")
-    assert r.status_code == 500 and "PAYPAL_CLIENT_ID" in r.json()["detail"]
+    assert r.status_code == 503 and "Sending is disabled on this deployment: no PayPal credentials" in r.json()["detail"]
     assert client.get(f"/api/batches/{b['batch_id']}").json()["summary"]["locked"] is False
     assert client.put(f"/api/batches/{b['batch_id']}/decisions", json={"r2": "hold"}).status_code == 200
     assert [e["kind"] for e in client.get(f"/api/batches/{b['batch_id']}/audit").json()] == ["upload", "score", "decision"]

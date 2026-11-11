@@ -173,7 +173,8 @@ def create_app(db_path: str | None = None, paypal_client: PayPalClient | None = 
         if state["paypal"] is None:
             missing = [k for k in ("PAYPAL_CLIENT_ID", "PAYPAL_CLIENT_SECRET", "PAYPAL_BASE_URL") if not os.environ.get(k)]
             if missing:
-                raise HTTPException(500, f"missing env vars {missing}, see .env.example")
+                raise HTTPException(503, "Sending is disabled on this deployment: no PayPal credentials "
+                                         f"(missing {', '.join(missing)})")
             try:
                 state["paypal"] = PayPalClient(os.environ["PAYPAL_CLIENT_ID"], os.environ["PAYPAL_CLIENT_SECRET"],
                                                os.environ["PAYPAL_BASE_URL"])

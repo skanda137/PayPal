@@ -146,6 +146,19 @@ and writes its files only if every row still gets the same action and flags. In 
 payouts to registered accounts start approved. The six flagged rows go to placeholder addresses, so they are never
 sent unless an operator overrides; the override of r116, the typo row, is recorded in the audit log.
 
+## Hosting on Render
+
+Review-only deployment (scoring, review and audit work; sending is disabled without PayPal credentials). One Render **Web Service**, Python 3 runtime (3.12), Node available for the front-end build.
+
+- **Build command:** `pip install -r requirements.txt && cd frontend && npm install && npm run build`
+- **Start command:** `uvicorn backend.app:create_app --factory --host 0.0.0.0 --port $PORT`
+- **Environment variables:**
+  - `PAYOUTGUARD_DB` (required): SQLite path, e.g. `/tmp/payoutguard.db` (the free tier's disk is ephemeral, so batches reset on restart)
+  - `PORT`: set by Render, nothing to do
+  - No `.env` and no PayPal variables are needed. Without `PAYPAL_CLIENT_ID`, `PAYPAL_CLIENT_SECRET` and `PAYPAL_BASE_URL`, pressing Send returns HTTP 503 and the UI shows "Sending is disabled on this deployment: no PayPal credentials".
+
+Memory: about 180 MB resident after scoring the demo batch, so a 512 MB instance is enough.
+
 ## Developing the front end
 
 `npm run dev` in `frontend/` serves the UI on http://localhost:5173 with hot reload and proxies `/api` to the backend
