@@ -56,8 +56,23 @@ export default function Eval() {
   const held = Object.entries(data.heldout_alias_kind.groups);
 
   return (
-    <section className="eval">
-      <div className="alert warn">
+  <section className="eval eval-page">
+    <div className="eval-header">
+      <div>
+        <h2>Model Evaluation</h2>
+        <p>
+          Performance, calibration and reliability analysis of the identity
+          matching and anomaly detection models.
+        </p>
+      </div>
+
+      <span className="eval-status">
+        <span className="eval-status-dot" />
+        Evaluation report
+      </span>
+    </div>
+
+    <div className="alert warn">
         Every number here comes from <strong>synthetic data</strong>. It measures how well the model recovers the error
         patterns the generator injects, not real-world payout accuracy. The model is advisory: it never moves money.
       </div>
@@ -67,7 +82,7 @@ export default function Eval() {
           <h3>
             Identity matching: precision vs recall <Synthetic />
           </h3>
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={300} minWidth={300}>
             <LineChart margin={{ top: 8, right: 16, bottom: 24, left: 0 }}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="recall" type="number" domain={[0, 1]} label={{ value: "recall", position: "insideBottom", offset: -12 }} />
@@ -86,7 +101,7 @@ export default function Eval() {
           <h3>
             Calibration (calibrated matcher, 10 equal-width bins) <Synthetic />
           </h3>
-          <ResponsiveContainer width="100%" height={300}>
+          <div style={{ width: "100%", height: 300 }}>
             <ScatterChart margin={{ top: 8, right: 16, bottom: 24, left: 0 }}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="x" type="number" domain={[0, 1]} name="predicted" label={{ value: "predicted probability", position: "insideBottom", offset: -12 }} />
@@ -96,7 +111,7 @@ export default function Eval() {
               <Tooltip formatter={(v) => (typeof v === "number" ? Number(v).toFixed(3) : v)} />
               <Scatter data={calib} fill="#2563eb" isAnimationActive={false} />
             </ScatterChart>
-          </ResponsiveContainer>
+          </div>
           <p className="small muted">
             ECE {data.calibration_bins.calibrated.ece} (raw {data.calibration_bins.raw.ece}), method{" "}
             {data.calibration_bins.calibration_method?.method}. Dashed line = perfect calibration. Dot size = pairs in the
@@ -105,9 +120,9 @@ export default function Eval() {
         </div>
       </div>
 
-      <div className="card">
-        <h3>
-          Review queue at a chosen threshold <Synthetic />
+     <div className="card eval-threshold-card">
+  <h3>
+    Review queue at a chosen threshold <Synthetic />
         </h3>
         <label className="slider">
           match threshold <strong>{q.threshold}</strong>

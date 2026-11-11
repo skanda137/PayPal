@@ -60,12 +60,25 @@ export default function Audit({ batchId }) {
   if (error) return <div className="alert error">{error.message}</div>;
   if (!events) return <p className="muted">Loading…</p>;
   const shown = events.find((e) => e.id === open);
-  return (
-    <section>
-      <h2>Audit log</h2>
-      <p className="muted">Append-only: the database rejects updates and deletes on this table. Click a row to see the raw payload.</p>
-      <button onClick={load}>Refresh</button>
-      <div className={`grid-auto ${events.length > 15 ? "tall" : ""}`}>
+  return (<section className="audit-page">
+  <div className="audit-header">
+    <div>
+      <h2>Audit trail</h2>
+      <p className="muted">
+        A chronological record of uploads, model decisions, operator actions and PayPal activity.
+      </p>
+    </div>
+
+    <div className="audit-header-actions">
+      <span className="audit-count">
+        {events.length} events recorded
+      </span>
+      <button onClick={load}>
+        Refresh log
+      </button>
+    </div>
+  </div>
+      <div className={`grid-auto audit-grid ${events.length > 15 ? "tall" : ""}`}>
         <AgGridReact
           {...gridDefaults}
           rowData={events}
@@ -77,13 +90,21 @@ export default function Audit({ batchId }) {
         />
       </div>
       {shown && (
-        <div className="card">
-          <h3>
-            Event #{shown.id} <KindPill value={shown.kind} />
-          </h3>
-          <pre className="raw">{JSON.stringify(shown.payload, null, 2)}</pre>
-        </div>
-      )}
+  <div className="card audit-payload">
+    <div className="payload-header">
+      <div>
+        <span className="payload-eyebrow">EVENT DETAILS</span>
+        <h3>Event #{shown.id}</h3>
+      </div>
+      <KindPill value={shown.kind} />
+    </div>
+
+    <div className="payload-content">
+      <div className="payload-label">Raw event payload</div>
+      <pre className="raw">{JSON.stringify(shown.payload, null, 2)}</pre>
+    </div>
+  </div>
+)}
     </section>
   );
 }
