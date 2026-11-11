@@ -101,7 +101,7 @@ export default function Eval() {
           <h3>
             Calibration (calibrated matcher, 10 equal-width bins) <Synthetic />
           </h3>
-          <div style={{ width: "100%", height: 300 }}>
+          <ResponsiveContainer width="100%" height={300}>
             <ScatterChart margin={{ top: 8, right: 16, bottom: 24, left: 0 }}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="x" type="number" domain={[0, 1]} name="predicted" label={{ value: "predicted probability", position: "insideBottom", offset: -12 }} />
@@ -111,7 +111,7 @@ export default function Eval() {
               <Tooltip formatter={(v) => (typeof v === "number" ? Number(v).toFixed(3) : v)} />
               <Scatter data={calib} fill="#2563eb" isAnimationActive={false} />
             </ScatterChart>
-          </div>
+          </ResponsiveContainer>
           <p className="small muted">
             ECE {data.calibration_bins.calibrated.ece} (raw {data.calibration_bins.raw.ece}), method{" "}
             {data.calibration_bins.calibration_method?.method}. Dashed line = perfect calibration. Dot size = pairs in the
